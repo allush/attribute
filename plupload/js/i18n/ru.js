@@ -7,7 +7,7 @@ plupload.addI18n({
     'Size' : 'Размер',
     'Add files' : 'Добавить файлы',
     'Stop current upload' : 'Остановить загрузку',
-    'Start uploading queue' : 'Загрузить файлы',
+    'Start upload' : 'Загрузить файлы',
     'Uploaded %d/%d files': 'Загружено %d/%d файлов',
     'N/A' : 'N/D',
     'Drag files here.' : 'Перетащите файлы сюда.',

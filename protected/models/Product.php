@@ -49,7 +49,7 @@ class Product extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, productStatusID', 'required'),
+			array('productStatusID', 'required'),
 			array('productStatusID, discount', 'numerical', 'integerOnly'=>true),
 			array('name, unit', 'length', 'max'=>255),
 			array('createdOn, modifiedOn, description', 'safe'),
@@ -82,14 +82,14 @@ class Product extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'productID' => 'Product',
-			'name' => 'Name',
-			'createdOn' => 'Created On',
-			'modifiedOn' => 'Modified On',
-			'description' => 'Description',
-			'unit' => 'Unit',
-			'productStatusID' => 'Product Status',
-			'discount' => 'Discount',
+			'productID' => 'ID',
+			'name' => 'Название',
+			'createdOn' => 'Создан',
+			'modifiedOn' => 'Изменен',
+			'description' => 'Описание',
+			'unit' => 'Ед.изм.',
+			'productStatusID' => 'Статус',
+			'discount' => 'Скидка',
 		);
 	}
 

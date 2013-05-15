@@ -9,7 +9,6 @@ $this->breadcrumbs = array(
 
 $this->renderPartial('_menu');
 
-//echo $this->renderPartial('_form', array('model' => $model));
 ?>
 
 
@@ -23,6 +22,7 @@ $this->renderPartial('_menu');
 <script type="text/javascript" src="/plupload/js/plupload.full.js"></script>
 
 <script type="text/javascript" src="/plupload/js/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="/plupload/js/i18n/ru.js"></script>
 
 <script type="text/javascript">
 
@@ -30,16 +30,16 @@ $this->renderPartial('_menu');
     $(function () {
         $("#uploader").pluploadQueue({
             // General settings
-            runtimes: 'gears,flash,silverlight,browserplus,html5',
+            runtimes: 'html5,gears,flash,silverlight,browserplus',
             url: '<?php echo $this->createUrl('upload')?>',
-            max_file_size: '10mb',
-            chunk_size: '1mb',
+            max_file_size: '8mb',
+//            chunk_size: '1mb',
             unique_names: true,
             // Resize images on clientside if we can
-            resize: {width: 320, height: 240, quality: 90},
+            resize: {width: 1200, height: 900, quality: 90},
             // Specify what files to browse for
             filters: [
-                {title: "Image files", extensions: "jpg,gif,png"},
+                {title: "Image files", extensions: "jpg,jpeg,gif,png"},
                 {title: "Zip files", extensions: "zip"}
             ],
             multipart_params: {
@@ -50,6 +50,7 @@ $this->renderPartial('_menu');
             // Silverlight settings
             silverlight_xap_url: '/plupload/js/plupload.silverlight.xap'
         });
+
 
         // Client side form validation
         $('form').submit(function (e) {
@@ -73,6 +74,7 @@ $this->renderPartial('_menu');
 
 <form>
     <div id="uploader">
-        <p>You browser doesn't have Flash, Silverlight, Gears, BrowserPlus or HTML5 support.</p>
+        <p>Ваш браузер не поддерживает ни одну из технологий: Flash, Silverlight, Gears, BrowserPlus, HTML5.</p>
     </div>
 </form>
+

@@ -1,5 +1,9 @@
 Options +FollowSymLinks
-IndexIgnore */*
+
+<IfModule mod_autoindex.c>
+    IndexIgnore */*
+</IfModule>
+
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f
