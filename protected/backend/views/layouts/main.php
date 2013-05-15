@@ -9,8 +9,7 @@
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <!-- Twitter Bootstrap CSS framework -->
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css"
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"
           media="screen"/>
 
     <?php
@@ -57,15 +56,15 @@
     <div class="row">
         <div class="span12">
             <?php
-                $this->widget('zii.widgets.CBreadcrumbs', array(
-                    'links' => $this->breadcrumbs,
-                    'separator' => '<span class="divider"> / </span> ',
-                    'tagName' => 'ul',
-                    'htmlOptions' => array(
-                        'class' => 'breadcrumb'
-                    ),
-                ));
-                ?><!-- breadcrumbs -->
+            $this->widget('zii.widgets.CBreadcrumbs', array(
+                'links' => $this->breadcrumbs,
+                'separator' => '<span class="divider"> / </span> ',
+                'tagName' => 'ul',
+                'htmlOptions' => array(
+                    'class' => 'breadcrumb'
+                ),
+            ));
+            ?><!-- breadcrumbs -->
         </div>
     </div>
 

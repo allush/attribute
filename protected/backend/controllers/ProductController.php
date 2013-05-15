@@ -30,6 +30,9 @@ class ProductController extends Controller
         );
     }
 
+    /**
+     * @return bool
+     */
     public function actionUpload()
     {
         /** @var $files CUploadedFile[] */
@@ -114,8 +117,9 @@ class ProductController extends Controller
 
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
-            if ($model->save())
+            if ($model->save()) {
                 $this->redirect(array('view', 'id' => $model->productID));
+            }
         }
 
         $this->render('update', array(
@@ -140,26 +144,11 @@ class ProductController extends Controller
     /**
      * Lists all models.
      */
-    public function actionIndex()
+    public function actionIndex($c = null)
     {
         $dataProvider = new CActiveDataProvider('Product');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-        ));
-    }
-
-    /**
-     * Manages all models.
-     */
-    public function actionAdmin()
-    {
-        $model = new Product('search');
-        $model->unsetAttributes(); // clear any default values
-        if (isset($_GET['Product']))
-            $model->attributes = $_GET['Product'];
-
-        $this->render('admin', array(
-            'model' => $model,
         ));
     }
 

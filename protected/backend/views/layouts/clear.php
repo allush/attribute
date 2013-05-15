@@ -8,16 +8,16 @@
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <!-- Twitter Bootstrap CSS framework -->
-    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css"
-          media="screen"/>
+    <?php
+    Yii::app()->clientScript->registerCssFile(
+        CHtml::asset(Yii::app()->basePath . '/backend/assets/css/bootstrap.min.css')
+    );
 
-    <link rel="stylesheet/less" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.less"
-          media="screen"/>
-
-
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/less-1.3.3.min.js" type="text/javascript"></script>
+    Yii::app()->clientScript->registerScriptFile(
+        CHtml::asset(Yii::app()->basePath . '/backend/assets/js/bootstrap.min.js'),
+        CClientScript::POS_HEAD
+    );
+    ?>
 
 
 </head>

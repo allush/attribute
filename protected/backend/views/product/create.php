@@ -8,7 +8,6 @@ $this->breadcrumbs = array(
 );
 
 $this->renderPartial('_menu');
-
 ?>
 
 

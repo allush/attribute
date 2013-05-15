@@ -2,32 +2,14 @@
 /* @var $this ProductController */
 /* @var $model Product */
 
-$this->breadcrumbs=array(
-	'Products'=>array('index'),
-	$model->name,
+$this->breadcrumbs = array(
+    'Товары' => array('index'),
+    '#' . $model->productID . ' ' . $model->name,
 );
 
-$this->menu=array(
-	array('label'=>'List Product', 'url'=>array('index')),
-	array('label'=>'Create Product', 'url'=>array('create')),
-	array('label'=>'Update Product', 'url'=>array('update', 'id'=>$model->productID)),
-	array('label'=>'Delete Product', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->productID),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Product', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Назад', 'url' => array('index')),
+    array('label' => 'Удалить', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->productID), 'confirm' => 'Are you sure you want to delete this item?')),
 );
-?>
 
-<h1>View Product #<?php echo $model->productID; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'productID',
-		'name',
-		'createdOn',
-		'modifiedOn',
-		'description',
-		'unit',
-		'productStatusID',
-		'discount',
-	),
-)); ?>
+$this->renderPartial('_form', array('model' => $model)); ?>
