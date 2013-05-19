@@ -15,11 +15,11 @@
  * @property string $comment
  *
  * The followings are the available model relations:
- * @property Orderstatus $orderStatus
- * @property Orderpayment $orderPayment
- * @property Orderdelivery $orderDelivery
+ * @property OrderStatus $orderStatus
+ * @property OrderPayment $orderPayment
+ * @property OrderDelivery $orderDelivery
  * @property User $user
- * @property Orderitem[] $orderitems
+ * @property OrderItem[] $orderitems
  */
 class Order extends CActiveRecord
 {
@@ -66,11 +66,11 @@ class Order extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'orderStatus' => array(self::BELONGS_TO, 'Orderstatus', 'orderStatusID'),
-			'orderPayment' => array(self::BELONGS_TO, 'Orderpayment', 'orderPaymentID'),
-			'orderDelivery' => array(self::BELONGS_TO, 'Orderdelivery', 'orderDeliveryID'),
+			'orderStatus' => array(self::BELONGS_TO, 'OrderStatus', 'orderStatusID'),
+			'orderPayment' => array(self::BELONGS_TO, 'OrderPayment', 'orderPaymentID'),
+			'orderDelivery' => array(self::BELONGS_TO, 'OrderDelivery', 'orderDeliveryID'),
 			'user' => array(self::BELONGS_TO, 'User', 'userID'),
-			'orderitems' => array(self::HAS_MANY, 'Orderitem', 'orderID'),
+			'orderitems' => array(self::HAS_MANY, 'OrderItem', 'orderID'),
 		);
 	}
 

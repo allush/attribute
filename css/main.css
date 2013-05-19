@@ -1,4 +1,26 @@
-.product-image-cell img{
+.product-image-cell img {
     max-height: 100px;
     max-width: 100px;
+}
+
+span.required {
+    color: red;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.yiiPager .hidden {
+    visibility: visible;
+}
+
+#uploader_filelist{
+    height: 400px;
+}
+.miniPicture img{
+    cursor: pointer;
+}
+.miniPicture div{
+    margin-top: 8px;
 }

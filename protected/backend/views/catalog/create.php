@@ -3,16 +3,12 @@
 /* @var $model Catalog */
 
 $this->breadcrumbs=array(
-	'Catalogs'=>array('index'),
-	'Create',
+    'Каталоги'=>array('index'),
+	'Создание',
 );
 
 $this->menu=array(
-	array('label'=>'List Catalog', 'url'=>array('index')),
-	array('label'=>'Manage Catalog', 'url'=>array('admin')),
+	array('label'=>'Назад', 'url'=>array('index')),
 );
-?>
 
-<h1>Create Catalog</h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+echo $this->renderPartial('_form', array('model'=>$model));

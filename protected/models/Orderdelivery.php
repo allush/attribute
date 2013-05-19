@@ -10,12 +10,12 @@
  * The followings are the available model relations:
  * @property Order[] $orders
  */
-class Orderdelivery extends CActiveRecord
+class OrderDelivery extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Orderdelivery the static model class
+	 * @return OrderDelivery the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

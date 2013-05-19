@@ -11,14 +11,15 @@
  * @property string $description
  * @property string $unit
  * @property integer $productStatusID
+ * @property integer $catalogID
  * @property integer $discount
  *
  * The followings are the available model relations:
  * @property Existence[] $existences
- * @property Orderitem[] $orderitems
+ * @property OrderItem[] $orderItems
  * @property Picture[] $pictures
- * @property Productstatus $productStatus
- * @property Catalog[] $catalogs
+ * @property ProductStatus $productStatus
+ * @property Catalog $catalog
  * @property Property[] $properties
  */
 class Product extends CActiveRecord
@@ -50,7 +51,7 @@ class Product extends CActiveRecord
         // will receive user inputs.
         return array(
             array('productStatusID', 'required'),
-            array('productStatusID, discount', 'numerical', 'integerOnly' => true),
+            array('productStatusID, catalogID, discount', 'numerical', 'integerOnly' => true),
             array('name, unit', 'length', 'max' => 255),
             array('createdOn, modifiedOn, description', 'safe'),
             // The following rule is used by search().
@@ -68,10 +69,10 @@ class Product extends CActiveRecord
         // class name for the relations automatically generated below.
         return array(
             'existences' => array(self::HAS_MANY, 'Existence', 'productID'),
-            'orderitems' => array(self::HAS_MANY, 'Orderitem', 'productID'),
+            'orderItems' => array(self::HAS_MANY, 'OrderItem', 'productID'),
             'pictures' => array(self::HAS_MANY, 'Picture', 'productID'),
-            'productStatus' => array(self::BELONGS_TO, 'Productstatus', 'productStatusID'),
-            'catalogs' => array(self::MANY_MANY, 'Catalog', 'product_catalog(productID, catalogID)'),
+            'productStatus' => array(self::BELONGS_TO, 'ProductStatus', 'productStatusID'),
+            'catalog' => array(self::BELONGS_TO, 'Catalog', 'catalogID'),
             'properties' => array(self::HAS_MANY, 'Property', 'productID'),
         );
     }
@@ -89,6 +90,7 @@ class Product extends CActiveRecord
             'description' => 'Описание',
             'unit' => 'Ед.изм.',
             'productStatusID' => 'Статус',
+            'catalogID' => 'Каталог',
             'discount' => 'Скидка,%',
         );
     }
@@ -124,12 +126,10 @@ class Product extends CActiveRecord
      */
     public function image($index = 0)
     {
-        $url = Yii::app()->baseUrl . '/images/product/large/' . $this->pictures[$index]->filename;
-        $path = Yii::app()->basePath . '/../images/product/large/' . $this->pictures[$index]->filename;
-        if (!file_exists($path)) {
-            return null;
-        }
-        return $url;
+        if (count($this->pictures) > 0)
+            return $this->pictures[$index]->large();
+
+        return null;
     }
 
     /**
@@ -138,12 +138,10 @@ class Product extends CActiveRecord
      */
     public function thumbnail($index = 0)
     {
-        $url = Yii::app()->baseUrl . '/images/product/thumbnail/' . $this->pictures[$index]->filename;
-        $path = Yii::app()->basePath . '/../images/product/thumbnail/' . $this->pictures[$index]->filename;
-        if (!file_exists($path)) {
-            return null;
-        }
-        return $url;
+        if (count($this->pictures) > 0)
+            return $this->pictures[$index]->thumbnail();
+
+        return null;
     }
 
 

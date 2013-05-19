@@ -16,13 +16,13 @@
  *
  * The followings are the available model relations:
  * @property Product $product
- * @property Propertyitem $propertyItemID10
- * @property Propertyitem $propertyItemID20
- * @property Propertyitem $propertyItemID30
+ * @property PropertyItem $propertyItemID10
+ * @property PropertyItem $propertyItemID20
+ * @property PropertyItem $propertyItemID30
  * @property Property $propertyID10
  * @property Property $propertyID20
  * @property Property $propertyID30
- * @property Orderitem[] $orderitems
+ * @property OrderItem[] $orderitems
  */
 class Existence extends CActiveRecord
 {
@@ -68,13 +68,13 @@ class Existence extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'product' => array(self::BELONGS_TO, 'Product', 'productID'),
-			'propertyItemID10' => array(self::BELONGS_TO, 'Propertyitem', 'propertyItemID1'),
-			'propertyItemID20' => array(self::BELONGS_TO, 'Propertyitem', 'propertyItemID2'),
-			'propertyItemID30' => array(self::BELONGS_TO, 'Propertyitem', 'propertyItemID3'),
+			'propertyItemID10' => array(self::BELONGS_TO, 'PropertyItem', 'propertyItemID1'),
+			'propertyItemID20' => array(self::BELONGS_TO, 'PropertyItem', 'propertyItemID2'),
+			'propertyItemID30' => array(self::BELONGS_TO, 'PropertyItem', 'propertyItemID3'),
 			'propertyID10' => array(self::BELONGS_TO, 'Property', 'propertyID1'),
 			'propertyID20' => array(self::BELONGS_TO, 'Property', 'propertyID2'),
 			'propertyID30' => array(self::BELONGS_TO, 'Property', 'propertyID3'),
-			'orderitems' => array(self::HAS_MANY, 'Orderitem', 'existenceID'),
+			'orderitems' => array(self::HAS_MANY, 'OrderItem', 'existenceID'),
 		);
 	}
 

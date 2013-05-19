@@ -14,12 +14,12 @@
  * @property Existence[] $existences2
  * @property Property $property
  */
-class Propertyitem extends CActiveRecord
+class PropertyItem extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Propertyitem the static model class
+	 * @return PropertyItem the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -72,9 +72,9 @@ class Propertyitem extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'name' => 'Name',
-			'propertyItemID' => 'Property Item',
-			'propertyID' => 'Property',
+			'name' => 'Название',
+			'propertyItemID' => 'ID',
+			'propertyID' => 'Свойство',
 		);
 	}
 
@@ -97,4 +97,14 @@ class Propertyitem extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+    protected function beforeDelete()
+    {
+        // удалить все из таблицы наличия у товара, к которому относится значение свойства
+        Existence::model()->deleteAllByAttributes(array(
+            'productID' => $this->property->productID,
+        ));
+
+        return parent::beforeDelete();
+    }
 }

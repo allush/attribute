@@ -73,6 +73,16 @@ class ProductController extends Controller
         }
     }
 
+    public function actionSetExistence($existenceID)
+    {
+        /** @var $existence Existence */
+        $existence = Existence::model()->findByPk($existenceID);
+        if (isset($_POST['Existence'])) {
+            $existence->attributes = $_POST['Existence'];
+            $existence->save();
+        }
+    }
+
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed
@@ -146,9 +156,34 @@ class ProductController extends Controller
      */
     public function actionIndex($c = null)
     {
-        $dataProvider = new CActiveDataProvider('Product');
+        $hierarchy = array();
+        Catalog::_loadHierarchy($hierarchy, null, 'view');
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'catalogID IS NOT NULL';
+
+        if ($c == -1) {
+            $criteria->condition = 'catalogID IS NULL';
+        } elseif ($c !== null) {
+            $catalogIDs = array();
+            Catalog::childrenRecursively($catalogIDs, $c);
+
+            $criteria->addInCondition('catalogID', $catalogIDs);
+        }
+
+        $dataProvider = new CActiveDataProvider('Product', array(
+            'criteria' => $criteria,
+            'pagination' => array(
+                'pageSize' => 10,
+            ),
+            'sort' => array(
+                'defaultOrder' => 'modifiedOn DESC'
+            ),
+        ));
+
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'hierarchy' => $hierarchy,
         ));
     }
 

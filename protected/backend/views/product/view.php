@@ -8,8 +8,12 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'Назад', 'url' => array('index')),
-    array('label' => 'Удалить', 'url' => '#', 'linkOptions' => array('submit' => array('delete', 'id' => $model->productID), 'confirm' => 'Are you sure you want to delete this item?')),
+    array('label' => 'Назад', 'url' => array('index', 'c' => $model->catalogID !== null ? $model->catalogID : -1)),
+    array(
+        'label' => 'Удалить',
+        'url' => '#',
+        'linkOptions' => array('submit' => array('delete', 'id' => $model->productID), 'confirm' => 'Are you sure you want to delete this item?'),
+        'itemOptions' => array('class' => 'pull-right')),
 );
 
-$this->renderPartial('_form', array('model' => $model)); ?>
+$this->renderPartial('_form', array('model' => $model));

@@ -2,19 +2,19 @@
 /* @var $this CatalogController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Catalogs',
+$this->breadcrumbs = array(
+    'Каталоги',
 );
 
-$this->menu=array(
-	array('label'=>'Create Catalog', 'url'=>array('create')),
-	array('label'=>'Manage Catalog', 'url'=>array('admin')),
+
+$this->menu = array(
+    array('label' => 'Создать', 'url' => array('create')),
 );
-?>
 
-<h1>Catalogs</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+$this->widget('system.web.widgets.CTreeView', array(
+    'data' => $this->hierarchy(),
+    'collapsed' => true,
+    'unique' => true,
+    'persist' => 'location',
+    'animated' => 'fast'
+));

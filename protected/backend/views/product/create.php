@@ -76,4 +76,3 @@ $this->renderPartial('_menu');
         <p>Ваш браузер не поддерживает ни одну из технологий: Flash, Silverlight, Gears, BrowserPlus, HTML5.</p>
     </div>
 </form>
-

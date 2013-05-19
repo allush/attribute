@@ -15,12 +15,12 @@
  * @property Order $order
  * @property Existence $existence
  */
-class Orderitem extends CActiveRecord
+class OrderItem extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Orderitem the static model class
+	 * @return OrderItem the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

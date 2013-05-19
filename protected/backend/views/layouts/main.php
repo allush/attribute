@@ -12,6 +12,16 @@
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"
           media="screen"/>
 
+
+    <link href='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.css' type='text/css'
+          rel='stylesheet'>
+    <script type='text/javascript'
+            src='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.js'></script>
+    <script type='text/javascript'
+            src='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.edit.js'></script>
+
+
+
     <?php
     Yii::app()->clientScript->registerCssFile(
         CHtml::asset(Yii::app()->basePath . '/backend/assets/css/bootstrap.min.css')
