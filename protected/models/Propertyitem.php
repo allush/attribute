@@ -101,15 +101,9 @@ class PropertyItem extends CActiveRecord
     protected function beforeDelete()
     {
         // удалить все из таблицы наличия у товара, к которому относится значение свойства
-        $criteria = new CDbCriteria();
-        $criteria->addCondition('productID=:productID');
-        $criteria->addCondition('propertyItemID1=:propertyItemID OR propertyItemID3=:propertyItemID OR propertyItemID3=:propertyItemID');
-        $criteria->params = array(
-            ':productID'=>$this->property->productID,
-            ':propertyItemID'=>$this->propertyItemID,
-        );
-
-        $numDeleted = Existence::model()->deleteAll($criteria);
+        Existence::model()->deleteAllByAttributes(array(
+            'productID' => $this->property->productID,
+        ));
 
         return parent::beforeDelete();
     }
