@@ -9,7 +9,7 @@ class ProductController extends Controller
     {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'postOnly + delete', // we only allow deletion via POST request
+            'postOnly + delete, deletePicture', // we only allow deletion via POST request
         );
     }
 
@@ -69,6 +69,56 @@ class ProductController extends Controller
                 }
             } else {
                 return false;
+            }
+        }
+    }
+
+
+    public function actionDeletePicture($productPictureID)
+    {
+        /** @var $picture Picture */
+        $picture = Picture::model()->findByPk($productPictureID);
+
+        $base = Yii::app()->basePath . '/../';
+        @unlink($base . $picture->large());
+        @unlink($base . $picture->thumbnail());
+
+        $picture->delete();
+
+        $this->redirect(Yii::app()->request->urlReferrer);
+    }
+
+    /**
+     * Добавление фото к товару
+     * @param $productID
+     */
+    public function actionUploadPicture($productID)
+    {
+        /** @var $files CUploadedFile[] */
+        $files = CUploadedFile::getInstancesByName('file');
+        foreach ($files as $file) {
+
+            // преобразовать имя файла в уникальное, сохраняя расширение файла
+            $originalFilename = $file->getName();
+            $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
+            $filename = md5(crypt($originalFilename)) . $fileExtension;
+
+            // определение пути сохранения файлов
+            $pathLarge = 'images/product/large/' . $filename;
+            $pathThumbnail = 'images/product/thumbnail/' . $filename;
+
+            // если большое изображение успешно сохранено
+            if ($file->saveAs($pathLarge)) {
+                // создать и сохранить миниатюру
+                $ih = new CImageHandler();
+                $ih->load($pathLarge);
+                $ih->thumb(400, 300)->save($pathThumbnail);
+
+                // создать модель фото продукта
+                $picture = new Picture();
+                $picture->productID = $productID;
+                $picture->filename = $filename;
+                $picture->save();
             }
         }
     }

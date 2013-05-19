@@ -28,7 +28,7 @@ $this->renderPartial('_menu');
             ->queryScalar();
 
 
-        echo CHtml::link('Вне каталогов', array('index', 'c' => -1)) . ' <small>(' . $productCount . ')</small>';
+        echo CHtml::link('Вне каталогов', array('index', 'c' => 0)) . ' <small>(' . $productCount . ')</small>';
         ?>
     </div>
     <div class="span10">

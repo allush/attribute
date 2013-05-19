@@ -86,7 +86,5 @@ return array(
         // this is used in contact page
         'adminEmail' => 'al.lushnikov@yandex.ru',
     ),
-
-    'language' => 'ru'
-,
+    'language' => 'ru',
 );
