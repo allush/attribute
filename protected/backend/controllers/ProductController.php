@@ -162,13 +162,14 @@ class ProductController extends Controller
         $criteria = new CDbCriteria();
         $criteria->condition = 'catalogID IS NOT NULL';
 
-        if ($c == -1) {
-            $criteria->condition = 'catalogID IS NULL';
-        } elseif ($c !== null) {
-            $catalogIDs = array();
-            Catalog::childrenRecursively($catalogIDs, $c);
-
-            $criteria->addInCondition('catalogID', $catalogIDs);
+        if ($c !== null) {
+            if ($c == 0) {
+                $criteria->condition = 'catalogID IS NULL';
+            } else {
+                $catalogIDs = array();
+                Catalog::childrenRecursively($catalogIDs, $c);
+                $criteria->addInCondition('catalogID', $catalogIDs);
+            }
         }
 
         $dataProvider = new CActiveDataProvider('Product', array(
