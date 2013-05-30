@@ -42,14 +42,17 @@ class ActionController extends Controller
             $model->attributes = $_POST['Action'];
 
             $pictureFile = CUploadedFile::getInstanceByName('Action[picture]');
-            $originalFilename = $pictureFile->getName();
-            $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
-            $filename = md5(crypt($originalFilename)) . $fileExtension;
+            $filename = '';
+            if ($pictureFile !== null) {
+                $originalFilename = $pictureFile->getName();
+                $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
+                $filename = md5(crypt($originalFilename)) . $fileExtension;
+            }
             $model->picture = $filename;
 
             if ($model->save()) {
                 $path = $model->picturePath . $filename;
-                if ($pictureFile->saveAs($path)) {
+                if ($pictureFile !== null && $pictureFile->saveAs($path)) {
                     $ih = new CImageHandler();
                     $ih->load($path);
                     $ih->thumb(false, 279)->save();
