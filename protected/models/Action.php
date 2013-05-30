@@ -8,88 +8,101 @@
  * @property string $picture
  * @property string $beginOn
  * @property string $endOn
- * @property string $position
+ * @property string $header
+ * @property string $slogan
+ * @property string $content
  */
 class Action extends CActiveRecord
 {
-	/**
-	 * Returns the static model of the specified AR class.
-	 * @param string $className active record class name.
-	 * @return Action the static model class
-	 */
-	public static function model($className=__CLASS__)
-	{
-		return parent::model($className);
-	}
+    public $picturePath;
 
-	/**
-	 * @return string the associated database table name
-	 */
-	public function tableName()
-	{
-		return 'action';
-	}
+    public function __construct($scenario = 'insert')
+    {
+        $this->picturePath = Yii::app()->basePath . '/../images/action/';
 
-	/**
-	 * @return array validation rules for model attributes.
-	 */
-	public function rules()
-	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
-		return array(
-			array('picture, position', 'length', 'max'=>255),
-			array('beginOn, endOn', 'safe'),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('actionID, picture, beginOn, endOn, position', 'safe', 'on'=>'search'),
-		);
-	}
+        parent::__construct($scenario);
+    }
 
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations()
-	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
-		);
-	}
+    /**
+     * Returns the static model of the specified AR class.
+     * @param string $className active record class name.
+     * @return Action the static model class
+     */
+    public static function model($className = __CLASS__)
+    {
+        return parent::model($className);
+    }
 
-	/**
-	 * @return array customized attribute labels (name=>label)
-	 */
-	public function attributeLabels()
-	{
-		return array(
-			'actionID' => 'Action',
-			'picture' => 'Picture',
-			'beginOn' => 'Begin On',
-			'endOn' => 'End On',
-			'position' => 'Position',
-		);
-	}
+    /**
+     * @return string the associated database table name
+     */
+    public function tableName()
+    {
+        return 'action';
+    }
 
-	/**
-	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-	 */
-	public function search()
-	{
-		// Warning: Please modify the following code to remove attributes that
-		// should not be searched.
+    /**
+     * @return array validation rules for model attributes.
+     */
+    public function rules()
+    {
+        // NOTE: you should only define rules for those attributes that
+        // will receive user inputs.
+        return array(
+            array('beginOn, endOn, header', 'required'),
+            array('picture, header, slogan', 'length', 'max' => 255),
+            array('beginOn, endOn', 'date', 'format' => 'yyyy-MM-dd'),
+            array('content', 'safe'),
+        );
+    }
 
-		$criteria=new CDbCriteria;
+    /**
+     * @return array relational rules.
+     */
+    public function relations()
+    {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array();
+    }
 
-		$criteria->compare('actionID',$this->actionID);
-		$criteria->compare('picture',$this->picture,true);
-		$criteria->compare('beginOn',$this->beginOn,true);
-		$criteria->compare('endOn',$this->endOn,true);
-		$criteria->compare('position',$this->position,true);
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'actionID' => 'Action',
+            'picture' => 'Картинка',
+            'beginOn' => 'Начало',
+            'endOn' => 'Окончение',
+            'header' => 'Заголовок',
+            'slogan' => 'Слоган',
+            'content' => 'Содержание',
+        );
+    }
 
-		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
-	}
+    protected function beforeDelete()
+    {
+        $this->deletePicture();
+        return parent::beforeDelete();
+    }
+
+    public function picture()
+    {
+        $picture = '';
+        if (strlen($this->picture) > 0 && $this->picture != null) {
+            $picture = Yii::app()->baseUrl . '/images/action/' . $this->picture;
+        }
+        return $picture;
+    }
+
+    public function deletePicture()
+    {
+        // удалить картинку акции
+        $pictureFile = $this->picturePath . $this->picture;
+        if (file_exists($pictureFile) && is_file($pictureFile)) {
+            unlink($pictureFile);
+        }
+    }
 }

@@ -20,8 +20,6 @@
     <script type='text/javascript'
             src='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.edit.js'></script>
 
-
-
     <?php
     Yii::app()->clientScript->registerCssFile(
         CHtml::asset(Yii::app()->basePath . '/backend/assets/css/bootstrap.min.css')
@@ -49,7 +47,7 @@
                             array('label' => 'Товары', 'url' => array('/product/index')),
                             array('label' => 'Каталоги', 'url' => array('/catalog/index')),
                             array('label' => 'Страницы', 'url' => array('/page/index')),
-                            array('label' => 'Баннеры', 'url' => array('/action/index')),
+                            array('label' => 'Акции', 'url' => array('/action/index')),
                             array('label' => 'Пользователи', 'url' => array('/user/index')),
                             array('label' => '(' . Yii::app()->user->getState('login') . ') Выйти', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                         ),

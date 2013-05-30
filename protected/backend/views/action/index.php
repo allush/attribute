@@ -2,19 +2,47 @@
 /* @var $this ActionController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Actions',
+$this->breadcrumbs = array(
+    'Акции',
 );
 
-$this->menu=array(
-	array('label'=>'Create Action', 'url'=>array('create')),
-	array('label'=>'Manage Action', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Создать', 'url' => array('create')),
 );
-?>
 
-<h1>Actions</h1>
+$this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider' => $dataProvider,
+    'summaryText' => '{start} - {end} из {count}',
+    'summaryCssClass' => 'pull-right',
+    'itemsCssClass' => 'table table-bordered table-condensed table-hover',
+    'pagerCssClass' => 'pagination',
+    'pager' => array(
+        'firstPageLabel' => '<<',
+        'prevPageLabel' => '<',
+        'nextPageLabel' => '>',
+        'lastPageLabel' => '>>',
+        'maxButtonCount' => '10',
+        'header' => '',
+        'cssFile' => '',
+        'selectedPageCssClass' => 'active',
+    ),
+    'columns' => array(
+        array(
+            'name' => 'header',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->header, array("update", "id" => $data->actionID))',
+        ),
+        'slogan',
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+        array(
+            'name' => 'beginOn',
+            'value'=>'date("d-m-Y", strtotime($data->beginOn))'
+        ),
+        array(
+            'name' => 'endOn',
+            'value'=>'date("d-m-Y", strtotime($data->endOn))'
+        ),
+    ),
+    'showTableOnEmpty' => false,
+    'emptyText' => 'У вас пока нет ни одной акции',
+));

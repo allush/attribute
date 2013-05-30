@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'page':
  * @property integer $pageID
+ * @property string $name
  * @property string $content
  */
 class Page extends CActiveRecord
@@ -35,7 +36,9 @@ class Page extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content', 'safe'),
+            array('name', 'required'),
+            array('content', 'safe'),
+            array('name', 'length', 'max' => 255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('pageID, content', 'safe', 'on'=>'search'),
@@ -59,8 +62,9 @@ class Page extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'pageID' => 'Page',
-			'content' => 'Content',
+            'pageID' => 'Page',
+            'name' => 'Название',
+			'content' => 'Содержание',
 		);
 	}
 

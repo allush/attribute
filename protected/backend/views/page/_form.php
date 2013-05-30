@@ -2,29 +2,42 @@
 /* @var $this PageController */
 /* @var $model Page */
 /* @var $form CActiveForm */
+
+Yii::app()->clientScript->registerScriptFile(
+    Yii::app()->baseUrl . '/ckeditor/ckeditor.js',
+    CClientScript::POS_HEAD
+);
 ?>
 
-<div class="form">
+<?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'page-form',
+    'enableAjaxValidation' => false,
+    'focus' => $model->isNewRecord ? array($model, 'name') : null,
+));
+?>
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'page-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+<div>
+    <?php echo $form->labelEx($model, 'name'); ?>
+    <?php echo $form->textField($model, 'name', array('class' => 'span5')); ?>
+    <?php echo $form->error($model, 'name'); ?>
+</div>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<div>
+    <?php echo $form->labelEx($model, 'content'); ?>
+    <?php echo $form->textArea($model, 'content', array('rows' => 6, 'class' => 'span5')); ?>
+    <?php echo $form->error($model, 'content'); ?>
+</div>
 
-	<?php echo $form->errorSummary($model); ?>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'content'); ?>
-		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'content'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+<br>
+<div>
+    <?php echo CHtml::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить', array('class' => 'btn span2')); ?>
+</div>
 
 <?php $this->endWidget(); ?>
 
-</div><!-- form -->
+
+<script>
+    var editor = CKEDITOR.replace('Page[content]');
+    CKFinder.setupCKEditor(editor, '/ckfinder/');
+</script>

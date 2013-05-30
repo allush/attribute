@@ -2,20 +2,29 @@
 /* @var $this PageController */
 /* @var $model Page */
 
-$this->breadcrumbs=array(
-	'Pages'=>array('index'),
-	$model->pageID=>array('view','id'=>$model->pageID),
-	'Update',
+$this->breadcrumbs = array(
+    'Страницы' => array('index'),
+    'Редактирование "' . $model->name . '"',
 );
 
-$this->menu=array(
-	array('label'=>'List Page', 'url'=>array('index')),
-	array('label'=>'Create Page', 'url'=>array('create')),
-	array('label'=>'View Page', 'url'=>array('view', 'id'=>$model->pageID)),
-	array('label'=>'Manage Page', 'url'=>array('admin')),
+$this->menu = array(
+    array(
+        'label' => 'Назад',
+        'url' => array('index')
+    ),
+    array(
+        'label' => 'Удалить',
+        'url' => '#',
+        'itemOptions' => array('class' => 'pull-right'),
+        'linkOptions' => array(
+            'class' => 'text-error',
+            'confirm' => 'Вы уверены?',
+            'submit' => array('delete', 'id' => $model->pageID),
+            'params' => array(
+                'YII_CSRF_TOKEN' => Yii::app()->request->csrfToken,
+            ),
+        )
+    ),
 );
-?>
 
-<h1>Update Page <?php echo $model->pageID; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+echo $this->renderPartial('_form', array('model' => $model)); ?>

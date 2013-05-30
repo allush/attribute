@@ -2,19 +2,17 @@
 /* @var $this OrderController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Orders',
+$this->breadcrumbs = array(
+    'Заказы',
 );
 
-$this->menu=array(
-	array('label'=>'Create Order', 'url'=>array('create')),
-	array('label'=>'Manage Order', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Завершенные', 'url' => array('index')),
+    array('label' => 'Незавершенные', 'url' => array('index')),
+    array('label' => 'Выполненные', 'url' => array('index')),
 );
-?>
 
-<h1>Orders</h1>
-
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+$this->widget('zii.widgets.CListView', array(
+    'dataProvider' => $dataProvider,
+    'itemView' => '_view',
+));

@@ -2,20 +2,29 @@
 /* @var $this ActionController */
 /* @var $model Action */
 
-$this->breadcrumbs=array(
-	'Actions'=>array('index'),
-	$model->actionID=>array('view','id'=>$model->actionID),
-	'Update',
+$this->breadcrumbs = array(
+    'Акции' => array('index'),
+    'Редактирование "' . $model->header . '"',
 );
 
-$this->menu=array(
-	array('label'=>'List Action', 'url'=>array('index')),
-	array('label'=>'Create Action', 'url'=>array('create')),
-	array('label'=>'View Action', 'url'=>array('view', 'id'=>$model->actionID)),
-	array('label'=>'Manage Action', 'url'=>array('admin')),
+$this->menu = array(
+    array(
+        'label' => 'Назад',
+        'url' => array('index')
+    ),
+    array(
+        'label' => 'Удалить',
+        'url' => '#',
+        'itemOptions' => array('class' => 'pull-right'),
+        'linkOptions' => array(
+            'class' => 'text-error',
+            'confirm' => 'Вы уверены?',
+            'submit' => array('delete', 'id' => $model->actionID),
+            'params' => array(
+                'YII_CSRF_TOKEN' => Yii::app()->request->csrfToken,
+            ),
+        )
+    ),
 );
-?>
 
-<h1>Update Action <?php echo $model->actionID; ?></h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+echo $this->renderPartial('_form', array('model' => $model)); ?>
