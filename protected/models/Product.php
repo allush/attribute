@@ -94,6 +94,7 @@ class Product extends CActiveRecord
             'productStatusID' => 'Статус',
             'catalogID' => 'Каталог',
             'discount' => 'Скидка,%',
+            'price' => 'Цена',
         );
     }
 

@@ -123,6 +123,21 @@
                 ?>
             </div>
         </div>
+
+        <div class="control-group">
+            <?php echo $form->labelEx($model, 'price', array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php
+                echo $form->numberField($model, 'price', array(
+                    'class' => 'span1',
+                    'placeholder' => $model->getAttributeLabel('price'),
+                    'title' => $model->getAttributeLabel('price'),
+                ));
+                echo $form->error($model, 'price');
+                ?>
+            </div>
+        </div>
+
     </div>
 </div>
 </div>
