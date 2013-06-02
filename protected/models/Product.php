@@ -12,6 +12,7 @@
  * @property string $unit
  * @property integer $productStatusID
  * @property integer $catalogID
+ * @property double $price
  * @property integer $discount
  *
  * The followings are the available model relations:
@@ -52,6 +53,7 @@ class Product extends CActiveRecord
         return array(
             array('productStatusID', 'required'),
             array('productStatusID, catalogID, discount', 'numerical', 'integerOnly' => true),
+            array('price', 'numerical'),
             array('name, unit', 'length', 'max' => 255),
             array('createdOn, modifiedOn, description', 'safe'),
             // The following rule is used by search().

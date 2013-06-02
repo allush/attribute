@@ -21,7 +21,7 @@
 
 <body>
 <div id="container">
-    <div id="header-container" class="index">
+    <div id="header-container">
         <div id="header-wrapper">
             <div id="header">
                 <div class="header-top">
@@ -31,7 +31,7 @@
                     <!--.header-logo-->
 
                     <div id="header-right">
-                        <a href="#" class="opt">Оптовые продажи</a>
+                        <?php echo CHtml::link('Оптовые продажи',array('/wholesale'),array('class'=>'opt'));?>
 
                         <div class="header-phone">+7 948 949 49 30</div>
                     </div>
@@ -43,18 +43,18 @@
                             <div class="header-menu">
                                 <?php $this->widget('zii.widgets.CMenu', array(
                                     'items' => array(
-                                        array('label' => 'О нас', 'url' => array('/site/about'), 'linkOptions' => array('class' => 'about-us')),
-                                        array('label' => 'Каталог', 'url' => array('/catalog/index'), 'linkOptions' => array('class' => 'catalog')),
-                                        array('label' => 'Оплата и доставка', 'url' => array('/site/delivery'), 'linkOptions' => array('class' => 'delivery')),
+                                        array('label' => 'О нас', 'url' => array('/about'), 'linkOptions' => array('class' => 'about-us')),
+                                        array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
+                                        array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
                                         array('label' => 'Акции', 'url' => array('/action/index'), 'linkOptions' => array('class' => 'stock')),
-                                        array('label' => 'Контакты', 'url' => array('/site/contacts'), 'linkOptions' => array('class' => 'contacts')),
-                                        array('label' => '<input class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
+                                        array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
+                                        array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
                                     ),
                                     'encodeLabel' => false,
                                 )); ?>
                                 <div class="clear"></div>
-                                <a href="#" class="basket">Корзина: <span class="count">0</span></a>
-                                <a href="#" class="advanced-search">расширенный поиск</a>
+                                <?php echo CHtml::link('Корзина: <span class="count">0</span>',array('/cart'),array('class'=>'basket'));?>
+<!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->
                             </div>
                             <!--.header-menu-->
                         </div>
@@ -62,37 +62,37 @@
                     </div>
                     <!--.header-menu-left-->
 
-                    <div id="slider-container">
-                        <a href="#" id="top-slider-prev"></a>
-                        <a href="#" id="top-slider-next"></a>
-
-                        <div id="slideshow-items">
-
-                            <div class="slide">
-                                <img src="images/slide_img_1.png">
-
-                                <div class="slide-content">
-                                    <div class="slide-header">Фотоконкурс</div>
-                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>
-                                    <a href="#" class="want-button"></a>
-                                </div>
-                            </div>
-                            <!--slide-->
-                            <div class="slide">
-                                <img src="images/slide_img_1.png">
-
-                                <div class="slide-content">
-                                    <div class="slide-header">конкурс</div>
-                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>
-                                    <a href="#" class="want-button"></a>
-                                </div>
-                            </div>
-                            <!--slide-->
-                        </div>
-                        <!--#slideshow-items-->
-                        <div id="nav"></div>
-                    </div>
-                    <!--#slider-container-->
+<!--                    <div id="slider-container">-->
+<!--                        <a href="#" id="top-slider-prev"></a>-->
+<!--                        <a href="#" id="top-slider-next"></a>-->
+<!---->
+<!--                        <div id="slideshow-items">-->
+<!---->
+<!--                            <div class="slide">-->
+<!--                                <img src="/images/slide_img_1.png">-->
+<!---->
+<!--                                <div class="slide-content">-->
+<!--                                    <div class="slide-header">Фотоконкурс</div>-->
+<!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
+<!--                                    <a href="#" class="want-button"></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <!--slide-->
+<!--                            <div class="slide">-->
+<!--                                <img src="/images/slide_img_1.png">-->
+<!---->
+<!--                                <div class="slide-content">-->
+<!--                                    <div class="slide-header">конкурс</div>-->
+<!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
+<!--                                    <a href="#" class="want-button"></a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <!--slide-->
+<!--                        </div>-->
+<!--                        <!--#slideshow-items-->
+<!--                        <div id="nav"></div>-->
+<!--                    </div>-->
+<!--                    <!--#slider-container-->
                 </div>
                 <!--.header-top-->
             </div>
@@ -103,43 +103,10 @@
     </div>
 
     <div id="content">
-        <div id="line-blue">
-            <div id="line-blue-wrap">
-                <div id="menu-top">
-                    <div class="sort">
-                        <span>Сортировать:</span>
-                        <a href="javascript:void(0)" class="sort-button"></a>
-                    </div>
-                    <!--.sort-->
-                    <ul>
-                        <li><a class="active" href="#">Все</a></li>
-                        <li><a href="#">Новинки</a></li>
-                        <li><a href="#">Топ-продаж</a></li>
-                        <li><a href="#">Акции</a></li>
-                    </ul>
-                    <div class="filter-colors">
-                        <div class="filter-header">Фильтр по цветам</div>
-                        <div class="colors">
-                            <a href="javascript:void(0)" class="icon-color black"></a>
-                            <a href="javascript:void(0)" class="icon-color gray"></a>
-                            <a href="javascript:void(0)" class="icon-color light-pink"></a>
-                            <a href="javascript:void(0)" class="icon-color pink"></a>
-                            <a href="javascript:void(0)" class="icon-color red"></a>
-                            <a href="javascript:void(0)" class="icon-color blue"></a>
-                            <a href="javascript:void(0)" class="icon-color brown"></a>
-                            <a href="javascript:void(0)" class="icon-color yellow"></a>
-                            <a href="javascript:void(0)" class="icon-color orange"></a>
-                            <a href="javascript:void(0)" class="icon-color green"></a>
-                        </div>
-                    </div>
-                </div>
-                <!--#menu-top-->
 
-            </div>
-            <!--#line-blue-wrap-->
-        </div>
         <!--#line-blue-->
         <div class="main-content">
+
             <?php echo $content;?>
         </div>
         <!--.main-content-->
@@ -197,16 +164,6 @@
                 saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic
                 tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis
                 doloribus asperiores repellat.</p>
-
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui
-                dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora
-                incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum
-                exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
-                vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum
-                qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
         </div>
         <!--#footer-top-->
         <div id="footer-bottom">
@@ -214,11 +171,11 @@
                 <div id="footer-menu">
                     <?php $this->widget('zii.widgets.CMenu', array(
                         'items' => array(
-                            array('label' => 'О нас', 'url' => array('/')),
-                            array('label' => 'Каталог', 'url' => array('/catalog/index')),
-                            array('label' => 'Оплата и доставка', 'url' => array('/site/buy')),
+                            array('label' => 'О нас', 'url' => array('/about')),
+                            array('label' => 'Каталог', 'url' => array('/product/index')),
+                            array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
                             array('label' => 'Акции', 'url' => array('/action/index')),
-                            array('label' => 'Контакты', 'url' => array('/site/contacts')),
+                            array('label' => 'Контакты', 'url' => array('/contacts')),
                         ),
                     )); ?>
                     <div class="footer-phone">+7 948 949 49 30</div>

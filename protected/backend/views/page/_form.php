@@ -7,6 +7,10 @@ Yii::app()->clientScript->registerScriptFile(
     Yii::app()->baseUrl . '/ckeditor/ckeditor.js',
     CClientScript::POS_HEAD
 );
+Yii::app()->clientScript->registerScriptFile(
+    Yii::app()->baseUrl . '/ckfinder/ckfinder.js',
+    CClientScript::POS_HEAD
+);
 ?>
 
 <?php

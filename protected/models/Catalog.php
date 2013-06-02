@@ -40,6 +40,7 @@ class Catalog extends CActiveRecord
         // will receive user inputs.
         return array(
             array('name', 'required'),
+            array('name', 'unique'),
             array('parent', 'numerical', 'integerOnly' => true),
             array('name', 'length', 'max' => 255),
             // The following rule is used by search().

@@ -93,7 +93,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 .clear-ul {
 	clear: left;
 }
-/*-------------Основной контейнер для страницы-------------*/
+/*-------------пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-------------*/
 #container {
 	height: 100%;
 	width: 1024px;
@@ -269,7 +269,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 #header .header-menu-left {
-	margin: 20px 0px 0px 30px;
+	margin: 17px 0px 0px 30px;
 	padding: 0px 0px 0px 11px;
 	height: 89px;
 	background: url(../images/header_menu_left.png) no-repeat 0 0;
@@ -493,13 +493,13 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 /*--------------Content-----------*/
 /**********************************/
 #content {
-	padding: 34px 55px 0px 56px;
+	padding: 8px 55px 0px 56px;
 }
 
 #content #line-blue {
 	width: 913px;
 	height: 34px;
-	margin: 0 auto;
+	margin: 0 auto 18px auto;
 }
 
 #content #line-blue-wrap{
@@ -619,7 +619,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 #content .main-content {
-	padding: 58px 0px 44px 0px;
+	padding: 24px 0px 44px 0px;
 }
 
 .main-content .left-sidebar {
@@ -676,9 +676,18 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	background: url(../images/menu_item_hover.png) no-repeat 0 0;
 }
 
+.left-menu ul li.active .li-wrap {
+    background: url(../images/menu_item_hover.png) no-repeat 0 0;
+}
+
 .left-sidebar .left-menu ul li:hover,
 .left-sidebar .left-menu ul li:hover a {
 	background: none!important;
+}
+
+.left-sidebar .left-menu ul li.active,
+.left-sidebar .left-menu ul li.active a {
+    background: none!important;
 }
 
 .left-sidebar .left-menu ul li:first-child {
@@ -785,12 +794,18 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	position: absolute;
 	top: -24px;
 	right: -39px;
-} 
+}
+
+.products-item .product-image{
+    overflow: hidden;
+    width: 170px;
+    height: 170px;
+    padding-bottom: 7px;
+}
 
 .products-item img {
-	width: 170px;
+	/*width: 170px;*/
 	height: 170px;
-	padding-bottom: 7px;
 }
 
 .products-item .name-product {
@@ -836,9 +851,12 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	left: -2px;
 }
 
+
+
+
 .right-content .pager{
 	padding: 49px 0px 0px 0px;
-	width: 310px;
+	width: 600px;
 	height: 44px;
 	margin: 0 auto;
 }
@@ -847,7 +865,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	margin: 0;
 }
 
-.right-content .pager a {
+.right-content .pager li a {
 	width: 44px;
 	height: 44px;
 	display: block;
@@ -863,11 +881,28 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	color: #1e9cb3;
 }
 
+.right-content .pager li:hover a {
+    color: #71c1cf;
+}
+
+.right-content .pager li.first a,
+.right-content .pager li.last a,
+.right-content .pager li.next a,
+.right-content .pager li.previous a{
+    background: none;
+}
+
 .right-content .pager a:hover {
 	background-position: 0px -44px;
 }
-
-.right-content .pager a.active {
+.right-content .pager li.hidden{
+    display: none;
+}
+.right-content .pager li{
+    margin: 0 2px;
+    display: inline-block;
+}
+.right-content .pager li.active a {
 	color: #fff;
 	background-position: 0px -88px;
 }

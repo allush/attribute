@@ -2,19 +2,42 @@
 /* @var $this UserController */
 /* @var $dataProvider CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Users',
+$this->breadcrumbs = array(
+    'Пользователи',
 );
 
-$this->menu=array(
-	array('label'=>'Create User', 'url'=>array('create')),
-	array('label'=>'Manage User', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Создать', 'url' => array('create')),
 );
-?>
 
-<h1>Users</h1>
+$this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider' => $dataProvider,
+    'summaryText' => '{start} - {end} из {count}',
+    'summaryCssClass' => 'pull-right',
+    'itemsCssClass' => 'table table-bordered table-condensed table-hover',
+    'pagerCssClass' => 'pagination',
+    'pager' => array(
+        'firstPageLabel' => '<<',
+        'prevPageLabel' => '<',
+        'nextPageLabel' => '>',
+        'lastPageLabel' => '>>',
+        'maxButtonCount' => '10',
+        'header' => '',
+        'cssFile' => '',
+        'selectedPageCssClass' => 'active',
+    ),
+    'columns' => array(
+        array(
+            'header' => 'ФИО',
+            'name' => 'surname',
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->surname." ".$data->name." ".$data->patronymic, array("update","id"=>$data->userID))',
+        ),
+        'email',
+        'phone'
+    ),
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
+    'showTableOnEmpty' => false,
+    'emptyText' => 'Нет ни одного пользователя',
+));
+

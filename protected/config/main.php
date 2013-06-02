@@ -21,6 +21,7 @@ return array(
     // application components
     'components' => array(
 
+        'db' => require(dirname(__FILE__) . '/db.php'),
         'request' => array(
             'enableCsrfValidation' => true,
             'enableCookieValidation' => true,
@@ -35,12 +36,16 @@ return array(
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => array(
+                '/about' => '/site/about',
+                '/contacts' => '/site/contacts',
+                '/delivery' => '/site/delivery',
+                '/wholesale' => '/site/wholesale',
+                '/cart' => '/order/cart',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
-
 
 
         'errorHandler' => array(
