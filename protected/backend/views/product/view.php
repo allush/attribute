@@ -12,7 +12,13 @@ $this->menu = array(
     array(
         'label' => 'Удалить',
         'url' => '#',
-        'linkOptions' => array('submit' => array('delete', 'id' => $model->productID), 'confirm' => 'Are you sure you want to delete this item?'),
+        'linkOptions' => array(
+            'submit' => array('delete', 'id' => $model->productID),
+            'confirm' => 'Are you sure you want to delete this item?',
+            'params' => array(
+                'YII_CSRF_TOKEN' => Yii::app()->request->csrfToken,
+            ),
+        ),
         'itemOptions' => array('class' => 'pull-right')),
 );
 

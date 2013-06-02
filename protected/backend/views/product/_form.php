@@ -92,7 +92,7 @@
                 <?php
                 echo $form->dropDownList($model, 'catalogID',
                     CHtml::listData(Catalog::model()->findAll(), 'catalogID', 'name'),
-                    array('class' => 'span2', 'title' => $model->getAttributeLabel('catalogID'))
+                    array('class' => 'span2', 'title' => $model->getAttributeLabel('catalogID'),'prompt'=>'')
                 );
                 echo $form->error($model, 'catalogID');
                 ?>

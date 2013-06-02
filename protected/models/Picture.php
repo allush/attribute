@@ -101,4 +101,20 @@ class Picture extends CActiveRecord
     {
         return Yii::app()->baseUrl . '/images/product/large/' . $this->filename;
     }
+
+    protected function beforeDelete()
+    {
+        $largePath = Yii::app()->basePath . '/../images/product/large/' . $this->filename;
+        $thumbnailPath = Yii::app()->basePath . '/../images/product/thumbnail/' . $this->filename;
+
+        if (file_exists($largePath)) {
+            unlink($largePath);
+        }
+
+        if (file_exists($thumbnailPath)) {
+            unlink($thumbnailPath);
+        }
+
+        return parent::beforeDelete();
+    }
 }

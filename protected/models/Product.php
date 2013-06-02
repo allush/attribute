@@ -156,4 +156,24 @@ class Product extends CActiveRecord
 
         return parent::beforeSave();
     }
+
+    protected function beforeDelete()
+    {
+
+        // удалить свойства товара
+        foreach ($this->properties as $property) {
+            $property->delete();
+        }
+
+        // удалить картинки товара
+        foreach ($this->pictures as $picture) {
+            $picture->delete();
+        }
+
+        Existence::model()->model()->deleteAllByAttributes(array(
+            'productID' => $this->productID,
+        ));
+
+        return parent::beforeDelete();
+    }
 }
