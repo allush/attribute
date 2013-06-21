@@ -27,9 +27,3 @@ $this->widget('zii.widgets.CListView', array(
         'selectedPageCssClass' => 'active',
     ),
 ));
-?>
-<script type="text/javascript">
-    $('.to-basket-button').click(function(){
-        return false;
-    });
-</script>

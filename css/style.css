@@ -353,12 +353,33 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	cursor: pointer;
 	float: left;
 }
+.primary-btn{
+    text-decoration: none;
+    background-color: #eb99c7;
+    border: 2px solid #eb99c7;
+    color: #fff;
+    border-radius: 4px;
+    display: inline-block;
+    text-align: center;
+    width: 160px;
+    line-height: 24px;
+
+}
+.primary-btn:hover {
+    background-position: 0 -46px;
+    background-color: #da8ab6;
+    border: 2px solid #da8ab6;
+}
+
+.primary-btn:active {
+    background-position: 0 -92px;
+}
 
 #header .header-menu .basket {
 	position: absolute;
 	top: -27px;
 	color: #fff;
-	font-size: 17px;
+	font-size: 14px;
 	font-family: 'dincyr-boldregular';
 	text-align: center;
 	text-decoration: none;
@@ -369,6 +390,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	line-height: 46px;
 	background: url(../images/basket_back.png) no-repeat 0 0;
 }
+
 
 #header .header-menu .basket:hover {
 	background-position: 0 -46px;

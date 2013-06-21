@@ -16,21 +16,36 @@ if ($index % 3 == 0) {
 }
 ?>
 
-    <div class="products-item">
-        <div class="product-image">
-            <?php echo CHtml::link(CHtml::image($data->image()),array('view', 'id' => $data->productID));?>
-        </div>
-        <div class="name-product">
-            <?php echo CHtml::link($data->name, array('view', 'id' => $data->productID));?>
-        </div>
-        <div class="product-price">
-            <a href="#" class="to-basket-button"></a>
-            <span><?php echo $data->price;?> руб.</span>
-        </div>
-        <!--    <a href="javascript:void(0)" class="new-icon"></a>-->
-        <a href="javascript:void(0)" class="top-icon"></a>
+<div class="products-item">
+    <div class="product-image">
+        <?php echo CHtml::link(CHtml::image($data->image()), array('view', 'id' => $data->productID));?>
     </div>
-    <!--.products-item-->
+    <div class="name-product">
+        <?php echo CHtml::link($data->name, array('view', 'id' => $data->productID));?>
+    </div>
+    <div class="product-price">
+        <?php
+        echo CHtml::ajaxLink(
+            '',
+            array('/order/addToCart', 'productID' => $data->productID),
+            array(
+                'success' => 'js:function(data){
+                                    if(data==301){
+                                        document.location="' . $this->createUrl('/product/view', array('id' => $data->productID)) . '";
+                                    } else{
+                                        $(".basket .count").html(data);
+                                    }
+                              }',
+            ),
+            array('class' => 'to-basket-button')
+        );
+        ?>
+        <span><?php echo $data->priceCurrency();?></span>
+    </div>
+    <!--    <a href="javascript:void(0)" class="new-icon"></a>-->
+    <a href="javascript:void(0)" class="top-icon"></a>
+</div>
+<!--.products-item-->
 
 <?php
 if ($index + 1 == $itemCount && !$closed) {

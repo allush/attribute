@@ -123,16 +123,6 @@ class ProductController extends Controller
         }
     }
 
-    public function actionSetExistence($existenceID)
-    {
-        /** @var $existence Existence */
-        $existence = Existence::model()->findByPk($existenceID);
-        if (isset($_POST['Existence'])) {
-            $existence->attributes = $_POST['Existence'];
-            $existence->save();
-        }
-    }
-
     /**
      * Displays a particular model.
      * @param integer $id the ID of the model to be displayed

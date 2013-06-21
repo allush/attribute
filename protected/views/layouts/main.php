@@ -1,4 +1,6 @@
-<?php /* @var $this Controller */ ?>
+<?php
+/* @var $this Controller */
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +10,12 @@
     <meta name="language" content="ru"/>
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cart.css">
     <link rel="stylesheet" type="text/css"
           href="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.css">
 
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.7.2.min.js"></script>
+    <?php Yii::app()->getClientScript()->registerCoreScript('jquery');?>
+<!--    <script type="text/javascript" src="--><?php //echo Yii::app()->request->baseUrl; ?><!--/js/jquery-1.7.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.cycle.all.js"></script>
     <script type="text/javascript"
             src="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.js"></script>
@@ -31,7 +35,7 @@
                     <!--.header-logo-->
 
                     <div id="header-right">
-                        <?php echo CHtml::link('Оптовые продажи',array('/wholesale'),array('class'=>'opt'));?>
+                        <?php echo CHtml::link('Оптовые продажи', array('/wholesale'), array('class' => 'opt'));?>
 
                         <div class="header-phone">+7 948 949 49 30</div>
                     </div>
@@ -42,19 +46,21 @@
                         <div class="header-menu-right">
                             <div class="header-menu">
                                 <?php $this->widget('zii.widgets.CMenu', array(
-                                    'items' => array(
-                                        array('label' => 'О нас', 'url' => array('/about'), 'linkOptions' => array('class' => 'about-us')),
-                                        array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
-                                        array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
-                                        array('label' => 'Акции', 'url' => array('/action/index'), 'linkOptions' => array('class' => 'stock')),
-                                        array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
-                                        array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
-                                    ),
-                                    'encodeLabel' => false,
-                                )); ?>
+                                'items' => array(
+                                    array('label' => 'О нас', 'url' => array('/about'), 'linkOptions' => array('class' => 'about-us')),
+                                    array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
+                                    array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
+                                    array('label' => 'Акции', 'url' => array('/action/index'), 'linkOptions' => array('class' => 'stock')),
+                                    array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
+                                    array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
+                                ),
+                                'encodeLabel' => false,
+                            )); ?>
                                 <div class="clear"></div>
-                                <?php echo CHtml::link('Корзина: <span class="count">0</span>',array('/cart'),array('class'=>'basket'));?>
-<!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->
+                                <?php
+                                echo CHtml::link('Корзина: <span class="count">'.$this->order->sum().' р.</span>', array('/cart'), array('class' => 'basket'));
+                                ?>
+                                <!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->
                             </div>
                             <!--.header-menu-->
                         </div>
@@ -62,37 +68,37 @@
                     </div>
                     <!--.header-menu-left-->
 
-<!--                    <div id="slider-container">-->
-<!--                        <a href="#" id="top-slider-prev"></a>-->
-<!--                        <a href="#" id="top-slider-next"></a>-->
-<!---->
-<!--                        <div id="slideshow-items">-->
-<!---->
-<!--                            <div class="slide">-->
-<!--                                <img src="/images/slide_img_1.png">-->
-<!---->
-<!--                                <div class="slide-content">-->
-<!--                                    <div class="slide-header">Фотоконкурс</div>-->
-<!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
-<!--                                    <a href="#" class="want-button"></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <!--slide-->
-<!--                            <div class="slide">-->
-<!--                                <img src="/images/slide_img_1.png">-->
-<!---->
-<!--                                <div class="slide-content">-->
-<!--                                    <div class="slide-header">конкурс</div>-->
-<!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
-<!--                                    <a href="#" class="want-button"></a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <!--slide-->
-<!--                        </div>-->
-<!--                        <!--#slideshow-items-->
-<!--                        <div id="nav"></div>-->
-<!--                    </div>-->
-<!--                    <!--#slider-container-->
+                    <!--                    <div id="slider-container">-->
+                    <!--                        <a href="#" id="top-slider-prev"></a>-->
+                    <!--                        <a href="#" id="top-slider-next"></a>-->
+                    <!---->
+                    <!--                        <div id="slideshow-items">-->
+                    <!---->
+                    <!--                            <div class="slide">-->
+                    <!--                                <img src="/images/slide_img_1.png">-->
+                    <!---->
+                    <!--                                <div class="slide-content">-->
+                    <!--                                    <div class="slide-header">Фотоконкурс</div>-->
+                    <!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
+                    <!--                                    <a href="#" class="want-button"></a>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <!--slide-->
+                    <!--                            <div class="slide">-->
+                    <!--                                <img src="/images/slide_img_1.png">-->
+                    <!---->
+                    <!--                                <div class="slide-content">-->
+                    <!--                                    <div class="slide-header">конкурс</div>-->
+                    <!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
+                    <!--                                    <a href="#" class="want-button"></a>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <!--slide-->
+                    <!--                        </div>-->
+                    <!--                        <!--#slideshow-items-->
+                    <!--                        <div id="nav"></div>-->
+                    <!--                    </div>-->
+                    <!--                    <!--#slider-container-->
                 </div>
                 <!--.header-top-->
             </div>
@@ -170,14 +176,14 @@
             <div id="footer-menu-wrap">
                 <div id="footer-menu">
                     <?php $this->widget('zii.widgets.CMenu', array(
-                        'items' => array(
-                            array('label' => 'О нас', 'url' => array('/about')),
-                            array('label' => 'Каталог', 'url' => array('/product/index')),
-                            array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
-                            array('label' => 'Акции', 'url' => array('/action/index')),
-                            array('label' => 'Контакты', 'url' => array('/contacts')),
-                        ),
-                    )); ?>
+                    'items' => array(
+                        array('label' => 'О нас', 'url' => array('/about')),
+                        array('label' => 'Каталог', 'url' => array('/product/index')),
+                        array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
+                        array('label' => 'Акции', 'url' => array('/action/index')),
+                        array('label' => 'Контакты', 'url' => array('/contacts')),
+                    ),
+                )); ?>
                     <div class="footer-phone">+7 948 949 49 30</div>
                 </div>
                 <!--#footer-menu-->

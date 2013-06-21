@@ -1,0 +1,48 @@
+.cart-table {
+    width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+}
+
+.cart-table a{
+    color: #ae5f84;
+}
+.cart-table a.primary-btn{
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cart-table td:nth-child(4){
+    text-align: right;
+}
+.cart-table tr td:last-of-type{
+    width: 24px;
+}
+
+.cart-table td {
+    padding: 8px;
+    border-bottom: 1px solid #a8d0da;
+}
+
+.cart-table tr.noborder td {
+    border: none;
+}
+.totalSum{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.cart-thumbnail {
+    max-width: 120px;
+    max-height: 120px;
+}
+.cart-quantity-input{
+    width: 84px;
+    padding: 4px;
+    border-radius: 2px;
+    border: 1px solid #d4c8cc;
+}
+.orderItem-delete{
+    font-size: 14px;
+}

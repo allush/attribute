@@ -16,7 +16,7 @@
                     <li><?php echo CHtml::link('Все', array('/product/index'));?></li>
                     <li><?php echo CHtml::link('Новинки', array('/product/index', 'target' => 'new'));?></li>
                     <li><?php echo CHtml::link('Топ продаж', array('/product/index', 'target' => 'top'));?></li>
-                    <li><?php echo CHtml::link('Акции', array('/action/index'));?></li>
+<!--                    <li>--><?php //echo CHtml::link('Акции', array('/action/index'));?><!--</li>-->
                 </ul>
                 <!--                    <div class="filter-colors">-->
                 <!--                        <div class="filter-header">Фильтр по цветам</div>-->

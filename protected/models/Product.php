@@ -12,16 +12,15 @@
  * @property string $unit
  * @property integer $productStatusID
  * @property integer $catalogID
- * @property double $price
+ * @property float $price
  * @property integer $discount
+ * @property integer $existence
  *
  * The followings are the available model relations:
- * @property Existence[] $existences
  * @property OrderItem[] $orderItems
  * @property Picture[] $pictures
  * @property ProductStatus $productStatus
  * @property Catalog $catalog
- * @property Property[] $properties
  */
 class Product extends CActiveRecord
 {
@@ -52,10 +51,10 @@ class Product extends CActiveRecord
         // will receive user inputs.
         return array(
             array('productStatusID', 'required'),
-            array('productStatusID, catalogID, discount', 'numerical', 'integerOnly' => true),
-            array('price', 'numerical'),
+            array('productStatusID, catalogID, discount, createdOn, modifiedOn', 'numerical', 'integerOnly' => true),
+            array('price, existence', 'numerical'),
             array('name, unit', 'length', 'max' => 255),
-            array('createdOn, modifiedOn, description', 'safe'),
+            array('description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('productID, name, createdOn, modifiedOn, description, unit, productStatusID, discount', 'safe', 'on' => 'search'),
@@ -70,12 +69,10 @@ class Product extends CActiveRecord
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'existences' => array(self::HAS_MANY, 'Existence', 'productID'),
             'orderItems' => array(self::HAS_MANY, 'OrderItem', 'productID'),
             'pictures' => array(self::HAS_MANY, 'Picture', 'productID'),
             'productStatus' => array(self::BELONGS_TO, 'ProductStatus', 'productStatusID'),
             'catalog' => array(self::BELONGS_TO, 'Catalog', 'catalogID'),
-            'properties' => array(self::HAS_MANY, 'Property', 'productID'),
         );
     }
 
@@ -94,7 +91,8 @@ class Product extends CActiveRecord
             'productStatusID' => 'Статус',
             'catalogID' => 'Каталог',
             'discount' => 'Скидка,%',
-            'price' => 'Цена',
+            'price' => 'Цена,р',
+            'existence' => 'Наличие',
         );
     }
 
@@ -117,6 +115,7 @@ class Product extends CActiveRecord
         $criteria->compare('unit', $this->unit, true);
         $criteria->compare('productStatusID', $this->productStatusID);
         $criteria->compare('discount', $this->discount);
+        $criteria->compare('existence', $this->existence);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -158,23 +157,13 @@ class Product extends CActiveRecord
         return parent::beforeSave();
     }
 
-    protected function beforeDelete()
+    /**
+     * Стоимость вместе с валютой
+     * @return string
+     */
+    public function priceCurrency()
     {
+        return $this->price . ' руб.';
 
-        // удалить свойства товара
-        foreach ($this->properties as $property) {
-            $property->delete();
-        }
-
-        // удалить картинки товара
-        foreach ($this->pictures as $picture) {
-            $picture->delete();
-        }
-
-        Existence::model()->model()->deleteAllByAttributes(array(
-            'productID' => $this->productID,
-        ));
-
-        return parent::beforeDelete();
     }
 }
