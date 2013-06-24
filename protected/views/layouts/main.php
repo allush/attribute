@@ -15,7 +15,8 @@
           href="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.css">
 
     <?php Yii::app()->getClientScript()->registerCoreScript('jquery');?>
-<!--    <script type="text/javascript" src="--><?php //echo Yii::app()->request->baseUrl; ?><!--/js/jquery-1.7.2.min.js"></script>-->
+    <!--    <script type="text/javascript" src="-->
+    <?php //echo Yii::app()->request->baseUrl; ?><!--/js/jquery-1.7.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.cycle.all.js"></script>
     <script type="text/javascript"
             src="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.js"></script>
@@ -58,7 +59,7 @@
                             )); ?>
                                 <div class="clear"></div>
                                 <?php
-                                echo CHtml::link('Корзина: <span class="count">'.$this->order->sum().' р.</span>', array('/cart'), array('class' => 'basket'));
+                                echo CHtml::link('Корзина: <span class="count">0</span>', array('/cart'), array('class' => 'basket'));
                                 ?>
                                 <!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->
                             </div>

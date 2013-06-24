@@ -17,12 +17,8 @@
 	<?php echo CHtml::encode($data->createdOn); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('completedOn')); ?>:</b>
-	<?php echo CHtml::encode($data->completedOn); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('executedOn')); ?>:</b>
-	<?php echo CHtml::encode($data->executedOn); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('modifiedOn')); ?>:</b>
+	<?php echo CHtml::encode($data->modifiedOn); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('orderPaymentID')); ?>:</b>

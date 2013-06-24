@@ -14,8 +14,18 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $relatedProducts = Product::model()->findAll(array(
+            'condition' => 'productID<>:productID',
+            'params' => array(
+                ':productID' => $id,
+            ),
+            'order' => 'productID',
+            'limit' => 4
+        ));
+
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'relatedProducts' => $relatedProducts,
         ));
     }
 
