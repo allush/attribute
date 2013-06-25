@@ -69,6 +69,16 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	padding: 0px;
 }
 
+input{
+    border: 1px solid #cccccc;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+span.required,.errorMessage, .errorSummary{
+    color: #ff2222;
+}
+
 .clear , .clear-right, .clear-both {
 	line-height: 0px;
 	height: 0px;
@@ -104,7 +114,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 #container #question {
 	width: 47px;
 	height: 218px;
-	background: url(../images/question_button.png) no-repeat 0 0;
+	background: url(../img/question_button.png) no-repeat 0 0;
 	display: block;
 	position: fixed;
 	top: 380px;
@@ -117,20 +127,20 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
  #your-question {
 	width: 601px;
-	background: url(../images/fancy_top.png) no-repeat 0 0;
+	background: url(../img/fancy_top.png) no-repeat 0 0;
 	padding-top: 7px;
 }
 
 .your-question-bottom {
 	width: 601px;
-	background: url(../images/fancy_bottom.png) no-repeat 0 bottom;
+	background: url(../img/fancy_bottom.png) no-repeat 0 bottom;
 	padding-bottom: 7px;
 }
 
 .your-question-body {
 	width: 517px;
 	padding: 23px 42px 33px;
-	background: url(../images/fancy_body_back.png) repeat-y 0 0;
+	background: url(../img/fancy_body_back.png) repeat-y 0 0;
 }
 
 .your-question-body .line-fields {
@@ -147,7 +157,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 501px;
 	margin-top: 3px;
 	height: 52px;
-	background: url(../images/textarea_back.png) no-repeat 0 0;
+	background: url(../img/textarea_back.png) no-repeat 0 0;
 	padding: 8px;
 	border: none;
 }
@@ -155,7 +165,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 .your-question-body input {
 	width: 502px;
 	height: 37px;
-	background: url(../images/input_back.png) no-repeat 0 0;
+	background: url(../img/input_back.png) no-repeat 0 0;
 	padding: 0px 8px;
 	border: none;
 	margin-top: 5px;
@@ -184,7 +194,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 .your-question-body .send-button-container .send-button {
 	width: 214px;
 	height: 56px;
-	background: url(../images/send_button.png) no-repeat 0 0;
+	background: url(../img/send_button.png) no-repeat 0 0;
 	display: block;
 	float: left;
 }
@@ -226,7 +236,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: url(../images/header_back.gif) repeat-x 0 0;
+	background: url(../img/header_back.gif) repeat-x 0 0;
 }
 
 #header-container.index #header-wrapper {
@@ -272,19 +282,19 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	margin: 17px 0px 0px 30px;
 	padding: 0px 0px 0px 11px;
 	height: 89px;
-	background: url(../images/header_menu_left.png) no-repeat 0 0;
+	background: url(../img/header_menu_left.png) no-repeat 0 0;
 }
 
 #header .header-menu-right {
 	padding: 0px 11px 0px 0px;
 	height: 89px;
-	background: url(../images/header_menu_right.png) no-repeat right 0;
+	background: url(../img/header_menu_right.png) no-repeat right 0;
 }
 
 #header .header-menu {
 	height: 89px;
 	position: relative;
-	background: url(../images/header_menu_back.png) repeat-x right 0;
+	background: url(../img/header_menu_back.png) repeat-x right 0;
 }
 
 #header .header-menu ul {
@@ -299,7 +309,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 #header .header-menu ul li {
 	float: left;
 	height: 68px;
-	background: url(../images/menu_separate.gif) no-repeat 0 center;
+	background: url(../img/menu_separate.gif) no-repeat 0 center;
 }
 
 #header .header-menu ul li a {
@@ -311,23 +321,23 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 #header .header-menu ul li a.about-us:hover{
-	background: url(../images/about_us_hover.png) no-repeat center center;
+	background: url(../img/about_us_hover.png) no-repeat center center;
 }
 
 #header .header-menu ul li a.catalog:hover {
-	background: url(../images/catalog_hover.png) no-repeat center center;
+	background: url(../img/catalog_hover.png) no-repeat center center;
 }
 
 #header .header-menu ul li a.delivery:hover {
-	background: url(../images/delivery_hover.png) no-repeat center center;
+	background: url(../img/delivery_hover.png) no-repeat center center;
 }
 
 #header .header-menu ul li a.stock:hover {
-	background: url(../images/stock_hover.png) no-repeat center center;
+	background: url(../img/stock_hover.png) no-repeat center center;
 }
 
 #header .header-menu ul li a.contacts:hover {
-	background: url(../images/contacts_hover.png) no-repeat center center;
+	background: url(../img/contacts_hover.png) no-repeat center center;
 }
 
 #header .header-menu ul li.menu-search {
@@ -337,7 +347,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 
 #header .header-menu ul li.menu-search .search-field {
 	border: none;
-	background: url(../images/menu_search_input.png) no-repeat 0 0;
+	background: url(../img/menu_search_input.png) no-repeat 0 0;
 	width: 152px;
 	float: left;
 	padding: 0px 5px;
@@ -347,7 +357,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 
 #header .header-menu ul li.menu-search .search-button {
 	border: none;
-	background: url(../images/menu_search_button.png) no-repeat 0 0;
+	background: url(../img/menu_search_button.png) no-repeat 0 0;
 	width: 24px;
 	height: 27px;
 	cursor: pointer;
@@ -388,7 +398,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 142px;
 	height: 46px;
 	line-height: 46px;
-	background: url(../images/basket_back.png) no-repeat 0 0;
+	background: url(../img/basket_back.png) no-repeat 0 0;
 }
 
 
@@ -468,7 +478,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 295px;
 	height: 56px;
 	margin-top: 14px;
-	background: url(../images/want_button.png) no-repeat 0 0;
+	background: url(../img/want_button.png) no-repeat 0 0;
 }
 
 #slideshow-items .slide .slide-content .want-button:hover {
@@ -492,7 +502,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	float: left;
 	margin-left: 11px;
 	height: 17px;
-	background: url(../images/pager_nav.png) no-repeat 0 0;
+	background: url(../img/pager_nav.png) no-repeat 0 0;
 }
 
 #slider-container #nav a:hover,
@@ -504,7 +514,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	position: absolute;
 	bottom: 0;
 	left: 0;
-	background: url(../images/top_wave_back.png) repeat-x 0 0;
+	background: url(../img/top_wave_back.png) repeat-x 0 0;
 	width: 100%;
 	height: 9px;
 	z-index: 999;
@@ -576,7 +586,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 128px;
 	height: 18px;
 	display: block;
-	background: url(../images/sort_button.png) no-repeat 0 0;
+	background: url(../img/sort_button.png) no-repeat 0 0;
 }
 
 #content #menu-top .sort span {
@@ -602,7 +612,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	padding: 0px 22px;
 	height: 34px;
 	line-height: 34px;
-	background: url(../images/content_menu_separate.gif) no-repeat 0 center;
+	background: url(../img/content_menu_separate.gif) no-repeat 0 center;
 }
 
 #content #menu-top ul li a {
@@ -619,7 +629,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 #content #menu-top .filter-colors {
 	width: 246px;
 	height: 76px;
-	background: url(../images/filter_back.png) no-repeat 0 0;
+	background: url(../img/filter_back.png) no-repeat 0 0;
 	position: absolute;
 	top: -9px;
 	left: 0;
@@ -628,7 +638,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 
 #content #menu-top .filter-colors .filter-header {
 	line-height: 34px;
-	background: url(../images/color_header_back.gif) repeat-x 0 0;
+	background: url(../img/color_header_back.gif) repeat-x 0 0;
 	height: 34px;
 	font-size: 20px;
 	font-family: 'dincyr-mediumregular';
@@ -653,19 +663,19 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	padding: 6px 0px 0px 0px;
 	width: 246px;
 	margin: 0px 0px 20px 0px;
-	background: url(../images/menu_top_back.png) no-repeat 0 0;
+	background: url(../img/menu_top_back.png) no-repeat 0 0;
 }
 
 .left-sidebar .left-menu-bottom {
 	padding: 0px 0px 7px 0px;
 	width: 246px;
-	background: url(../images/menu_bottom_back.png) no-repeat 0 bottom;
+	background: url(../img/menu_bottom_back.png) no-repeat 0 bottom;
 }
 
 .left-sidebar .left-menu {
 	width: 246px;
 	padding: 13px 0px 17px;
-	background:#39a8bc url(../images/menu_center_back.gif) no-repeat 0 0;
+	background:#39a8bc url(../img/menu_center_back.gif) no-repeat 0 0;
 }
 
 
@@ -682,7 +692,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	height: 48px;
 	position: relative;
 	line-height: 48px;
-	background: url(../images/1x2_line.gif) repeat-x 0 bottom;
+	background: url(../img/1x2_line.gif) repeat-x 0 bottom;
 }
 
 .left-sidebar .left-menu ul li .li-wrap {
@@ -695,11 +705,11 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 .left-menu ul li:hover .li-wrap {
-	background: url(../images/menu_item_hover.png) no-repeat 0 0;
+	background: url(../img/menu_item_hover.png) no-repeat 0 0;
 }
 
 .left-menu ul li.active .li-wrap {
-    background: url(../images/menu_item_hover.png) no-repeat 0 0;
+    background: url(../img/menu_item_hover.png) no-repeat 0 0;
 }
 
 .left-sidebar .left-menu ul li:hover,
@@ -718,7 +728,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 .left-sidebar .left-menu ul li:first-child a{
-	background: url(../images/1x2_line.gif) repeat-x 0 0;
+	background: url(../img/1x2_line.gif) repeat-x 0 0;
 }
 
 .left-sidebar .left-menu ul li a {
@@ -742,19 +752,19 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 .socials a.facebook-icon {
-	background: url(../images/facebook_icon_big.png) no-repeat 0 0;
+	background: url(../img/facebook_icon_big.png) no-repeat 0 0;
 }
 
 .socials a.twitter-icon {
-	background: url(../images/twitter_icon_big.png) no-repeat 0 0;
+	background: url(../img/twitter_icon_big.png) no-repeat 0 0;
 }
 
 .socials a.google-icon {
-	background: url(../images/google_icon_big.png) no-repeat 0 0;
+	background: url(../img/google_icon_big.png) no-repeat 0 0;
 }
 
 .socials a.vk-icon {
-	background: url(../images/vk_icon_big.png) no-repeat 0 0;
+	background: url(../img/vk_icon_big.png) no-repeat 0 0;
 }
 
 .socials p {
@@ -802,7 +812,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 58px;
 	height: 58px;
 	display: block;
-	background: url(../images/new_icon.png) no-repeat 0 0;
+	background: url(../img/new_icon.png) no-repeat 0 0;
 	position: absolute;
 	top: -18px;
 	right: -16px;
@@ -812,7 +822,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 79px;
 	height: 79px;
 	display: block;
-	background: url(../images/top_icon.png) no-repeat 0 0;
+	background: url(../img/top_icon.png) no-repeat 0 0;
 	position: absolute;
 	top: -24px;
 	right: -39px;
@@ -866,7 +876,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 .products-item .product-price .to-basket-button {
 	width: 77px;
 	height: 24px;
-	background: url(../images/to_basket_button.png) no-repeat 0 0;
+	background: url(../img/to_basket_button.png) no-repeat 0 0;
 	display: none;
 	position: absolute;
 	top: 3px;
@@ -891,7 +901,7 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 	width: 44px;
 	height: 44px;
 	display: block;
-	background: url(../images/pager_back.png) no-repeat 0 0;
+	background: url(../img/pager_back.png) no-repeat 0 0;
 	float: left;
 	margin-left: 10px;
 	font-size: 18px;
@@ -994,43 +1004,43 @@ ul, li, input, form, p, img, table, tr, td, a, h1, h2, h3, h4, h5 {
 }
 
 a.icon-color.black {
-	background: url(../images/color_black.png) no-repeat 0 0;
+	background: url(../img/color_black.png) no-repeat 0 0;
 }
 
  a.icon-color.orange {
-	background: url(../images/color_orange.png) no-repeat 0 0;
+	background: url(../img/color_orange.png) no-repeat 0 0;
 }
 
  a.icon-color.blue {
-	background: url(../images/color_blue.png) no-repeat 0 0;
+	background: url(../img/color_blue.png) no-repeat 0 0;
 }
 
  a.icon-color.gray {
-	background: url(../images/color_gray.png) no-repeat 0 0;
+	background: url(../img/color_gray.png) no-repeat 0 0;
 }
 
  a.icon-color.light-pink {
-	background: url(../images/color_light_pink.png) no-repeat 0 0;
+	background: url(../img/color_light_pink.png) no-repeat 0 0;
 }
 
  a.icon-color.pink {
-	background: url(../images/color_pink.png) no-repeat 0 0;
+	background: url(../img/color_pink.png) no-repeat 0 0;
 }
 
  a.icon-color.red {
-	background: url(../images/color_red.png) no-repeat 0 0;
+	background: url(../img/color_red.png) no-repeat 0 0;
 }
 
  a.icon-color.brown {
-	background: url(../images/color_brown.png) no-repeat 0 0;
+	background: url(../img/color_brown.png) no-repeat 0 0;
 }
 
  a.icon-color.yellow {
-	background: url(../images/color_yellow.png) no-repeat 0 0;
+	background: url(../img/color_yellow.png) no-repeat 0 0;
 }
 
  a.icon-color.green {
-	background: url(../images/color_green.png) no-repeat 0 0;
+	background: url(../img/color_green.png) no-repeat 0 0;
 }
 
 
@@ -1061,7 +1071,7 @@ a.icon-color.black {
 .product-description-buttons .product-price {
 	width: 187px;
 	height: 51px;
-	background: url(../images/price_back.png) no-repeat 0 0;
+	background: url(../img/price_back.png) no-repeat 0 0;
 	margin: 1px 15px 0px 0px;
 	font-size: 29px;
 	line-height: 51px;
@@ -1074,7 +1084,7 @@ a.icon-color.black {
 
 
 .product-description-buttons .add-basket-button {
-	background: url(../images/add_basket_button.png) no-repeat 0 0;
+	background: url(../img/add_basket_button.png) no-repeat 0 0;
 	width: 322px;
 	height: 54px;
 	display: block;
@@ -1108,7 +1118,7 @@ a.icon-color.black {
 	left: 0;
 	height: 46px;
 	width: 100%;
-	background: url(../images/wave_blue.png) repeat-x 0 bottom;
+	background: url(../img/wave_blue.png) repeat-x 0 bottom;
 }
 
 .main-content .header-wrapper .header {
@@ -1133,9 +1143,12 @@ a.icon-color.black {
 	position: absolute;
 	width: 100%;
 	left: 0;
-	background: #a7e7f3 url(../images/bottom_wave_back.png) repeat-x 0 0;
+	background: #a7e7f3 url(../img/bottom_wave_back.png) repeat-x 0 0;
 }
-
+.page-empty{
+    clear: both;
+    padding-top: 8px;
+}
 #footer {
 	width: 913px;
 	margin: 0 auto;
@@ -1226,19 +1239,19 @@ a.icon-color.black {
 }
 
 #footer #footer-icons .footer-left a.visa-icon {
-	background: url(../images/visa_icon.png) no-repeat 0 0;
+	background: url(../img/visa_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-icons .footer-left a.master-icon {
-	background: url(../images/master_icon.png) no-repeat 0 0;
+	background: url(../img/master_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-icons .footer-left a.jsb-icon {
-	background: url(../images/jsb_icon.png) no-repeat 0 0;
+	background: url(../img/jsb_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-icons .footer-left a.diners-icon {
-	background: url(../images/diners_icon.png) no-repeat 0 0;
+	background: url(../img/diners_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-icons .footer-right {
@@ -1260,17 +1273,43 @@ a.icon-color.black {
 }
 
 #footer #footer-right .socials-icons a.facebook-icon {
-	background: url(../images/facebook_icon.png) no-repeat 0 0;
+	background: url(../img/facebook_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-right .socials-icons a.twitter-icon {
-	background: url(../images/twitter_icon.png) no-repeat 0 0;
+	background: url(../img/twitter_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-right .socials-icons a.google-icon {
-	background: url(../images/google_icon.png) no-repeat 0 0;
+	background: url(../img/google_icon.png) no-repeat 0 0;
 }
 
 #footer #footer-right .socials-icons a.vk-icon {
-	background: url(../images/vk_icon.png) no-repeat 0 0;
+	background: url(../img/vk_icon.png) no-repeat 0 0;
 }
+
+
+#login-status{
+    display: inline-block;
+    float: right;
+    margin-top: -8px;
+    padding: 4px 8px;
+    background-image: url('../img/white50.png');
+    border-radius: 4px;
+}
+
+#login-status li{
+    display: inline;
+}
+#login-status li a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #0792ac;
+    padding: 4px 8px;
+    font-weight: bold;
+}
+#login-status li a:hover{
+    text-decoration: underline;
+}
+
+

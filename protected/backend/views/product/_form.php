@@ -139,6 +139,20 @@
         </div>
 
         <div class="control-group">
+            <?php echo $form->labelEx($model, 'purchase', array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php
+                echo $form->numberField($model, 'purchase', array(
+                    'class' => 'span2',
+                    'placeholder' => $model->getAttributeLabel('purchase'),
+                    'title' => $model->getAttributeLabel('purchase'),
+                ));
+                echo $form->error($model, 'purchase');
+                ?>
+            </div>
+        </div>
+
+        <div class="control-group">
             <?php echo $form->labelEx($model, 'existence', array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php

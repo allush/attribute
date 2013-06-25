@@ -18,7 +18,7 @@ class Action extends CActiveRecord
 
     public function __construct($scenario = 'insert')
     {
-        $this->picturePath = Yii::app()->basePath . '/../images/action/';
+        $this->picturePath = Yii::app()->basePath . '/../img/action/';
 
         parent::__construct($scenario);
     }
@@ -92,7 +92,7 @@ class Action extends CActiveRecord
     {
         $picture = '';
         if (strlen($this->picture) > 0 && $this->picture != null) {
-            $picture = Yii::app()->baseUrl . '/images/action/' . $this->picture;
+            $picture = Yii::app()->baseUrl . '/img/action/' . $this->picture;
         }
         return $picture;
     }

@@ -11,29 +11,20 @@
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css"
           media="screen"/>
+    <link rel='stylesheet' href='<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css'
+          type='text/css'>
+    <link rel='stylesheet' href='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.css'
+          type='text/css'>
 
-
-    <link href='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.css' type='text/css'
-          rel='stylesheet'>
     <script type='text/javascript'
             src='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.js'></script>
     <script type='text/javascript'
             src='<?php echo Yii::app()->request->baseUrl; ?>/treeview/jquery.treeview.edit.js'></script>
-
-    <?php
-    Yii::app()->clientScript->registerCssFile(
-        CHtml::asset(Yii::app()->basePath . '/backend/assets/css/bootstrap.min.css')
-    );
-
-    Yii::app()->clientScript->registerScriptFile(
-        CHtml::asset(Yii::app()->basePath . '/backend/assets/js/bootstrap.min.js'),
-        CClientScript::POS_HEAD
-    );
-    ?>
+    <script type='text/javascript'
+            src='<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js'></script>
 </head>
 
 <body style="margin-top: 8px;">
-
 <div class="container">
     <div class="row">
         <div class="span12">

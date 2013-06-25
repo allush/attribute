@@ -51,8 +51,9 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('surname, name, email, password', 'required'),
-			array('activated, index', 'numerical', 'integerOnly'=>true),
+			array('name, email, password', 'required'),
+            array('activated, index', 'numerical', 'integerOnly'=>true),
+            array('email', 'unique'),
 			array('surname, name, patronymic, email, password, address, country, phone, region, sity', 'length', 'max'=>255),
 			array('lastVisit, createdOn', 'safe'),
 			// The following rule is used by search().
@@ -143,12 +144,12 @@ class User extends CActiveRecord
      * @param $password
      * @return string
      */
-    public function hashPassword($password)
+    public static function hashPassword($password)
     {
-        return crypt($password, $this->generateSalt());
+        return crypt($password, self::generateSalt());
     }
 
-    public function generateSalt(){
+    public static function generateSalt(){
         return time();
     }
 }

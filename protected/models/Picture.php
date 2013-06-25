@@ -94,18 +94,18 @@ class Picture extends CActiveRecord
 
     public function thumbnail()
     {
-        return Yii::app()->baseUrl . '/images/product/thumbnail/' . $this->filename;
+        return Yii::app()->baseUrl . '/img/product/thumbnail/' . $this->filename;
     }
 
     public function large()
     {
-        return Yii::app()->baseUrl . '/images/product/large/' . $this->filename;
+        return Yii::app()->baseUrl . '/img/product/large/' . $this->filename;
     }
 
     protected function beforeDelete()
     {
-        $largePath = Yii::app()->basePath . '/../images/product/large/' . $this->filename;
-        $thumbnailPath = Yii::app()->basePath . '/../images/product/thumbnail/' . $this->filename;
+        $largePath = Yii::app()->basePath . '/../img/product/large/' . $this->filename;
+        $thumbnailPath = Yii::app()->basePath . '/../img/product/thumbnail/' . $this->filename;
 
         if (file_exists($largePath)) {
             unlink($largePath);

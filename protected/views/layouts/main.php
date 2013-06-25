@@ -31,12 +31,12 @@
             <div id="header">
                 <div class="header-top">
                     <div id="header-logo">
-                        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/images/header_logo.png'), '/');?>
+                        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/img/header_logo.png'), '/');?>
                     </div>
                     <!--.header-logo-->
 
                     <div id="header-right">
-                        <?php echo CHtml::link('Оптовые продажи', array('/wholesale'), array('class' => 'opt'));?>
+                        <!--                        --><?php //echo CHtml::link('Оптовые продажи', array('/wholesale'), array('class' => 'opt'));?>
 
                         <div class="header-phone">+7 948 949 49 30</div>
                     </div>
@@ -66,6 +66,18 @@
                             <!--.header-menu-->
                         </div>
                         <!--.header-menu-right-->
+                    </div>
+                    <div id="login-status">
+                        <?php
+                        $this->widget('zii.widgets.CMenu', array(
+                            'items' => array(
+                                array('label' => 'Вход', 'url' => array('/signIn'), 'visible' => Yii::app()->user->isGuest),
+                                array('label' => 'Регистрация', 'url' => array('/signUp'), 'visible' => Yii::app()->user->isGuest),
+                                array('label' => Yii::app()->user->getState('login'), 'visible' => !Yii::app()->user->isGuest),
+                                array('label' => 'Выход', 'url' => array('/signOut'), 'visible' => !Yii::app()->user->isGuest),
+                            ),
+                        ));
+                        ?>
                     </div>
                     <!--.header-menu-left-->
 
@@ -176,15 +188,17 @@
         <div id="footer-bottom">
             <div id="footer-menu-wrap">
                 <div id="footer-menu">
-                    <?php $this->widget('zii.widgets.CMenu', array(
-                    'items' => array(
-                        array('label' => 'О нас', 'url' => array('/about')),
-                        array('label' => 'Каталог', 'url' => array('/product/index')),
-                        array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
-                        array('label' => 'Акции', 'url' => array('/action/index')),
-                        array('label' => 'Контакты', 'url' => array('/contacts')),
-                    ),
-                )); ?>
+                    <?php
+                    $this->widget('zii.widgets.CMenu', array(
+                        'items' => array(
+                            array('label' => 'О нас', 'url' => array('/about')),
+                            array('label' => 'Каталог', 'url' => array('/product/index')),
+                            array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
+                            array('label' => 'Акции', 'url' => array('/action/index')),
+                            array('label' => 'Контакты', 'url' => array('/contacts')),
+                        ),
+                    ));
+                    ?>
                     <div class="footer-phone">+7 948 949 49 30</div>
                 </div>
                 <!--#footer-menu-->

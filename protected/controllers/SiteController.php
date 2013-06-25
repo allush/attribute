@@ -43,6 +43,7 @@ class SiteController extends Controller
             'data' => $page->content,
         ));
     }
+
     /**
      * This is the default 'index' action that is invoked
      * when an action is not explicitly requested by users.
@@ -65,35 +66,48 @@ class SiteController extends Controller
         }
     }
 
+    public function actionSignUp()
+    {
+        /** @var $model User */
+        $model = new User();
+
+        if (isset($_POST['User'])) {
+            $model->attributes = $_POST['User'];
+            $model->password = User::hashPassword($model->password);
+            if ($model->save()) {
+                $userIdentity = new UserIdentity($model->email, $_POST['User']['password']);
+                if ($userIdentity->authenticate()) {
+                    Yii::app()->user->login($userIdentity);
+                }
+                $this->redirect('/');
+            }
+        }
+        $this->render('signUp', array('user' => $model));
+    }
 
     /**
      * Displays the login page
      */
-    public function actionLogin()
+    public function actionSignIn()
     {
         $model = new LoginForm;
-
-        // if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
 
         // collect user input data
         if (isset($_POST['LoginForm'])) {
             $model->attributes = $_POST['LoginForm'];
             // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->login())
+            if ($model->validate() && $model->login()) {
                 $this->redirect(Yii::app()->user->returnUrl);
+            }
         }
         // display the login form
-        $this->render('login', array('model' => $model));
+        $this->render('signIn', array('model' => $model));
     }
 
     /**
      * Logs out the current user and redirect to homepage.
      */
-    public function actionLogout()
+    public function actionSignOut()
     {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);

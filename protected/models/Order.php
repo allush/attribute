@@ -80,14 +80,14 @@ class Order extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'orderID' => 'Order',
-            'orderStatusID' => 'Order Status',
-            'createdOn' => 'Created On',
-            'modifiedOn' => 'modifiedOn',
-            'orderPaymentID' => 'Order Payment',
-            'orderDeliveryID' => 'Order Delivery',
-            'userID' => 'User',
-            'comment' => 'Comment',
+            'orderID' => '#',
+            'orderStatusID' => 'Статус',
+            'createdOn' => 'Создан',
+            'modifiedOn' => 'Изменен/Завершен',
+            'orderPaymentID' => 'Оплата',
+            'orderDeliveryID' => 'Доставка',
+            'userID' => 'Пользователь',
+            'comment' => 'Комментарий',
         );
     }
 

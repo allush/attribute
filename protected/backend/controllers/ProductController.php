@@ -51,8 +51,8 @@ class ProductController extends Controller
                 $filename = md5(crypt($originalFilename)) . $fileExtension;
 
                 // определение пути сохранения файлов
-                $pathLarge = 'images/product/large/' . $filename;
-                $pathThumbnail = 'images/product/thumbnail/' . $filename;
+                $pathLarge = 'img/product/large/' . $filename;
+                $pathThumbnail = 'img/product/thumbnail/' . $filename;
 
                 // если большое изображение успешно сохранено
                 if ($file->saveAs($pathLarge)) {
@@ -104,8 +104,8 @@ class ProductController extends Controller
             $filename = md5(crypt($originalFilename)) . $fileExtension;
 
             // определение пути сохранения файлов
-            $pathLarge = 'images/product/large/' . $filename;
-            $pathThumbnail = 'images/product/thumbnail/' . $filename;
+            $pathLarge = 'img/product/large/' . $filename;
+            $pathThumbnail = 'img/product/thumbnail/' . $filename;
 
             // если большое изображение успешно сохранено
             if ($file->saveAs($pathLarge)) {

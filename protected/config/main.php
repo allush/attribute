@@ -36,6 +36,9 @@ return array(
             'urlFormat' => 'path',
             'showScriptName' => false,
             'rules' => array(
+                '/signIn' => '/site/signIn',
+                '/signOut' => '/site/signOut',
+                '/signUp' => '/site/signUp',
                 '/about' => '/site/about',
                 '/contacts' => '/site/contacts',
                 '/delivery' => '/site/delivery',

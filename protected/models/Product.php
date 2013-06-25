@@ -13,6 +13,7 @@
  * @property integer $productStatusID
  * @property integer $catalogID
  * @property float $price
+ * @property float $purchase
  * @property integer $discount
  * @property integer $existence
  *
@@ -52,7 +53,7 @@ class Product extends CActiveRecord
         return array(
             array('productStatusID', 'required'),
             array('productStatusID, catalogID, discount, createdOn, modifiedOn', 'numerical', 'integerOnly' => true),
-            array('price, existence', 'numerical'),
+            array('price, existence, purchase', 'numerical'),
             array('name, unit', 'length', 'max' => 255),
             array('description', 'safe'),
             // The following rule is used by search().
@@ -92,6 +93,7 @@ class Product extends CActiveRecord
             'catalogID' => 'Каталог',
             'discount' => 'Скидка,%',
             'price' => 'Цена,р',
+            'purchase'=>'Закупка,р',
             'existence' => 'Наличие',
         );
     }
