@@ -877,7 +877,7 @@ span.required,.errorMessage, .errorSummary{
 	width: 77px;
 	height: 24px;
 	background: url(../img/to_basket_button.png) no-repeat 0 0;
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	top: 3px;
 	left: -2px;

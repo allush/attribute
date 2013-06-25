@@ -1,8 +1,7 @@
 <?php
 
-class ActionController extends Controller
+class ActionController extends FrontController
 {
-
     public function actionView($id){
         $model = $this->loadModel($id);
         $this->render('view', array(

@@ -10,22 +10,22 @@ $(document).ready(function() {
 			}
 		});
 	}
-	if($('.products-item').length) {
-		$('.products-item').mouseover(function(e){
-			if($(e.target).parents().filter('.products-item').length == 1 || $(e.target).attr('class')=='products-item'){
-				$(this).find('.to-basket-button').show();
-				$(this).find('.product-price span').css('color', '#32b0c6');
-				$(this).find('.name-product').addClass('hover');
-			}
-		});
-		$('.products-item').mouseout(function(e){
-			if($(e.target).parents().filter('.products-item').length == 1 || $(e.target).attr('class')=='products-item'){
-				$(this).find('.to-basket-button').hide();
-				$(this).find('.product-price span').css('color', '#71c1cf');
-				$(this).find('.name-product').removeClass('hover');
-			}
-		});
-	}
+//	if($('.products-item').length) {
+//		$('.products-item').mouseover(function(e){
+//			if($(e.target).parents().filter('.products-item').length == 1 || $(e.target).attr('class')=='products-item'){
+//				$(this).find('.to-basket-button').show();
+//				$(this).find('.product-price span').css('color', '#32b0c6');
+//				$(this).find('.name-product').addClass('hover');
+//			}
+//		});
+//		$('.products-item').mouseout(function(e){
+//			if($(e.target).parents().filter('.products-item').length == 1 || $(e.target).attr('class')=='products-item'){
+//				$(this).find('.to-basket-button').hide();
+//				$(this).find('.product-price span').css('color', '#71c1cf');
+//				$(this).find('.name-product').removeClass('hover');
+//			}
+//		});
+//	}
 	if($('.product-images .gallery').length) {
 		$('.product-images .gallery a').click(function() {
 			var src = $(this).find('img').attr('src');

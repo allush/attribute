@@ -1,9 +1,7 @@
 <?php
 
-class SiteController extends Controller
+class SiteController extends FrontController
 {
-    public $layout = 'main';
-
     public function actionAbout()
     {
         $this->pageTitle = 'О нас';

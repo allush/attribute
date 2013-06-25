@@ -26,7 +26,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'name' => 'userID',
-            'value' => '($data->userID === null)?"-":$data->userID->name'
+            'value' => '($data->user === null)?"-":$data->user->name'
         ),
         array(
             'name' => 'createdOn',
@@ -43,7 +43,16 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'header' => ' ',
             'type'=>'raw',
-            'value' => 'CHtml::link("<i class=\"icon-remove icon-white\"></i>","",array("class"=>"btn btn-mini btn-danger"))'
+            'value' => 'CHtml::link(
+                "<i class=\"icon-remove icon-white\"></i>",
+                "#",
+                array(
+                    "class"=>"btn btn-mini btn-danger",
+                    "submit" => array("delete", "id" => $data->orderID),
+                    "confirm" => "Вы уверены?",
+                    "params" => array("YII_CSRF_TOKEN" => Yii::app()->request->csrfToken),
+                )
+            )'
         ),
     ),
     'template' => '{summary}  {pager} {items} {pager}',

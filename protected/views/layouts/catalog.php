@@ -2,7 +2,7 @@
 /* @var $this ProductController ?> */
 ?>
 
-<?php $this->beginContent('//layouts/main'); ?>
+<?php $this->beginContent('//layouts/default'); ?>
 
     <div id="line-blue">
         <div id="line-blue-wrap">

@@ -1,6 +1,5 @@
 <?php
-
-class OrderController extends Controller
+class OrderController extends BackendController
 {
     /**
      * @return array action filters
@@ -61,7 +60,11 @@ class OrderController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Order');
+        $dataProvider = new CActiveDataProvider('Order',array(
+            'criteria'=>array(
+                'order'=>'createdOn DESC',
+            ),
+        ));
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));

@@ -3,8 +3,9 @@
 /* @var $order Order */
 
 
-if (count($order->orderItems) == 0) {
+if ($order === null || count($order->orderItems) == 0) {
     echo 'Корзина пуста';
+    return;
 }
 ?>
 <table class="cart-table">
@@ -12,6 +13,8 @@ if (count($order->orderItems) == 0) {
     foreach ($order->orderItems as $orderItem) {
         $this->renderPartial('orderItem', array('orderItem' => $orderItem));
     }?>
+
+    <?php if (count($order->orderItems) > 0) { ?>
     <tr class="noborder">
         <td></td>
         <td></td>
@@ -38,6 +41,7 @@ if (count($order->orderItems) == 0) {
         <td><?php echo CHtml::link('Оформить заказ', array('orderCompletion'), array('class' => 'primary-btn'));?></td>
         <td></td>
     </tr>
+    <?php }?>
 </table>
 
 <script type="text/javascript">

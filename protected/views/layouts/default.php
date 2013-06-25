@@ -1,5 +1,5 @@
 <?php
-/* @var $this Controller */
+/* @var $this FrontController */
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +59,7 @@
                             )); ?>
                                 <div class="clear"></div>
                                 <?php
-                                echo CHtml::link('Корзина: <span class="count">0</span>', array('/cart'), array('class' => 'basket'));
+                                echo CHtml::link('Корзина: <span class="count">' . $this->orderSum() . ' р.</span>', array('/cart'), array('class' => 'basket'));
                                 ?>
                                 <!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->
                             </div>

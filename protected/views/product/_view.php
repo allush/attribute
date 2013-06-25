@@ -43,7 +43,7 @@ if ($index % 3 == 0) {
         <span><?php echo $data->priceCurrency();?></span>
     </div>
     <!--    <a href="javascript:void(0)" class="new-icon"></a>-->
-    <a href="javascript:void(0)" class="top-icon"></a>
+<!--    <a href="javascript:void(0)" class="top-icon"></a>-->
 </div>
 <!--.products-item-->
 

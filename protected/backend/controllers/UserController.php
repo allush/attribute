@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Controller
+class UserController extends BackendController
 {
     /**
      * @return array action filters

@@ -7,31 +7,27 @@
  * To change this template use File | Settings | File Templates.
  */
 
-class OrderController extends OrderControllerCommon
+class OrderController extends FrontController
 {
+    /**
+     * @return array action filters
+     */
+    public function filters()
+    {
+        return array(
+            'postOnly + deleteOrderItem, clearOrder', // we only allow deletion via POST request
+        );
+    }
+
     public function actionCart()
     {
-//        session_start();
-        $sessid = session_id();
-
-        $order = $this->loadOrderBySessid($sessid);
+        $order = $this->loadAuto();
         $this->render('cart', array('order' => $order));
     }
 
     public function actionAddToCart($productID)
     {
-//        session_start();
-        $sessid = session_id();
-
-        /** @var $product Product */
-        $product = Product::model()->findByPk($productID);
-
-        $order = $this->loadOrderBySessid($sessid);
-        if ($order === null) {
-            $order = new Order();
-            $order->sessid = $sessid;
-            $order->save();
-        }
+        $order = $this->loadAuto(true);
 
         $orderItem = OrderItem::model()->findByAttributes(array(
             'orderID' => $order->orderID,
@@ -44,6 +40,8 @@ class OrderController extends OrderControllerCommon
             $orderItem->productID = $productID;
         }
 
+        /** @var $product Product */
+        $product = Product::model()->findByPk($productID);
         if (($orderItem->quantity + 1) > $product->existence) {
             echo 'Вы заказали все что есть в наличии!';
             Yii::app()->end();
@@ -57,18 +55,23 @@ class OrderController extends OrderControllerCommon
 
     public function actionOrderCompletion()
     {
-//        session_start();
-        $sessid = session_id();
-
-        $order = $this->loadOrderBySessid($sessid);
+        $order = $this->loadAuto();
         if ($order !== null) {
             $this->render('orderCompletion', array('order' => $order));
         }
     }
 
-
+    /**
+     * Изменение кол-ва заказываемого товара из корзины
+     * @param $id OrderItemID
+     * @throws CHttpException
+     */
     public function actionUpdateOrderItemQuantity($id)
     {
+        if(!Yii::app()->request->isAjaxRequest){
+            throw new CHttpException(403,'Неверное использование');
+        }
+
         if (isset($_POST['OrderItem']['quantity'])) {
             /** @var $model OrderItem */
             $model = OrderItem::model()->findByPk($id);
@@ -83,6 +86,10 @@ class OrderController extends OrderControllerCommon
         }
     }
 
+    /**
+     * Удалить пункт заказа из корзины
+     * @param $id
+     */
     public function actionDeleteOrderItem($id)
     {
         $model = OrderItem::model()->findByPk($id);
@@ -100,4 +107,20 @@ class OrderController extends OrderControllerCommon
 
         $this->redirect(Yii::app()->request->urlReferrer);
     }
+
+    /**
+     * @param $id
+     * @return Order
+     * @throws CHttpException
+     */
+    protected static function loadModel($id)
+    {
+        /** @var $model Order */
+        $model = Order::model()->findByPk($id);
+        if ($model === null) {
+            throw new CHttpException(404, 'The requested page does not exist.');
+        }
+        return $model;
+    }
+
 }

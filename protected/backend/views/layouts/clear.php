@@ -8,18 +8,10 @@
 
     <title><?php echo CHtml::encode($this->pageTitle); ?></title>
 
-    <?php
-    Yii::app()->clientScript->registerCssFile(
-        CHtml::asset(Yii::app()->basePath . '/backend/assets/css/bootstrap.min.css')
-    );
-
-    Yii::app()->clientScript->registerScriptFile(
-        CHtml::asset(Yii::app()->basePath . '/backend/assets/js/bootstrap.min.js'),
-        CClientScript::POS_HEAD
-    );
-    ?>
-
-
+    <link rel='stylesheet' href='<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.min.css'
+          type='text/css'>
+    <script type='text/javascript'
+            src='<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap.min.js'></script>
 </head>
 
 <body>

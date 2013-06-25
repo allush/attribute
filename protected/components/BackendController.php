@@ -3,22 +3,9 @@
  * Controller is the customized base controller class.
  * All controller classes for this application should extend from this base class.
  */
-class Controller extends CController
+
+class BackendController extends CController
 {
-    /** @var Order */
-    public $order;
-
-    public function __construct($id, CWebModule $module = null)
-    {
-        if (session_status() != 2) {
-            session_start();
-        }
-
-        $this->order = Order::model()->findByAttributes(array('sessid' => session_id()));
-
-        parent::__construct($id, $module);
-    }
-
     /**
      * @var string the default layout for the controller view. Defaults to '//layouts/column1',
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.

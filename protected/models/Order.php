@@ -126,6 +126,14 @@ class Order extends CActiveRecord
         return parent::beforeSave();
     }
 
+    protected function beforeDelete()
+    {
+        OrderItem::model()->deleteAllByAttributes(array(
+            'orderID' => $this->orderID,
+        ));
+        return parent::beforeDelete();
+    }
+
     /**
      * Возвращает сумму товара в заказе
      */
@@ -137,6 +145,6 @@ class Order extends CActiveRecord
             ->join('product', 'product.productID=orderItem.productID')
             ->where('orderID=:orderID', array(':orderID' => $this->orderID))
             ->queryScalar();
-        return $sum;
+        return $sum !== null ? $sum : 0;
     }
 }

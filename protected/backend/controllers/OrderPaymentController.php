@@ -1,6 +1,6 @@
 <?php
 
-class OrderPaymentController extends Controller
+class OrderPaymentController extends BackendController
 {
 	/**
 	 * @return array action filters

@@ -1,6 +1,6 @@
 <?php
 
-class CatalogController extends Controller
+class CatalogController extends BackendController
 {
     /**
      * @return array action filters
