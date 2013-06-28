@@ -63,10 +63,10 @@
         <!--.left-menu-top-->
         <div class="socials">
             <p>Мы в социальных сетях:</p>
-            <a href="#" target="_blank" class="facebook-icon"></a>
-            <a href="#" target="_blank" class="twitter-icon"></a>
-            <a href="#" target="_blank" class="google-icon"></a>
-            <a href="#" target="_blank" class="vk-icon"></a>
+<!--            <a href="#" target="_blank" class="facebook-icon"></a>-->
+<!--            <a href="#" target="_blank" class="twitter-icon"></a>-->
+<!--            <a href="#" target="_blank" class="google-icon"></a>-->
+            <a href="http://vk.com/club54960227" target="_blank" class="vk-icon"></a>
 
             <div class="clear"></div>
         </div>
