@@ -65,7 +65,7 @@ class OrderDelivery extends CActiveRecord
 	{
 		return array(
 			'orderDeliveryID' => 'Order Delivery',
-			'name' => 'Name',
+			'name' => 'Название',
 		);
 	}
 

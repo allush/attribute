@@ -65,7 +65,7 @@ class OrderPayment extends CActiveRecord
 	{
 		return array(
 			'orderPaymentID' => 'Order Payment',
-			'name' => 'Name',
+			'name' => 'Название',
 		);
 	}
 

@@ -8,12 +8,10 @@
  * @property integer $productID
  * @property integer $quantity
  * @property integer $orderID
- * @property integer $existenceID
  *
  * The followings are the available model relations:
  * @property Product $product
  * @property Order $order
- * @property Existence $existence
  */
 class OrderItem extends CActiveRecord
 {
@@ -43,11 +41,11 @@ class OrderItem extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('productID, quantity, orderID, existenceID', 'required'),
-			array('productID, quantity, orderID, existenceID', 'numerical', 'integerOnly'=>true),
+			array('productID, quantity, orderID', 'required'),
+			array('productID, quantity, orderID', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('orderItemID, productID, quantity, orderID, existenceID', 'safe', 'on'=>'search'),
+			array('orderItemID, productID, quantity, orderID', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -61,7 +59,6 @@ class OrderItem extends CActiveRecord
 		return array(
 			'product' => array(self::BELONGS_TO, 'Product', 'productID'),
 			'order' => array(self::BELONGS_TO, 'Order', 'orderID'),
-			'existence' => array(self::BELONGS_TO, 'Existence', 'existenceID'),
 		);
 	}
 
@@ -75,7 +72,6 @@ class OrderItem extends CActiveRecord
 			'productID' => 'Product',
 			'quantity' => 'Quantity',
 			'orderID' => 'Order',
-			'existenceID' => 'Existence',
 		);
 	}
 
@@ -94,7 +90,6 @@ class OrderItem extends CActiveRecord
 		$criteria->compare('productID',$this->productID);
 		$criteria->compare('quantity',$this->quantity);
 		$criteria->compare('orderID',$this->orderID);
-		$criteria->compare('existenceID',$this->existenceID);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
