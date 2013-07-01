@@ -142,7 +142,7 @@ class Order extends CActiveRecord
         $command = Yii::app()->db->createCommand();
         $sum = $command->select('SUM(product.price*quantity)')
             ->from('orderitem')
-            ->join('product', 'product.productID=orderItem.productID')
+            ->join('product', 'product.productID=orderitem.productID')
             ->where('orderID=:orderID', array(':orderID' => $this->orderID))
             ->queryScalar();
         return $sum !== null ? $sum : 0;
