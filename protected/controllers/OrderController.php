@@ -22,7 +22,22 @@ class OrderController extends FrontController
     public function actionCart()
     {
         $order = $this->loadAuto();
-        $this->render('cart', array('order' => $order));
+        $otherIncompleteOrders = array();
+        if (!Yii::app()->user->isGuest) {
+            $userID = Yii::app()->user->getState('userID');
+            $otherIncompleteOrders = Order::model()->findAll(array(
+                'condition' => 'userID=:userID AND orderID<>:orderID AND orderStatusID IS NULL',
+                'params' => array(
+                    ':userID' => $userID,
+                    ':orderID' => $order->orderID,
+                )
+            ));
+        }
+
+        $this->render('cart', array(
+            'order' => $order,
+            'otherIncompleteOrders' => $otherIncompleteOrders
+        ));
     }
 
     public function actionAddToCart($productID)
@@ -68,8 +83,8 @@ class OrderController extends FrontController
      */
     public function actionUpdateOrderItemQuantity($id)
     {
-        if(!Yii::app()->request->isAjaxRequest){
-            throw new CHttpException(403,'Неверное использование');
+        if (!Yii::app()->request->isAjaxRequest) {
+            throw new CHttpException(403, 'Неверное использование');
         }
 
         if (isset($_POST['OrderItem']['quantity'])) {
@@ -84,6 +99,17 @@ class OrderController extends FrontController
             $model->quantity = $needQuantity;
             $model->save();
         }
+    }
+
+    public function actionUnion($orderID1,$orderID2){
+        /** @var $order1 Order */
+        /** @var $order2 Order */
+
+        $order1 = Order::model()->findByPk($orderID1);
+        $order2 = Order::model()->findByPk($orderID2);
+
+        $order1->union($order2);
+        $this->redirect(Yii::app()->request->urlReferrer);
     }
 
     /**

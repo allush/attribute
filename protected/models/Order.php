@@ -147,4 +147,15 @@ class Order extends CActiveRecord
             ->queryScalar();
         return $sum !== null ? $sum : 0;
     }
+
+    /**
+     * @param $otherOrder Order
+     */
+    public function union($otherOrder){
+        foreach($otherOrder->orderItems as $item){
+            $item->orderID = $this->orderID;
+            $item->save();
+        }
+        $otherOrder->delete();
+    }
 }

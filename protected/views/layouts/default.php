@@ -59,6 +59,7 @@
                             )); ?>
                                 <div class="clear"></div>
                                 <?php
+                                $this->order = $this->loadAuto();
                                 echo CHtml::link('Корзина: <span class="count">' . $this->orderSum() . ' р.</span>', array('/cart'), array('class' => 'basket'));
                                 ?>
                                 <!--                                <a href="#" class="advanced-search">расширенный поиск</a>-->

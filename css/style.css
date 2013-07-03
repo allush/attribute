@@ -891,6 +891,7 @@ span.required,.errorMessage, .errorSummary{
 	width: 600px;
 	height: 44px;
 	margin: 0 auto;
+    text-align: left;
 }
 
 .right-content .pager a:first-child {

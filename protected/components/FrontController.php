@@ -10,40 +10,51 @@ class FrontController extends CController
 {
     public $order = null;
 
-    public function __construct($id, CWebModule $module = null)
-    {
-        $this->order = self::loadAuto();
-        parent::__construct($id, $module);
-    }
-
     /**
      * @param bool $create
      * @return Order
      */
     public static function loadAuto($create = false)
     {
-        $sessid = session_id();
-        $order = null;
+        /** @var $session CHttpSession */
+        /** @var $order Order */
+
+        $session = Yii::app()->getSession();
+//        echo $session->sessionID;
+
+        // найти анонимный заказ
+        $order = Order::model()->findByAttributes(array(
+            'sessid' => $session->sessionID,
+            'userID' => null,
+            'orderStatusID' => null,
+        ));
+
+
         if (Yii::app()->user->isGuest) {
-            /** @var $model Order */
-            $order = Order::model()->findByAttributes(array('sessid' => $sessid));
             if ($order === null && $create) {
                 $order = new Order();
-                $order->sessid = $sessid;
+                $order->sessid = $session->sessionID;
                 $order->save();
             }
         } else {
             $userID = Yii::app()->user->getState('userID');
-            $order = Order::model()->findByAttributes(array(
-                'userID' => $userID,
-                'orderStatusID' => null,
-            ));
-            if ($order === null && $create) {
-                /** @var $order Order */
-                $order = new Order();
+
+            // если есть анонимный заказ - привязываем его к пользователю, который осуществляет вход с той же сессией
+            if ($order !== null) {
                 $order->userID = $userID;
-                $order->sessid = $sessid;
                 $order->save();
+            } else {
+                // найти незавершенный заказ пользователя
+                $order = Order::model()->findByAttributes(array(
+                    'userID' => $userID,
+                    'orderStatusID' => null,
+                ));
+                if ($order === null && $create) {
+                    $order = new Order();
+                    $order->userID = $userID;
+                    $order->sessid = $session->sessionID;
+                    $order->save();
+                }
             }
         }
         return $order;

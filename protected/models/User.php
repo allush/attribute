@@ -84,7 +84,7 @@ class User extends CActiveRecord
 			'surname' => 'Фамилия',
 			'name' => 'Имя',
 			'patronymic' => 'Отчество',
-			'email' => 'email',
+			'email' => 'Электронная почта',
 			'password' => 'Пароль',
 			'activated' => 'Активирован',
 			'lastVisit' => 'Последнее посещение',
