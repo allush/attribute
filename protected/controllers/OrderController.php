@@ -29,25 +29,25 @@ class OrderController extends FrontController
             die("Неверное обращение к скрипту");
         }
 
-        if (!isset($_POST['OutSum'])) {
+        if (!isset($_GET['OutSum'])) {
             die("Не указана сумма платежа");
         }
-        if (!isset($_POST['InvId'])) {
+        if (!isset($_GET['InvId'])) {
             die("Не указан номер счета");
         }
-        if (!isset($_POST['SignatureValue'])) {
+        if (!isset($_GET['SignatureValue'])) {
             die("Не указана контрольная сумма");
         }
-        if (!isset($_POST['shp_id_order'])) {
+        if (!isset($_GET['shp_id_order'])) {
             die("Не указан идектификатор заказа");
         }
 
         $mrh_pass1 = "re50_fdn";
 
-        $shp_id_order = $_POST['shp_id_order'];
-        $out_summ = $_POST['OutSum'];
-        $inv_id = $_POST['InvId'];
-        $crc = $_POST['SignatureValue'];
+        $shp_id_order = $_GET['shp_id_order'];
+        $out_summ = $_GET['OutSum'];
+        $inv_id = $_GET['InvId'];
+        $crc = $_GET['SignatureValue'];
 
         $crc = strtoupper($crc); // force uppercase
 
@@ -78,25 +78,25 @@ class OrderController extends FrontController
             die("Неверное обращение к скрипту");
         }
 
-        if (!isset($_POST['OutSum'])) {
+        if (!isset($_GET['OutSum'])) {
             die("Не указана сумма платежа");
         }
-        if (!isset($_POST['InvId'])) {
+        if (!isset($_GET['InvId'])) {
             die("Не указан номер счета");
         }
-        if (!isset($_POST['SignatureValue'])) {
+        if (!isset($_GET['SignatureValue'])) {
             die("Не указана контрольная сумма");
         }
-        if (!isset($_POST['shp_id_order'])) {
+        if (!isset($_GET['shp_id_order'])) {
             die("Не указан идектификатор заказа");
         }
 
         $mrh_pass2 = "attribute2013_2h3";
 
-        $shp_id_order = $_POST['shp_id_order'];
-        $out_summ = $_POST['OutSum'];
-        $inv_id = $_POST['InvId'];
-        $crc = $_POST['SignatureValue'];
+        $shp_id_order = $_GET['shp_id_order'];
+        $out_summ = $_GET['OutSum'];
+        $inv_id = $_GET['InvId'];
+        $crc = $_GET['SignatureValue'];
 
         $crc = strtoupper($crc);
 
