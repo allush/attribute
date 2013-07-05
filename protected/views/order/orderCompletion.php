@@ -6,13 +6,13 @@
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderComplete.css');
 ?>
 <div class="order-complete-form">
-    <div class="heading">Адрес доставки</div>
+    <div class="heading">1. Адрес доставки</div>
     <?php
     $user = $order->user;
     if ($user->informationIsFull()) {
         echo $user->addressFull() . '<br>';
         ?>
-        <div class="heading">Контакты</div>
+        <div class="heading">2. Контакты</div>
         <?php
         echo $user->phone . '<br>';
         echo $user->email . '<br>';
@@ -94,52 +94,20 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
         'htmlOptions' => array()
     ));
     ?>
-    <div class="heading">Способ доставки</div>
+    <div class="heading">3. Комментарий к заказу</div>
+    <div>
+        <?php echo $form->textArea($order, 'comment', array('class' => 'order-complete-comment')); ?>
+        <?php echo $form->error($order, 'comment'); ?>
+    </div>
+    <div class="heading">4. Способ доставки</div>
     <div>
         <?php echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll(), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
         <?php echo $form->error($order, 'orderDeliveryID'); ?>
     </div>
 
-    <div class="heading">Способ оплаты</div>
-    <div>
-        <?php echo $form->radioButtonList($order, 'orderPaymentID', CHtml::listData(OrderPayment::model()->findAll(), 'orderPaymentID', 'name'), array('required' => 'required', 'class' => 'orderPaymentRadio')); ?>
-        <?php echo $form->error($order, 'orderPaymentID'); ?>
-    </div>
-
-    <div class="heading">Комментарий к заказу</div>
-    <div>
-        <?php echo $form->textArea($order, 'comment', array('class' => 'order-complete-comment')); ?>
-        <?php echo $form->error($order, 'comment'); ?>
-    </div>
     <?php $this->endWidget(); ?>
-
-
-    <div class="robokassa" style="display: none;"></div>
-    <script type="text/javascript">
-        $('.orderPaymentRadio').change(function (e) {
-            if (e.target.id == 'Order_orderPaymentID_1') {
-                $.ajax({
-                    url: '<?php echo $this->createUrl('robokassa');?>',
-                    type: 'get',
-                    data: {},
-                    beforeSend: function () {
-                        $('.robokassa').html('загрузка...');
-                        $('.robokassa').show(200);
-                    },
-                    success: function (data) {
-                        $('.robokassa').html(data);
-                    }
-                });
-            } else {
-                $('.robokassa').hide(200);
-                $('.robokassa').html('');
-            }
-        });
-    </script>
-
-    <div>
-        <?php echo CHtml::submitButton('Завершить оформление заказа', array('class' => 'primary-btn')); ?>
-    </div>
+    <div class="heading">5. Способ оплаты</div>
+    <?php include_once(Yii::getPathOfAlias('application.views.order') . '/robokassa.php'); ?>
 </div>
 
 <div class="order-complete-info">

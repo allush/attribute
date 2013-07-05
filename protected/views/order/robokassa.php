@@ -1,19 +1,6 @@
 <style type="text/css">
-    form[name=robokassa] {
-        clear: both;
-        margin: 0 4px 24px 4px;
-    }
-
-    form[name=robokassa] input[type=reset] {
-        width: 140px;
-        float: left;
-        margin-top: 24px;
-    }
-
     form[name=robokassa] input[type=submit] {
-        width: 140px;
-        float: right;
-        margin-top: 24px;
+        margin-top: 16px;
     }
 
     label:after {
@@ -29,12 +16,10 @@
 
     .groupCurrency:hover {
         cursor: pointer;
-        background-image: url(images/all/gradient_ffcccc.png);
         border: 1px solid #ffcccc;
     }
 
     .groupCurrency_hover {
-        background-image: url(images/all/gradient_ffcccc.png);
         border: 1px solid #ffcccc;
     }
 
@@ -53,7 +38,6 @@
     .payment_type {
         margin: 4px;
         border: 1px solid #ddd;
-        background-image: url(images/all/gradient_ddd.png);
         width: 365px;
         padding: 8px 0;
         font-size: 16pt;
@@ -65,7 +49,6 @@
     .payment_type:hover, .payment_type_active {
         cursor: pointer;
         border: 1px solid #ffcccc;
-        background-image: url(images/all/gradient_ffcccc.png);
     }
 
     .clearer {
@@ -93,7 +76,7 @@ $mrh_login = "attribute";
 $out_summ = $order->sum();
 // номер заказа
 $inv_id = $order->orderID;
-$mrh_pass1 = "attribute2013";
+$mrh_pass1 = "attribute2013_1r4";
 $shp_id_order = $order->orderID;
 // кодировка
 $encoding = "utf-8";
@@ -138,14 +121,19 @@ curl_close($c);
         }
         ?>
     </fieldset>
-    <button>Оплатить</button>
+    <input type="submit" class="primary-btn" value="Оплатить и завершить">
 </form>
 
 <script type="text/javascript">
-    $(".currency").toggle();
+    $(".currency").hide();
     $(".groupCurrency").click(function () {
-        $(".groupCurrency#" + this.id).toggleClass("groupCurrency_hover");
-        $(".currency#_" + this.id).toggle();
+        if ($(".currency#_" + this.id).is(':visible'))
+            return;
+        $(".currency").hide(200);
+        $('.currency input[type=radio]').each(function () {
+            $(this).attr('checked', false);
+        });
+        $(".currency#_" + this.id).show(200);
     });
     $(".groupCurrency").first().click();
 </script>

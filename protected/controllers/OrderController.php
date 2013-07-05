@@ -58,10 +58,10 @@ class OrderController extends FrontController
             die("Контрольная сумма не совпадает");
         }
 
+        /** @var $order Order */
+        $order = Order::model()->findByPk($shp_id_order);
 
-        $order = new COrder($shp_id_order);
-
-        if ($order->number() != $inv_id) {
+        if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
         }
 
@@ -69,12 +69,7 @@ class OrderController extends FrontController
             die("Сумма не совпадает");
         }
 
-        $order->complete();
-        $order->set_order_state(2);
-
-//--------завершение текущей сессии
-        require 'session_delete.php';
-        header('Location: session_new.php?referer=index.php?page=order_step5&user=' . $order->user());
+        $this->render('success');
     }
 
     public function actionResultURL()
@@ -96,7 +91,7 @@ class OrderController extends FrontController
             die("Не указан идектификатор заказа");
         }
 
-        $mrh_pass2 = "8534i6282";
+        $mrh_pass2 = "attribute2013_2h3";
 
         $shp_id_order = $_POST['shp_id_order'];
         $out_summ = $_POST['OutSum'];
@@ -105,45 +100,37 @@ class OrderController extends FrontController
 
         $crc = strtoupper($crc);
 
-//build own CRC
+        //build own CRC
         $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:shp_id_order=$shp_id_order"));
 
         if (strtoupper($my_crc) != strtoupper($crc)) {
             die("Неверная контрольная сумма\n");
         }
 
+        /** @var $order Order */
+        $order = Order::model()->findByPk($shp_id_order);
 
-        $order = new COrder($shp_id_order);
-
-        if ($order->number() != $inv_id) {
+        if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
         }
 
         if ($order->sum() != $out_summ) {
             die("Сумма не совпадает");
         }
+        $order->orderStatusID = 2;
+        $order->save();
 
-//print OK signature
+        //print OK signature
         echo "OK$inv_id\n";
-    }
-
-    public function actionRobokassa()
-    {
-        include_once(Yii::getPathOfAlias('application.views.order') . '/robokassa.php');
     }
 
     public function actionComplete()
     {
-        $order = $this->loadAuto();
-        if (isset($_POST['Order'])) {
-            $order->attributes = $_POST['Order'];
-            $order->save();
-        }
-
         if (isset($_POST['MrchLogin'])) {
 
             // curl запрос к робокассе
         } else {
+            $order = $this->loadAuto();
             $invoice = new Invoice($order);
             $invoice->generate();
             $mailer = new Mailer();
