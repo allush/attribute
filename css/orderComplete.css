@@ -1,0 +1,29 @@
+.heading {
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.order-complete-form {
+    float: left;
+    width: 450px;
+}
+
+.order-complete-table {
+    width: 100%;
+    border-spacing: 0;
+}
+.order-complete-table td {
+    padding: 4px;
+    border-bottom: 1px solid #a8d0da;
+}
+
+.order-complete-info {
+    float: right;
+    width: 450px;
+}
+.order-complete-comment{
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100px;
+    min-height: 100px;
+}

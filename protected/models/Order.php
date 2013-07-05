@@ -119,8 +119,9 @@ class Order extends CActiveRecord
     protected function beforeSave()
     {
         $time = time();
-        if ($this->isNewRecord)
+        if ($this->isNewRecord) {
             $this->createdOn = $time;
+        }
         $this->modifiedOn = $time;
 
         return parent::beforeSave();
@@ -151,10 +152,27 @@ class Order extends CActiveRecord
     /**
      * @param $otherOrder Order
      */
-    public function union($otherOrder){
-        foreach($otherOrder->orderItems as $item){
-            $item->orderID = $this->orderID;
-            $item->save();
+    public function union($otherOrder)
+    {
+        foreach ($otherOrder->orderItems as $item) {
+            // найти в главном заказе такой же товар, как и в объединяемом
+            /** @var $mainOrderItem OrderItem */
+            $mainOrderItem = OrderItem::model()->findByAttributes(array(
+                'productID' => $item->productID,
+                'orderID' => $this->orderID,
+            ));
+
+            if (is_object($mainOrderItem)) {
+                $newQuantity = $mainOrderItem->quantity + $item->quantity;
+                if ($newQuantity > $item->product->existence) {
+                    $newQuantity = $item->product->existence;
+                }
+                $mainOrderItem->quantity = $newQuantity;
+                $mainOrderItem->save();
+            } else {
+                $item->orderID = $this->orderID;
+                $item->save();
+            }
         }
         $otherOrder->delete();
     }

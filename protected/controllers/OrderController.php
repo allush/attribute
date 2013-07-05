@@ -19,11 +19,145 @@ class OrderController extends FrontController
         );
     }
 
+    public function actionFailURL()
+    {
+    }
+
+    public function actionSuccessURL()
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            die("Неверное обращение к скрипту");
+        }
+
+        if (!isset($_POST['OutSum'])) {
+            die("Не указана сумма платежа");
+        }
+        if (!isset($_POST['InvId'])) {
+            die("Не указан номер счета");
+        }
+        if (!isset($_POST['SignatureValue'])) {
+            die("Не указана контрольная сумма");
+        }
+        if (!isset($_POST['shp_id_order'])) {
+            die("Не указан идектификатор заказа");
+        }
+
+        $mrh_pass1 = "re50_fdn";
+
+        $shp_id_order = $_POST['shp_id_order'];
+        $out_summ = $_POST['OutSum'];
+        $inv_id = $_POST['InvId'];
+        $crc = $_POST['SignatureValue'];
+
+        $crc = strtoupper($crc); // force uppercase
+
+// build own CRC
+        $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:shp_id_order=$shp_id_order"));
+
+        if (strtoupper($my_crc) != strtoupper($crc)) {
+            die("Контрольная сумма не совпадает");
+        }
+
+
+        $order = new COrder($shp_id_order);
+
+        if ($order->number() != $inv_id) {
+            die("Заказа с таким номером не существует в системе");
+        }
+
+        if ($order->sum() != $out_summ) {
+            die("Сумма не совпадает");
+        }
+
+        $order->complete();
+        $order->set_order_state(2);
+
+//--------завершение текущей сессии
+        require 'session_delete.php';
+        header('Location: session_new.php?referer=index.php?page=order_step5&user=' . $order->user());
+    }
+
+    public function actionResultURL()
+    {
+        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+            die("Неверное обращение к скрипту");
+        }
+
+        if (!isset($_POST['OutSum'])) {
+            die("Не указана сумма платежа");
+        }
+        if (!isset($_POST['InvId'])) {
+            die("Не указан номер счета");
+        }
+        if (!isset($_POST['SignatureValue'])) {
+            die("Не указана контрольная сумма");
+        }
+        if (!isset($_POST['shp_id_order'])) {
+            die("Не указан идектификатор заказа");
+        }
+
+        $mrh_pass2 = "8534i6282";
+
+        $shp_id_order = $_POST['shp_id_order'];
+        $out_summ = $_POST['OutSum'];
+        $inv_id = $_POST['InvId'];
+        $crc = $_POST['SignatureValue'];
+
+        $crc = strtoupper($crc);
+
+//build own CRC
+        $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:shp_id_order=$shp_id_order"));
+
+        if (strtoupper($my_crc) != strtoupper($crc)) {
+            die("Неверная контрольная сумма\n");
+        }
+
+
+        $order = new COrder($shp_id_order);
+
+        if ($order->number() != $inv_id) {
+            die("Заказа с таким номером не существует в системе");
+        }
+
+        if ($order->sum() != $out_summ) {
+            die("Сумма не совпадает");
+        }
+
+//print OK signature
+        echo "OK$inv_id\n";
+    }
+
+    public function actionRobokassa()
+    {
+        include_once(Yii::getPathOfAlias('application.views.order') . '/robokassa.php');
+    }
+
+    public function actionComplete()
+    {
+        $order = $this->loadAuto();
+        if (isset($_POST['Order'])) {
+            $order->attributes = $_POST['Order'];
+            $order->save();
+        }
+
+        if (isset($_POST['MrchLogin'])) {
+
+            // curl запрос к робокассе
+        } else {
+            $invoice = new Invoice($order);
+            $invoice->generate();
+            $mailer = new Mailer();
+            $mailer->sendMail($order->user, '', $order);
+        }
+
+        $a = 0;
+    }
+
     public function actionCart()
     {
         $order = $this->loadAuto();
         $otherIncompleteOrders = array();
-        if (!Yii::app()->user->isGuest) {
+        if (!Yii::app()->user->isGuest && is_object($order)) {
             $userID = Yii::app()->user->getState('userID');
             $otherIncompleteOrders = Order::model()->findAll(array(
                 'condition' => 'userID=:userID AND orderID<>:orderID AND orderStatusID IS NULL',
@@ -58,7 +192,7 @@ class OrderController extends FrontController
         /** @var $product Product */
         $product = Product::model()->findByPk($productID);
         if (($orderItem->quantity + 1) > $product->existence) {
-            echo 'Вы заказали все что есть в наличии!';
+            echo 'null';
             Yii::app()->end();
         }
 
@@ -101,7 +235,17 @@ class OrderController extends FrontController
         }
     }
 
-    public function actionUnion($orderID1,$orderID2){
+    public function actionUpdate($id)
+    {
+        $model = $this->loadModel($id);
+        if (isset($_POST['Order'])) {
+            $model->attributes = $_POST['Order'];
+            $model->save();
+        }
+    }
+
+    public function actionUnion($orderID1, $orderID2)
+    {
         /** @var $order1 Order */
         /** @var $order2 Order */
 

@@ -18,7 +18,7 @@ if ($order === null || count($order->orderItems) == 0) {
     return;
 }
 ?>
-<table class="cart-table">
+<table class="cart-table fixed-table-layout">
     <?php
     foreach ($order->orderItems as $orderItem) {
         $this->renderPartial('orderItem', array('orderItem' => $orderItem));

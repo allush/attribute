@@ -1,0 +1,47 @@
+table{
+    border-collapse: collapse;
+}
+table td{
+    padding: 4px 12px;
+}
+table td.center{
+    text-align: center;
+}
+
+table#head tr#buyer td{/*иммитируем отступ между продавцом и покупателем*/
+    padding-top: 24px;
+}
+
+#invoice{/*строка номера счета и даты*/
+    font-weight: bold;
+    font-size: 14pt;
+    text-align: center;
+    margin: 24px 0px;
+}
+
+table#order_items{
+    width: 100%;
+}
+
+table#order_items td{/*устанавливаем границы для таблицы с позициями заказа*/
+    border: 1px solid;
+}
+
+td#itogo{/*строка итого в таблице счета*/
+    font-weight: bold;
+    padding-top: 16px;
+}
+div#value_spell{
+    margin-top: 16px;
+}
+div#director{
+    width: 50%;
+    float: left;
+    margin-top: 100px;
+}
+
+div#accountant{
+    width: 50%;
+    margin-top: 100px;
+    text-align: right;
+}

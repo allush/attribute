@@ -371,8 +371,10 @@ span.required,.errorMessage, .errorSummary{
     border-radius: 4px;
     display: inline-block;
     text-align: center;
-    width: 160px;
+    /*width: 160px;*/
     line-height: 24px;
+    padding: 2px 8px;
+    cursor: pointer;
 
 }
 .primary-btn:hover {

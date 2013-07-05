@@ -93,7 +93,7 @@ class Product extends CActiveRecord
             'catalogID' => 'Каталог',
             'discount' => 'Скидка,%',
             'price' => 'Цена,р',
-            'purchase'=>'Закупка,р',
+            'purchase' => 'Закупка,р',
             'existence' => 'Наличие',
         );
     }

@@ -13,7 +13,11 @@ $this->menu=array(
 $this->widget('zii.widgets.grid.CGridView', array(
 	'dataProvider'=>$dataProvider,
     'columns'=>array(
-        'name'
+        array(
+            'name'=>'name',
+            'type'=>'raw',
+            'value'=>'CHtml::link($data->name,array("view","id"=>$data->orderPaymentID))'
+        )
     ),
     'template' => '{summary}  {pager} {items} {pager}',
     'summaryText' => '{start} - {end} из {count}',

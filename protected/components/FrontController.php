@@ -23,11 +23,13 @@ class FrontController extends CController
 //        echo $session->sessionID;
 
         // найти анонимный заказ
-        $order = Order::model()->findByAttributes(array(
-            'sessid' => $session->sessionID,
-            'userID' => null,
-            'orderStatusID' => null,
-        ));
+        $order = Order::model()->findByAttributes(
+            array(
+                'sessid' => $session->sessionID,
+                'userID' => null,
+                'orderStatusID' => null,
+            )
+        );
 
 
         if (Yii::app()->user->isGuest) {

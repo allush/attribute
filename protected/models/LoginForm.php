@@ -52,10 +52,9 @@ class LoginForm extends CFormModel
             $this->_identity = new UserIdentity($this->email, $this->password);
 
             $authCode = $this->_identity->authenticate();
-            if($authCode === UserIdentity::ERROR_NOT_ACTIVATED){
+            if ($authCode === UserIdentity::ERROR_NOT_ACTIVATED) {
                 $this->addError('password', 'Учетная запись не активирована');
-            }
-            elseif ($authCode !== true) {
+            } elseif ($authCode !== true) {
                 $this->addError('password', 'Неверный адрес электронной почты или пароль');
             }
         }
