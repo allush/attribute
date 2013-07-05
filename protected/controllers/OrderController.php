@@ -25,7 +25,7 @@ class OrderController extends FrontController
 
     public function actionSuccessURL()
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             die("Неверное обращение к скрипту");
         }
 
@@ -74,7 +74,7 @@ class OrderController extends FrontController
 
     public function actionResultURL()
     {
-        if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] != 'GET') {
             die("Неверное обращение к скрипту");
         }
 
