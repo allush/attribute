@@ -42,17 +42,17 @@ class OrderController extends FrontController
             die("Не указан идектификатор заказа");
         }
 
-        $mrh_pass1 = "re50_fdn";
+        $mrh_pass1 = "attribute2013_1r4";
 
-        $shp_id_order = $_GET['shp_id_order'];
-        $out_summ = $_GET['OutSum'];
+        $out_sum = $_GET['OutSum'];
         $inv_id = $_GET['InvId'];
+        $shp_id_order = $_GET['shp_id_order'];
         $crc = $_GET['SignatureValue'];
 
         $crc = strtoupper($crc); // force uppercase
 
 // build own CRC
-        $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass1:shp_id_order=$shp_id_order"));
+        $my_crc = strtoupper(md5("$out_sum:$inv_id:$mrh_pass1:shp_id_order=$shp_id_order"));
 
         if (strtoupper($my_crc) != strtoupper($crc)) {
             die("Контрольная сумма не совпадает");
@@ -61,11 +61,15 @@ class OrderController extends FrontController
         /** @var $order Order */
         $order = Order::model()->findByPk($shp_id_order);
 
+        if(!is_object($order)){
+            die('Не удалось загрузить заказ');
+        }
+
         if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
         }
 
-        if ($order->sum() != $out_summ) {
+        if ($order->sum() != $out_sum) {
             die("Сумма не совпадает");
         }
 
@@ -109,6 +113,10 @@ class OrderController extends FrontController
 
         /** @var $order Order */
         $order = Order::model()->findByPk($shp_id_order);
+
+        if(!is_object($order)){
+            die('Не удалось загрузить заказ');
+        }
 
         if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
