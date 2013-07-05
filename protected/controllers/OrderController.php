@@ -61,7 +61,7 @@ class OrderController extends FrontController
         /** @var $order Order */
         $order = Order::model()->findByPk($shp_id_order);
 
-        if(!is_object($order)){
+        if (!is_object($order)) {
             die('Не удалось загрузить заказ');
         }
 
@@ -114,7 +114,7 @@ class OrderController extends FrontController
         /** @var $order Order */
         $order = Order::model()->findByPk($shp_id_order);
 
-        if(!is_object($order)){
+        if (!is_object($order)) {
             die('Не удалось загрузить заказ');
         }
 
@@ -125,27 +125,11 @@ class OrderController extends FrontController
         if ($order->sum() != $out_summ) {
             die("Сумма не совпадает");
         }
-        $order->orderStatusID = 2;
+        $order->complete();
         $order->save();
 
         //print OK signature
         echo "OK$inv_id\n";
-    }
-
-    public function actionComplete()
-    {
-        if (isset($_POST['MrchLogin'])) {
-
-            // curl запрос к робокассе
-        } else {
-            $order = $this->loadAuto();
-            $invoice = new Invoice($order);
-            $invoice->generate();
-            $mailer = new Mailer();
-            $mailer->sendMail($order->user, '', $order);
-        }
-
-        $a = 0;
     }
 
     public function actionCart()

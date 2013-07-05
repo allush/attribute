@@ -176,4 +176,23 @@ class Order extends CActiveRecord
         }
         $otherOrder->delete();
     }
+
+    public function complete()
+    {
+        // статус оплачен
+        $this->orderStatusID = 2;
+        $this->save();
+
+        // списать кол-во товаров
+        foreach ($this->orderItems as $item) {
+            $item->product->existence -= $item->quantity;
+            $item->product->save();
+        }
+
+        $invoice = new Invoice($this);
+        $invoice->generate();
+
+        $mailer = new Mailer();
+        $mailer->sendMail($this->user, 'Заказ успешно оформлен. Оплаченный вами счет находится во вложении.', $this);
+    }
 }
