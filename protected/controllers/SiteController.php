@@ -51,15 +51,18 @@ class SiteController extends FrontController
             'data' => $page->content,
         ));
     }
-
-    /**
-     * This is the default 'index' action that is invoked
-     * when an action is not explicitly requested by users.
-     */
-    public function actionIndex()
-    {
-        $this->render('/news/index');
-    }
+//
+//    /**
+//     * This is the default 'index' action that is invoked
+//     * when an action is not explicitly requested by users.
+//     */
+//    public function actionIndex()
+//    {
+//        $dataProvider = new CActiveDataProvider('News');
+//        $this->render('/news/index', array(
+//            'dataProvider' => $dataProvider,
+//        ));
+//    }
 
     /**
      * This is the action to handle external exceptions.
