@@ -1,6 +1,6 @@
 <?php
 
-class ActionController extends FrontController
+class NewsController extends FrontController
 {
     public function actionView($id){
         $model = $this->loadModel($id);
@@ -14,7 +14,7 @@ class ActionController extends FrontController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Action');
+        $dataProvider = new CActiveDataProvider('News');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -24,12 +24,12 @@ class ActionController extends FrontController
      * Returns the data model based on the primary key given in the GET variable.
      * If the data model is not found, an HTTP exception will be raised.
      * @param integer $id the ID of the model to be loaded
-     * @return Action the loaded model
+     * @return News the loaded model
      * @throws CHttpException
      */
     public function loadModel($id)
     {
-        $model = Action::model()->findByPk($id);
+        $model = News::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;

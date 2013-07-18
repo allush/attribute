@@ -1,9 +1,9 @@
 <?php
-/* @var $this ActionController */
-/* @var $model Action */
+/* @var $this NewsController */
+/* @var $model News */
 
 $this->breadcrumbs = array(
-    'Акции' => array('index'),
+    'Новости' => array('index'),
     'Редактирование "' . $model->header . '"',
 );
 
@@ -19,7 +19,7 @@ $this->menu = array(
         'linkOptions' => array(
             'class' => 'text-error',
             'confirm' => 'Вы уверены?',
-            'submit' => array('delete', 'id' => $model->actionID),
+            'submit' => array('delete', 'id' => $model->newsID),
             'params' => array(
                 'YII_CSRF_TOKEN' => Yii::app()->request->csrfToken,
             ),

@@ -1,6 +1,6 @@
 <?php
-/* @var $this ActionController */
-/* @var $model Action */
+/* @var $this NewsController */
+/* @var $model News */
 /* @var $form CActiveForm */
 
 Yii::app()->clientScript->registerScriptFile(
@@ -11,7 +11,7 @@ Yii::app()->clientScript->registerScriptFile(
 
 <?php
 $form = $this->beginWidget('CActiveForm', array(
-    'id' => 'action-form',
+    'id' => 'news-form',
     'enableAjaxValidation' => false,
     'focus' => $model->isNewRecord ? array($model, 'name') : null,
     'htmlOptions' => array(
@@ -25,36 +25,6 @@ $form = $this->beginWidget('CActiveForm', array(
     <?php echo $form->textField($model, 'header', array('class' => 'span5')); ?>
     <?php echo $form->error($model, 'header'); ?>
 </div>
-
-<div>
-    <?php echo $form->labelEx($model, 'slogan'); ?>
-    <?php echo $form->textField($model, 'slogan', array('class' => 'span5')); ?>
-    <?php echo $form->error($model, 'slogan'); ?>
-</div>
-
-<div>
-    <?php echo $form->labelEx($model, 'beginOn'); ?>
-    <?php echo $form->dateField($model, 'beginOn'); ?>
-    <?php echo $form->error($model, 'beginOn'); ?>
-</div>
-
-<div>
-    <?php echo $form->labelEx($model, 'endOn'); ?>
-    <?php echo $form->dateField($model, 'endOn'); ?>
-    <?php echo $form->error($model, 'endOn'); ?>
-</div>
-
-<div>
-    <?php echo CHtml::image($model->picture());?>
-</div>
-
-<div>
-    <?php echo $form->labelEx($model, 'picture'); ?>
-    <?php echo $form->fileField($model, 'picture', array('class' => 'span5')); ?>
-    <?php echo $form->error($model, 'picture'); ?>
-</div>
-
-<br>
 
 <div>
     <?php echo $form->labelEx($model, 'content'); ?>
@@ -71,6 +41,6 @@ $form = $this->beginWidget('CActiveForm', array(
 <?php $this->endWidget(); ?>
 
 <script>
-    var editor = CKEDITOR.replace('Action[content]');
+    var editor = CKEDITOR.replace('News[content]');
     CKFinder.setupCKEditor(editor, '/ckfinder/');
 </script>

@@ -1,9 +1,9 @@
 <?php
-/* @var $this ActionController */
-/* @var $model Action */
+/* @var $this NewsController */
+/* @var $model News */
 
 $this->breadcrumbs = array(
-    'Акции' => array('index'),
+    'Новости' => array('index'),
     'Создание',
 );
 

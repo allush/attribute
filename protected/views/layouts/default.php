@@ -48,10 +48,10 @@
                             <div class="header-menu">
                                 <?php $this->widget('zii.widgets.CMenu', array(
                                 'items' => array(
-                                    array('label' => 'О нас', 'url' => array('/about'), 'linkOptions' => array('class' => 'about-us')),
+                                    array('label' => 'Новости', 'url' => array('/news/index'), 'linkOptions' => array('class' => 'about-us')),
                                     array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
                                     array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
-                                    array('label' => 'Акции', 'url' => array('/action/index'), 'linkOptions' => array('class' => 'stock')),
+                                    array('label' => 'Акции', 'url' => array('/actions'), 'linkOptions' => array('class' => 'stock')),
                                     array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
                                     array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
                                 ),
@@ -192,10 +192,10 @@
                     <?php
                     $this->widget('zii.widgets.CMenu', array(
                         'items' => array(
-                            array('label' => 'О нас', 'url' => array('/about')),
+                            array('label' => 'Новости', 'url' => array('/news/index')),
                             array('label' => 'Каталог', 'url' => array('/product/index')),
                             array('label' => 'Оплата и доставка', 'url' => array('/delivery')),
-                            array('label' => 'Акции', 'url' => array('/action/index')),
+                            array('label' => 'Акции', 'url' => array('/actions')),
                             array('label' => 'Контакты', 'url' => array('/contacts')),
                         ),
                     ));

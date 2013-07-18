@@ -59,7 +59,7 @@ return array(
             ),
         ),
         'errorHandler' => array(
-            // use 'site/error' action to display errors
+            // use 'site/error' news to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(

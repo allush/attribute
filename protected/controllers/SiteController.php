@@ -32,6 +32,16 @@ class SiteController extends FrontController
         ));
     }
 
+    public function actionActions()
+    {
+        $this->pageTitle = 'Акции';
+        /** @var $page Page */
+        $page = Page::model()->findByPk(5);
+        $this->render('page', array(
+            'data' => $page->content,
+        ));
+    }
+
     public function actionWholesale()
     {
         $this->pageTitle = 'Оптовые продажи';
@@ -48,7 +58,7 @@ class SiteController extends FrontController
      */
     public function actionIndex()
     {
-        $this->actionAbout();
+        $this->render('/news/index');
     }
 
     /**

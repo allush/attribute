@@ -45,16 +45,17 @@ return array(
                 '/contacts' => '/site/contacts',
                 '/delivery' => '/site/delivery',
                 '/wholesale' => '/site/wholesale',
+                '/actions' => '/site/actions',
                 '/cart' => '/order/cart',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<news:\w+>/<id:\d+>' => '<controller>/<news>',
+                '<controller:\w+>/<news:\w+>' => '<controller>/<news>',
             ),
         ),
 
 
         'errorHandler' => array(
-            // use 'site/error' action to display errors
+            // use 'site/error' news to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(

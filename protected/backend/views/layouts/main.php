@@ -34,13 +34,13 @@
                     $this->widget('zii.widgets.CMenu', array(
                         'items' => array(
                             array('label' => 'Главная', 'url' => array('/site/index')),
+                            array('label' => 'Новости', 'url' => array('/news/index')),
                             array('label' => 'Заказы', 'url' => array('/order/index')),
                             array('label' => 'Доставка', 'url' => array('/orderDelivery/index')),
                             array('label' => 'Оплата', 'url' => array('/orderPayment/index')),
                             array('label' => 'Товары', 'url' => array('/product/index')),
                             array('label' => 'Каталоги', 'url' => array('/catalog/index')),
                             array('label' => 'Страницы', 'url' => array('/page/index')),
-                            array('label' => 'Акции', 'url' => array('/action/index')),
                             array('label' => 'Пользователи', 'url' => array('/user/index')),
                             array('label' => '(' . Yii::app()->user->getState('login') . ') Выйти', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest),
                         ),
