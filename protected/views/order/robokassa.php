@@ -98,31 +98,29 @@ $page = curl_exec($c);
 curl_close($c);
 ?>
 
-<form id="robokassa" name="robokassa" action="http://test.robokassa.ru/Index.aspx" method="post">
-    <input name="MrchLogin" type="hidden" value="<?php echo $mrh_login; ?>"/>
-    <input name="OutSum" type="hidden" value="<?php echo $out_summ; ?>"/>
-    <input name="InvId" type="hidden" value="<?php echo $inv_id; ?>"/>
-    <input name="Desc" type="hidden" value="<?php echo $inv_desc; ?>"/>
-    <input name="SignatureValue" type="hidden" value="<?php echo $crc; ?>"/>
-    <input name="Encoding" type="hidden" value="<?php echo $encoding; ?>"/>
-    <input name="shp_id_order" type="hidden" value="<?php echo $shp_id_order; ?>"/>
+<input name="Robokassa[MrchLogin]" type="hidden" value="<?php echo $mrh_login; ?>"/>
+<input name="Robokassa[OutSum]" type="hidden" value="<?php echo $out_summ; ?>"/>
+<input name="Robokassa[InvId]" type="hidden" value="<?php echo $inv_id; ?>"/>
+<input name="Robokassa[Desc]" type="hidden" value="<?php echo $inv_desc; ?>"/>
+<input name="Robokassa[SignatureValue]" type="hidden" value="<?php echo $crc; ?>"/>
+<input name="Robokassa[Encoding]" type="hidden" value="<?php echo $encoding; ?>"/>
+<input name="Robokassa[shp_id_order]" type="hidden" value="<?php echo $shp_id_order; ?>"/>
 
-    <fieldset class="payment">
-        <?php
-        $xml = simplexml_load_string($page);
-        foreach ($xml->Groups->Group as $group) {
-            echo "<div class='groupCurrency' id='" . $group['Code'] . "' >" . $group['Description'] . "</div>";
-            echo "<div class='currency' id='_" . $group['Code'] . "'>";
-            foreach ($group->Items->Currency as $currency) {
-                echo "<input name='IncCurrLabel' type='radio' required='required' value='" . $currency['Label'] . "' id='" . $group['Code'] . "_" . $currency['Label'] . "' />";
-                echo " <label for='" . $group['Code'] . "_" . $currency['Label'] . "'>" . $currency['Name'] . "</label><br>";
-            }
-            echo "</div>";
+<fieldset class="payment">
+    <?php
+    $xml = simplexml_load_string($page);
+    foreach ($xml->Groups->Group as $group) {
+        echo "<div class='groupCurrency' id='" . $group['Code'] . "' >" . $group['Description'] . "</div>";
+        echo "<div class='currency' id='_" . $group['Code'] . "'>";
+        foreach ($group->Items->Currency as $currency) {
+            echo "<input name='Robokassa[IncCurrLabel]' type='radio' required='required' value='" . $currency['Label'] . "' id='" . $group['Code'] . "_" . $currency['Label'] . "' />";
+            echo " <label for='" . $group['Code'] . "_" . $currency['Label'] . "'>" . $currency['Name'] . "</label><br>";
         }
-        ?>
-    </fieldset>
-    <input type="submit" class="primary-btn" value="Оплатить и завершить">
-</form>
+        echo "</div>";
+    }
+    ?>
+</fieldset>
+<input type="submit" class="primary-btn" value="Оплатить и завершить">
 
 <script type="text/javascript">
     $(".currency").hide();

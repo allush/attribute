@@ -16,81 +16,12 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
         <?php
         echo $user->phone . '<br>';
         echo $user->email . '<br>';
-    } else {
-        ?>
-        <div class="heading">Пожалуйста, заполните недостающую информацию</div>
-        <?php
-        $form = $this->beginWidget('CActiveForm', array(
-            'id' => 'incompleteInfo-form',
-            'enableAjaxValidation' => true,
-            'method' => 'post',
-            'action' => array('/user/update', 'id' => $user->userID),
-            'htmlOptions' => array()
-        ));
-        ?>
-        <div>
-            <?php echo $form->labelEx($user, 'surname', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'surname', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'surname'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'name', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'name', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'name'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'patronymic', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'patronymic', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'patronymic'); ?>
-        </div>
-
-
-        <div>
-            <?php echo $form->labelEx($user, 'address', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'address'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'index', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'index', array('class' => 'span5')); ?>
-            <?php echo $form->error($user, 'index'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'country', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'country', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'country'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'phone', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'phone', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'phone'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'region', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'region', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'region'); ?>
-        </div>
-
-        <div>
-            <?php echo $form->labelEx($user, 'sity', array('class' => 'control-label')); ?>
-            <?php echo $form->textField($user, 'sity', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($user, 'sity'); ?>
-        </div>
-        <?php
-
-        $this->endWidget();
     }
 
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'orderComplete-form',
-        'enableAjaxValidation' => true,
-        'action' => array('/order/update', 'id' => $order->orderID),
+        'enableAjaxValidation' => false,
+        'action' => array('/order/complete', 'id' => $order->orderID),
         'htmlOptions' => array()
     ));
     ?>
@@ -99,15 +30,17 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
         <?php echo $form->textArea($order, 'comment', array('class' => 'order-complete-comment')); ?>
         <?php echo $form->error($order, 'comment'); ?>
     </div>
+
     <div class="heading">4. Способ доставки</div>
     <div>
         <?php echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll(), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
         <?php echo $form->error($order, 'orderDeliveryID'); ?>
     </div>
 
-    <?php $this->endWidget(); ?>
     <div class="heading">5. Способ оплаты</div>
     <?php include_once(Yii::getPathOfAlias('application.views.order') . '/robokassa.php'); ?>
+
+    <?php $this->endWidget(); ?>
 </div>
 
 <div class="order-complete-info">

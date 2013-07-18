@@ -189,6 +189,32 @@ class OrderController extends FrontController
         }
     }
 
+    public function actionComplete($id)
+    {
+
+        $model = $this->loadModel($id);
+        if (isset($_POST['Order'])) {
+            $model->attributes = $_POST['Order'];
+            $model->save();
+        }
+
+        $get['MrchLogin'] = $_POST['Robokassa']['MrchLogin'];
+        $get['OutSum'] = $_POST['Robokassa']['OutSum'];
+        $get['InvId'] = $_POST['Robokassa']['InvId'];
+        $get['Desc'] = $_POST['Robokassa']['Desc'];
+        $get['SignatureValue'] = $_POST['Robokassa']['SignatureValue'];
+        $get['IncCurrLabel'] = $_POST['Robokassa']['IncCurrLabel'];
+
+        $redirectUrl = 'http://test.robokassa.ru/Index.aspx?';
+
+        foreach ($get as $key => $value) {
+            $redirectUrl .= $key . '=' . $value . '&';
+        }
+        $redirectUrl = substr($redirectUrl, 0, strlen($redirectUrl) - 1);
+
+        $this->redirect($redirectUrl);
+    }
+
     /**
      * Изменение кол-ва заказываемого товара из корзины
      * @param $id OrderItemID
