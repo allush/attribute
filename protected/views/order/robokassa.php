@@ -1,14 +1,10 @@
 <style type="text/css">
-    form[name=robokassa] input[type=submit] {
-        margin-top: 16px;
-    }
-
-    label:after {
-        background-color: #060606;
+    label:hover {
+        cursor: pointer;
     }
 
     .groupCurrency {
-        border: 1px solid #ddd;
+        border: 1px solid #cccccc;
         border-radius: 3px;
         padding: 4px;
         margin: 2px;
@@ -16,11 +12,7 @@
 
     .groupCurrency:hover {
         cursor: pointer;
-        border: 1px solid #ffcccc;
-    }
-
-    .groupCurrency_hover {
-        border: 1px solid #ffcccc;
+        border: 1px solid #a8d0da;
     }
 
     .currency {
@@ -31,41 +23,6 @@
         margin: 4px;
     }
 
-    label:hover {
-        cursor: pointer;
-    }
-
-    .payment_type {
-        margin: 4px;
-        border: 1px solid #ddd;
-        width: 365px;
-        padding: 8px 0;
-        font-size: 16pt;
-        float: left;
-        border-radius: 3px;
-        text-align: center;
-    }
-
-    .payment_type:hover, .payment_type_active {
-        cursor: pointer;
-        border: 1px solid #ffcccc;
-    }
-
-    .clearer {
-        clear: both;
-    }
-
-    fieldset.payment {
-        border: 1px solid #dddddd;
-        border-radius: 3px;
-    }
-
-    #pt_table {
-    }
-
-    #pt_table td label {
-        margin-right: 24px;
-    }
 </style>
 
 <?php
@@ -77,12 +34,11 @@ $out_summ = $order->sum();
 // номер заказа
 $inv_id = $order->orderID;
 $mrh_pass1 = "attribute2013_1r4";
-$shp_id_order = $order->orderID;
 // кодировка
 $encoding = "utf-8";
 
 // формирование подписи
-$crc = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1:shp_id_order=$shp_id_order");
+$crc = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
 
 // описание заказа
 $inv_desc = 'Оплата заказа № ' . $inv_id . ' на сайте attribute.pro';
@@ -104,9 +60,7 @@ curl_close($c);
 <input name="Robokassa[Desc]" type="hidden" value="<?php echo $inv_desc; ?>"/>
 <input name="Robokassa[SignatureValue]" type="hidden" value="<?php echo $crc; ?>"/>
 <input name="Robokassa[Encoding]" type="hidden" value="<?php echo $encoding; ?>"/>
-<input name="Robokassa[shp_id_order]" type="hidden" value="<?php echo $shp_id_order; ?>"/>
 
-<fieldset class="payment">
     <?php
     $xml = simplexml_load_string($page);
     foreach ($xml->Groups->Group as $group) {
@@ -119,8 +73,6 @@ curl_close($c);
         echo "</div>";
     }
     ?>
-</fieldset>
-<input type="submit" class="primary-btn" value="Оплатить и завершить">
 
 <script type="text/javascript">
     $(".currency").hide();

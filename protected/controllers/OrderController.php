@@ -38,34 +38,26 @@ class OrderController extends FrontController
         if (!isset($_GET['SignatureValue'])) {
             die("Не указана контрольная сумма");
         }
-        if (!isset($_GET['shp_id_order'])) {
-            die("Не указан идектификатор заказа");
-        }
 
         $mrh_pass1 = "attribute2013_1r4";
 
         $out_sum = $_GET['OutSum'];
         $inv_id = $_GET['InvId'];
-        $shp_id_order = $_GET['shp_id_order'];
         $crc = $_GET['SignatureValue'];
 
         $crc = strtoupper($crc); // force uppercase
 
-// build own CRC
-        $my_crc = strtoupper(md5("$out_sum:$inv_id:$mrh_pass1:shp_id_order=$shp_id_order"));
+        // build own CRC
+        $my_crc = strtoupper(md5("$out_sum:$inv_id:$mrh_pass1"));
 
         if (strtoupper($my_crc) != strtoupper($crc)) {
             die("Контрольная сумма не совпадает");
         }
 
         /** @var $order Order */
-        $order = Order::model()->findByPk($shp_id_order);
+        $order = Order::model()->findByPk($inv_id);
 
         if (!is_object($order)) {
-            die('Не удалось загрузить заказ');
-        }
-
-        if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
         }
 
@@ -85,46 +77,41 @@ class OrderController extends FrontController
         if (!isset($_GET['OutSum'])) {
             die("Не указана сумма платежа");
         }
+
         if (!isset($_GET['InvId'])) {
             die("Не указан номер счета");
         }
+
         if (!isset($_GET['SignatureValue'])) {
             die("Не указана контрольная сумма");
-        }
-        if (!isset($_GET['shp_id_order'])) {
-            die("Не указан идектификатор заказа");
         }
 
         $mrh_pass2 = "attribute2013_2h3";
 
-        $shp_id_order = $_GET['shp_id_order'];
-        $out_summ = $_GET['OutSum'];
+        $out_sum = $_GET['OutSum'];
         $inv_id = $_GET['InvId'];
         $crc = $_GET['SignatureValue'];
 
         $crc = strtoupper($crc);
 
         //build own CRC
-        $my_crc = strtoupper(md5("$out_summ:$inv_id:$mrh_pass2:shp_id_order=$shp_id_order"));
+        $my_crc = strtoupper(md5("$out_sum:$inv_id:$mrh_pass2"));
 
         if (strtoupper($my_crc) != strtoupper($crc)) {
             die("Неверная контрольная сумма\n");
         }
 
         /** @var $order Order */
-        $order = Order::model()->findByPk($shp_id_order);
+        $order = Order::model()->findByPk($inv_id);
 
         if (!is_object($order)) {
-            die('Не удалось загрузить заказ');
-        }
-
-        if ($order->orderID != $inv_id) {
             die("Заказа с таким номером не существует в системе");
         }
 
-        if ($order->sum() != $out_summ) {
+        if ($order->sum() != $out_sum) {
             die("Сумма не совпадает");
         }
+
         $order->complete();
         $order->save();
 
@@ -191,28 +178,34 @@ class OrderController extends FrontController
 
     public function actionComplete($id)
     {
-
         $model = $this->loadModel($id);
         if (isset($_POST['Order'])) {
             $model->attributes = $_POST['Order'];
             $model->save();
         }
 
-        $get['MrchLogin'] = $_POST['Robokassa']['MrchLogin'];
-        $get['OutSum'] = $_POST['Robokassa']['OutSum'];
-        $get['InvId'] = $_POST['Robokassa']['InvId'];
-        $get['Desc'] = $_POST['Robokassa']['Desc'];
-        $get['SignatureValue'] = $_POST['Robokassa']['SignatureValue'];
-        $get['IncCurrLabel'] = $_POST['Robokassa']['IncCurrLabel'];
-
-        $redirectUrl = 'http://test.robokassa.ru/Index.aspx?';
-
-        foreach ($get as $key => $value) {
-            $redirectUrl .= $key . '=' . $value . '&';
+        $user = $model->user;
+        if (isset($_POST['User'])) {
+            $user->attributes = $_POST['User'];
+            $user->save();
         }
-        $redirectUrl = substr($redirectUrl, 0, strlen($redirectUrl) - 1);
 
-        $this->redirect($redirectUrl);
+        if (isset($_POST['Robokassa'])) {
+            $get['MrchLogin'] = $_POST['Robokassa']['MrchLogin'];
+            $get['OutSum'] = $_POST['Robokassa']['OutSum'];
+            $get['InvId'] = $_POST['Robokassa']['InvId'];
+            $get['Desc'] = $_POST['Robokassa']['Desc'];
+            $get['SignatureValue'] = $_POST['Robokassa']['SignatureValue'];
+            $get['IncCurrLabel'] = $_POST['Robokassa']['IncCurrLabel'];
+
+            $redirectUrl = 'http://test.robokassa.ru/Index.aspx?';
+
+            foreach ($get as $key => $value) {
+                $redirectUrl .= $key . '=' . $value . '&';
+            }
+            $redirectUrl = substr($redirectUrl, 0, strlen($redirectUrl) - 1);
+            $this->redirect($redirectUrl);
+        }
     }
 
     /**
