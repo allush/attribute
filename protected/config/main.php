@@ -17,7 +17,7 @@ return array(
     'import' => array(
         'application.models.*',
         'application.components.*',
-        'application.components.MPDF56.*',
+        'application.components.mpdf.*',
     ),
 
     // application components
