@@ -11,7 +11,7 @@ $this->menu = array();
 $this->widget('zii.widgets.grid.CGridView', array(
     'dataProvider' => $dataProvider,
     'columns' => array(
-        'orderID',
+            'name' => 'orderID',
         array(
             'name' => 'orderStatusID',
             'value' => '($data->orderStatus === null)?"-":$data->orderStatus->name'
@@ -43,10 +43,24 @@ $this->widget('zii.widgets.grid.CGridView', array(
         array(
             'header' => ' ',
             'type'=>'raw',
+            'type' => 'raw',
+            'value' => 'CHtml::link(
+                "<i class=\"icon-align-justify icon-white\"></i>",
+                array("view","id"=>$data->orderID),
+                array(
+                    "class"=>"btn btn-mini btn-info",
+                    "title"=>"Посмотреть",
+                )
+            )',
+        ),
+        array(
+            'header' => ' ',
+            'type'=>'raw',
             'value' => 'CHtml::link(
                 "<i class=\"icon-remove icon-white\"></i>",
                 "#",
                 array(
+                    "title"=>"Удалить",
                     "class"=>"btn btn-mini btn-danger",
                     "submit" => array("delete", "id" => $data->orderID),
                     "confirm" => "Вы уверены?",

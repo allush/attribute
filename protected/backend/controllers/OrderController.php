@@ -35,8 +35,18 @@ class OrderController extends BackendController
      */
     public function actionView($id)
     {
+        $orderItems = new CActiveDataProvider('OrderItem', array(
+            'criteria' => array(
+                'condition' => 'orderID=:orderID',
+                'params' => array(
+                    ':orderID' => $id,
+                ),
+            ),
+        ));
+
         $this->render('view', array(
             'model' => $this->loadModel($id),
+            'orderItems' => $orderItems
         ));
     }
 
@@ -60,9 +70,8 @@ class OrderController extends BackendController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Order',array(
-            'criteria'=>array(
-                'order'=>'createdOn DESC',
+        $dataProvider = new CActiveDataProvider('Order', array(
+            'criteria' => array(
             ),
         ));
         $this->render('index', array(

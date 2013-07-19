@@ -68,31 +68,10 @@ class OrderItem extends CActiveRecord
     public function attributeLabels()
     {
         return array(
-            'orderItemID' => 'Order Item',
-            'productID' => 'Product',
-            'quantity' => 'Quantity',
-            'orderID' => 'Order',
+            'orderItemID' => '#',
+            'productID' => 'Товар',
+            'quantity' => 'Количество',
+            'orderID' => 'Номер заказа',
         );
-    }
-
-    /**
-     * Retrieves a list of models based on the current search/filter conditions.
-     * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
-     */
-    public function search()
-    {
-        // Warning: Please modify the following code to remove attributes that
-        // should not be searched.
-
-        $criteria = new CDbCriteria;
-
-        $criteria->compare('orderItemID', $this->orderItemID);
-        $criteria->compare('productID', $this->productID);
-        $criteria->compare('quantity', $this->quantity);
-        $criteria->compare('orderID', $this->orderID);
-
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-        ));
     }
 }

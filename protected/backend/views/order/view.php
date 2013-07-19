@@ -1,34 +1,105 @@
 <?php
 /* @var $this OrderController */
 /* @var $model Order */
+/* @var $orderItems CActiveDataProvider */
 
-$this->breadcrumbs=array(
-	'Orders'=>array('index'),
-	$model->orderID,
+$this->breadcrumbs = array(
+    'Заказы' => array('index'),
+    'Заказ №' . $model->orderID,
 );
 
-$this->menu=array(
-	array('label'=>'List Order', 'url'=>array('index')),
-	array('label'=>'Create Order', 'url'=>array('create')),
-	array('label'=>'Update Order', 'url'=>array('update', 'id'=>$model->orderID)),
-	array('label'=>'Delete Order', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->orderID),'confirm'=>'Are you sure you want to delete this item?')),
-	array('label'=>'Manage Order', 'url'=>array('admin')),
+$this->menu = array(
+    array('label' => 'Назад', 'url' => array('index')),
+    array(
+        'label' => 'Удалить',
+        'url' => '#',
+        'linkOptions' => array(
+            'submit' => array('delete', 'id' => $model->orderID),
+            'confirm' => 'Вы уверены?',
+            'class' => 'text-error'
+        ),
+        'itemOptions' => array(
+            'class' => 'pull-right'
+        )
+    ),
 );
 ?>
 
-<h1>View Order #<?php echo $model->orderID; ?></h1>
-
 <?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'orderID',
-		'orderStatusID',
-		'createdOn',
-		'completedOn',
-		'executedOn',
-		'orderPaymentID',
-		'orderDeliveryID',
-		'userID',
-		'comment',
-	),
+    'data' => $model,
+    'attributes' => array(
+        'orderID',
+        array(
+            'name' => 'createdOn',
+            'value' => ($model->createdOn === null) ? "-" : date("d-m-Y", $model->createdOn)
+        ),
+        array(
+            'name' => 'modifiedOn',
+            'value' => ($model->modifiedOn === null) ? "-" : date("d-m-Y", $model->modifiedOn)
+        ),
+        'orderPaymentID',
+        'orderDeliveryID',
+
+        array(
+            'name' => 'userID',
+            'value' => ($model->user !== null) ? $model->user->surname . ' ' . $model->user->name : 'Не задан',
+        ),
+        'comment',
+
+        array(
+            'name'=> 'orderStatusID',
+            'type'=>'raw',
+            'value' => CHtml::dropDownList(
+                'orderStatusID',
+                '',
+                CHtml::listData(OrderStatus::model()->findAll(),'orderStatusID','name'),
+                array()
+            ),
+        ),
+    ),
+    'htmlOptions' => array(
+        'class' => 'table table-bordered table-condensed table-hover',
+    )
 )); ?>
+
+    <h4>Сумма заказа: <?php echo $model->sum(); ?> руб.</h4>
+
+<?php
+$this->widget('zii.widgets.grid.CGridView', array(
+    'dataProvider' => $orderItems,
+    'columns' => array(
+        array(
+            'header' => 'Картинка',
+            'type' => 'raw',
+            'value' => 'CHtml::image($data->product->thumbnail(),"",array("style"=>"width: 120px;"))'
+        ),
+        array(
+            'header' => 'Название',
+            'value' => '$data->product->name'
+        ),
+        array(
+            'header' => 'Стоимость',
+            'value' => '$data->product->price'
+        ),
+        'quantity',
+        array(
+            'header' => 'Сумма',
+            'value' => '$data->product->price * $data->quantity'
+        ),
+
+    ),
+    'template' => '{summary}  {pager} {items} {pager}',
+    'summaryText' => '{start} - {end} из {count}',
+    'itemsCssClass' => 'table table-bordered table-condensed table-hover',
+    'pagerCssClass' => 'pagination',
+    'pager' => array(
+        'firstPageLabel' => '<<',
+        'prevPageLabel' => '<',
+        'nextPageLabel' => '>',
+        'lastPageLabel' => '>>',
+        'maxButtonCount' => '10',
+        'header' => '',
+        'cssFile' => '',
+        'selectedPageCssClass' => 'active',
+    ),
+));

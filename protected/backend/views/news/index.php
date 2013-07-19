@@ -34,7 +34,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'type' => 'raw',
-            'value' => 'CHtml::link("<i class=\"icon-trash icon-white\"></i>",
+            'value' => 'CHtml::link("<i class=\"icon-remove icon-white\"></i>",
                 array("#"),
                 array(
                     "title" => "Удалить",
