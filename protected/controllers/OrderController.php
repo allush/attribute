@@ -171,6 +171,11 @@ class OrderController extends FrontController
     public function actionOrderCompletion()
     {
         $order = $this->loadAuto();
+        if(!$order->user){
+            Yii::app()->user->returnUrl = '/order/cart';
+            $this->redirect('/site/signIn');
+        }
+
         if ($order !== null) {
             $this->render('orderCompletion', array('order' => $order));
         }
