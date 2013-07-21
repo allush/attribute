@@ -54,10 +54,10 @@ class Product extends CActiveRecord
         // will receive user inputs.
         return array(
             array('productStatusID', 'required'),
-            array('productStatusID, productNumber, catalogID, discount, createdOn, modifiedOn', 'numerical', 'integerOnly' => true),
+            array('productStatusID, catalogID, discount, createdOn, modifiedOn', 'numerical', 'integerOnly' => true),
             array('deleted', 'boolean'),
             array('price, existence, purchase', 'numerical'),
-            array('name, unit', 'length', 'max' => 255),
+            array('name, unit, productNumber', 'length', 'max' => 255),
             array('description', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.

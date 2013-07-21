@@ -168,6 +168,9 @@ class ProductController extends BackendController
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
             if ($model->save()) {
+                if(Yii::app()->request->isAjaxRequest){
+                    Yii::app()->end();
+                }
                 $this->redirect(array('view', 'id' => $model->productID));
             }
         }
