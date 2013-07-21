@@ -186,7 +186,10 @@ class ProductController extends BackendController
     {
         $model = $this->loadModel($id);
         $catalogID = $model->catalogID;
-        $model->delete();
+//        $model->delete();
+
+        $model->deleted = true;
+        $model->save();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
@@ -202,11 +205,11 @@ class ProductController extends BackendController
         Catalog::_loadHierarchy($hierarchy, null, 'view');
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'catalogID IS NOT NULL';
+        $criteria->condition = 'catalogID IS NOT NULL AND deleted=0';
 
         if ($c !== null) {
             if ($c == 0) {
-                $criteria->condition = 'catalogID IS NULL';
+                $criteria->condition = 'catalogID IS NULL AND deleted=0';
             } else {
                 $catalogIDs = array();
                 Catalog::childrenRecursively($catalogIDs, $c);
@@ -239,8 +242,9 @@ class ProductController extends BackendController
      */
     public function loadModel($id)
     {
+        /** @var $model Product */
         $model = Product::model()->findByPk($id);
-        if ($model === null)
+        if ($model === null || $model->deleted)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }

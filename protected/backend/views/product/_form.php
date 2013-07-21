@@ -74,6 +74,16 @@
         <!--        <div>--><?php //echo 'Изменен:' . date("H:i:s d/m/Y", $model->modifiedOn);?><!--</div>-->
 
         <div class="control-group">
+            <?php echo $form->labelEx($model, 'productNumber', array('class' => 'control-label')); ?>
+            <div class="controls">
+                <?php
+                echo $form->textField($model, 'productNumber', array('class' => 'span2', 'title' => $model->getAttributeLabel('productStatusID')));
+                echo $form->error($model, 'productNumber');
+                ?>
+            </div>
+        </div>
+
+        <div class="control-group">
             <?php echo $form->labelEx($model, 'productStatusID', array('class' => 'control-label')); ?>
             <div class="controls">
                 <?php

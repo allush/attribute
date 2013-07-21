@@ -39,11 +39,11 @@ class ProductController extends FrontController
         $this->catalogs = Catalog::model()->findAll('parent IS NULL');
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'catalogID IS NOT NULL';
+        $criteria->condition = 'catalogID IS NOT NULL AND deleted=0';
 
         if ($c !== null) {
             if ($c == 0) {
-                $criteria->condition = 'catalogID IS NULL';
+                $criteria->condition = 'catalogID IS NULL AND deleted=0';
             } else {
                 $catalogIDs = array();
                 Catalog::childrenRecursively($catalogIDs, $c);
@@ -76,8 +76,9 @@ class ProductController extends FrontController
      */
     public function loadModel($id)
     {
+        /** @var $model Product */
         $model = Product::model()->findByPk($id);
-        if ($model === null)
+        if ($model === null || $model->deleted)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
     }

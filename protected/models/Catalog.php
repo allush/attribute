@@ -73,6 +73,36 @@ class Catalog extends CActiveRecord
         );
     }
 
+
+    protected function beforeDelete()
+    {
+        Product::model()->updateAll(
+            array(
+                'catalogID' => null
+            ),
+            array(
+                'condition' => 'catalogID=:catalogID',
+                'params' => array(
+                    ':catalogID' => $this->catalogID,
+                )
+            )
+        );
+
+        Catalog::model()->updateAll(
+            array(
+                'parent' => null
+            ),
+            array(
+                'condition' => 'parent=:parent',
+                'params' => array(
+                    ':parent' => $this->catalogID,
+                )
+            )
+        );
+
+        return parent::beforeDelete();
+    }
+
     /**
      * Retrieves a list of models based on the current search/filter conditions.
      * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
