@@ -33,6 +33,16 @@ $this->renderPartial('_menu');
     </div>
     <div class="span10">
         <?php
+        /** @var $form CActiveForm */
+        $form = $this->beginWidget('CActiveForm', array(
+            'action' => array('groupAction'),
+            'id' => 'product-form',
+            'enableAjaxValidation' => false,
+            'htmlOptions' => array(),
+        ));
+        echo '<button class="btn btn-small" name="action" value="group">Группировать</button>';
+        echo '<button class="btn btn-small" name="action" value="ungroup">Разгруппировать</button>';
+
         $this->widget('zii.widgets.CListView', array(
             'dataProvider' => $dataProvider,
             'itemView' => '_view',
@@ -55,6 +65,8 @@ $this->renderPartial('_menu');
                 'selectedPageCssClass' => 'active',
             ),
         ));
+
+        $this->endWidget();
         ?>
     </div>
 </div>

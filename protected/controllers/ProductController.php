@@ -14,6 +14,7 @@ class ProductController extends FrontController
      */
     public function actionView($id)
     {
+        $model = $this->loadModel($id);
         $relatedProducts = Product::model()->findAll(array(
             'condition' => 'productID<>:productID',
             'params' => array(
@@ -23,9 +24,18 @@ class ProductController extends FrontController
             'limit' => 4
         ));
 
+        $similarProducts = Product::model()->findAll(array(
+            'condition' => '`group`<>:group',
+            'params' => array(
+                ':group' => $model->group,
+            ),
+            'order' => 'productID',
+        ));
+
         $this->render('view', array(
-            'model' => $this->loadModel($id),
+            'model' => $model,
             'relatedProducts' => $relatedProducts,
+            'similarProducts' => $similarProducts,
         ));
     }
 

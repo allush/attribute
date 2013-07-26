@@ -2,6 +2,7 @@
 /* @var $this ProductController */
 /* @var $model Product */
 /* @var $relatedProducts Product[] */
+/* @var $similarProducts Product[] */
 
 $this->breadcrumbs = array(
     'Каталог' => array('index'),
@@ -33,8 +34,9 @@ $this->menu = array(
 <div class="main-content">
     <div class="product-item">
         <div class="product-images">
-            <?php echo CHtml::image($model->thumbnail(), '', array('class' => 'big-img'));?>
-
+            <div class="big-img-container">
+                <?php echo CHtml::image($model->thumbnail(), '', array('class' => 'big-img'));?>
+            </div>
             <div class="gallery">
                 <ul>
                     <?php
@@ -55,7 +57,7 @@ $this->menu = array(
 
             <div class="product-description-buttons">
                 <div class="product-price"><?php echo CHtml::encode($model->price);?> руб</div>
-<!--                <a href="#" class="add-basket-button"></a>-->
+                <!--                <a href="#" class="add-basket-button"></a>-->
                 <?php
                 echo CHtml::ajaxLink(
                     '',
@@ -74,6 +76,40 @@ $this->menu = array(
                 ?>
                 <div class="clear"></div>
             </div>
+
+            <?php if (count($similarProducts) > 0) { ?>
+
+                <h1><?php echo CHtml::encode('Похожие товары');?></h1>
+                <?php
+                echo '<table style="width: 100%;">';
+                foreach ($similarProducts as $oneSimilarProduct) {
+                    echo '<tr>';
+
+                    echo '<td>' . CHtml::image($oneSimilarProduct->thumbnail(),'',array('style'=>'width: 80px;')) . '</td>';
+                    echo '<td>' . $oneSimilarProduct->name . '</td>';
+                    echo '<td>' . $oneSimilarProduct->price . '</td>';
+
+                    echo '<td>'.CHtml::ajaxLink(
+                        'В корзину',
+                        array('/order/addToCart', 'productID' => $oneSimilarProduct->productID),
+                        array(
+                            'success' => 'js:function(data){
+                                    if(data==301){
+                                        document.location="' . $this->createUrl('/product/view', array('id' => $oneSimilarProduct->productID)) . '";
+                                    } else{
+                                        $(".basket .count").html(data);
+                                    }
+                              }',
+                        )
+                    ).'</td>';
+                    echo '</tr>';
+                }
+
+                echo '</table>';
+            }
+            ?>
+
+
             <!--.product-description-buttons-->
             <div class="share"></div>
         </div>
