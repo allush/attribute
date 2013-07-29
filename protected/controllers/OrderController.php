@@ -121,6 +121,8 @@ class OrderController extends FrontController
 
     public function actionCart()
     {
+        $this->pageTitle = 'Корзина товаров';
+
         $order = $this->loadAuto();
         $otherIncompleteOrders = array();
         if (!Yii::app()->user->isGuest && is_object($order)) {

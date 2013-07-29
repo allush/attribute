@@ -20,26 +20,26 @@ $form = $this->beginWidget('CActiveForm', array(
 
     <tr>
         <td><?php echo $form->labelEx($user, 'name'); ?></td>
-        <td><?php echo $form->textField($user, 'name', array()); ?></td>
-<!--        <td>--><?php //echo $form->error($user, 'name'); ?><!--</td>-->
+        <td><?php echo $form->textField($user, 'name', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'name'); ?></td>
     </tr>
 
     <tr>
         <td><?php echo $form->labelEx($user, 'surname'); ?></td>
         <td><?php echo $form->textField($user, 'surname', array()); ?></td>
-<!--        <td>--><?php //echo $form->error($user, 'surname'); ?><!--</td>-->
+        <td><?php echo $form->error($user, 'surname'); ?></td>
     </tr>
 
     <tr>
         <td> <?php echo $form->labelEx($user, 'email'); ?></td>
-        <td><?php echo $form->emailField($user, 'email', array()); ?></td>
-<!--        <td>--><?php //echo $form->error($user, 'email'); ?><!--</td>-->
+        <td><?php echo $form->emailField($user, 'email', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'email'); ?></td>
     </tr>
 
     <tr>
         <td><?php echo $form->labelEx($user, 'password'); ?></td>
-        <td><?php echo $form->passwordField($user, 'password', array()); ?></td>
-<!--        <td>--><?php //echo $form->error($user, 'password'); ?><!--</td>-->
+        <td><?php echo $form->passwordField($user, 'password', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'password'); ?></td>
     </tr>
 
     <tr>

@@ -55,5 +55,24 @@ $(document).ready(function() {
 			$(this).removeClass('focus');
 		});
 	}
+
+    $('.add-basket-button').click(function(){
+        addToCart($(this).attr('productID'));
+    });
+
+    $('.to-basket-button').click(function(){
+        addToCart($(this).attr('productID'));
+    });
 });
+
+function addToCart(productID){
+    $.ajax({
+        url: '/order/addToCart?productID='+productID,
+        type: 'get',
+        beforeSend: function () {},
+        success: function (data) {
+            $(".basket .count").html(data);
+        }
+    });
+}
 

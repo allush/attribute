@@ -11,8 +11,6 @@ class WebUser extends CWebUser
 {
     public function changeIdentity($id, $name, $states)
     {
-//        parent::changeIdentity($id, $name, $states);
-
         $this->setId($id);
         $this->setName($name);
         $this->loadIdentityStates($states);

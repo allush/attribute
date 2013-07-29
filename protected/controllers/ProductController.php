@@ -14,6 +14,10 @@ class ProductController extends FrontController
      */
     public function actionView($id)
     {
+        $model = $this->loadModel($id);
+
+        $this->pageTitle = 'Каталог - ' . $model->catalog->name . ' - ' . $model->name;
+
         $relatedProducts = Product::model()->findAll(array(
             'condition' => 'productID<>:productID',
             'params' => array(
@@ -24,7 +28,7 @@ class ProductController extends FrontController
         ));
 
         $this->render('view', array(
-            'model' => $this->loadModel($id),
+            'model' => $model,
             'relatedProducts' => $relatedProducts,
         ));
     }
@@ -35,20 +39,24 @@ class ProductController extends FrontController
     public function actionIndex($c = null)
     {
         $this->layout = 'catalog';
+        $this->pageTitle = 'Каталог';
 
         $this->catalogs = Catalog::model()->findAll('parent IS NULL');
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'catalogID IS NOT NULL AND deleted=0';
 
-        if ($c !== null) {
-            if ($c == 0) {
-                $criteria->condition = 'catalogID IS NULL AND deleted=0';
-            } else {
-                $catalogIDs = array();
-                Catalog::childrenRecursively($catalogIDs, $c);
-                $criteria->addInCondition('catalogID', $catalogIDs);
+        if ($c !== null and $c !== 0) {
+            $catalog = Catalog::model()->findByPk($c);
+            if ($catalog !== null) {
+                $this->pageTitle .= ' - ' . $catalog->name;
             }
+
+            $catalogIDs = array();
+            Catalog::childrenRecursively($catalogIDs, $c);
+            $criteria->addInCondition('catalogID', $catalogIDs);
+            $criteria->addCondition('deleted=0');
+        } else {
+            $criteria->condition = 'catalogID IS NOT NULL AND deleted=0';
         }
 
         $dataProvider = new CActiveDataProvider('Product', array(

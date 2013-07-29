@@ -2,8 +2,13 @@
 
 class NewsController extends FrontController
 {
-    public function actionView($id){
+
+    public function actionView($id)
+    {
         $model = $this->loadModel($id);
+
+        $this->pageTitle = 'Новости - ' . $model->header;
+
         $this->render('view', array(
             'model' => $model,
         ));

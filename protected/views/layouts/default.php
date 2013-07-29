@@ -4,17 +4,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+    <title><?php echo CHtml::encode($this->pageTitle()); ?></title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="language" content="ru"/>
+    <meta name="description" content="<?php echo $this->description; ?>"/>
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cart.css">
     <link rel="stylesheet" type="text/css"
           href="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.css">
 
-    <?php Yii::app()->getClientScript()->registerCoreScript('jquery');?>
+    <?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
     <!--    <script type="text/javascript" src="-->
     <?php //echo Yii::app()->request->baseUrl; ?><!--/js/jquery-1.7.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.cycle.all.js"></script>
@@ -31,7 +32,7 @@
             <div id="header">
                 <div class="header-top">
                     <div id="header-logo">
-                        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/img/header_logo.png'), '/');?>
+                        <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/img/header_logo.png'), '/'); ?>
                     </div>
                     <!--.header-logo-->
 
@@ -47,16 +48,16 @@
                         <div class="header-menu-right">
                             <div class="header-menu">
                                 <?php $this->widget('zii.widgets.CMenu', array(
-                                'items' => array(
-                                    array('label' => 'Новости', 'url' => array('/news/index'), 'linkOptions' => array('class' => 'about-us')),
-                                    array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
-                                    array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
-                                    array('label' => 'Акции', 'url' => array('/actions'), 'linkOptions' => array('class' => 'stock')),
-                                    array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
-                                    array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
-                                ),
-                                'encodeLabel' => false,
-                            )); ?>
+                                    'items' => array(
+                                        array('label' => 'Новости', 'url' => array('/news/index'), 'linkOptions' => array('class' => 'about-us')),
+                                        array('label' => 'Каталог', 'url' => array('/product/index'), 'linkOptions' => array('class' => 'catalog')),
+                                        array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
+                                        array('label' => 'Акции', 'url' => array('/actions'), 'linkOptions' => array('class' => 'stock')),
+                                        array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
+                                        array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
+                                    ),
+                                    'encodeLabel' => false,
+                                )); ?>
                                 <div class="clear"></div>
                                 <?php
                                 $this->order = $this->loadAuto();
@@ -127,7 +128,7 @@
         <!--#line-blue-->
         <div class="main-content">
 
-            <?php echo $content;?>
+            <?php echo $content; ?>
         </div>
         <!--.main-content-->
     </div>
@@ -169,21 +170,21 @@
 <div id="footer-wrapper">
     <div id="footer">
         <div id="footer-top">
-<!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et-->
-<!--                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
-<!--                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu-->
-<!--                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia-->
-<!--                deserunt mollit anim id est laborum.</p>-->
-<!---->
-<!--            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti-->
-<!--                atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,-->
-<!--                similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum-->
-<!--                quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio-->
-<!--                cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est,-->
-<!--                omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus-->
-<!--                saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic-->
-<!--                tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis-->
-<!--                doloribus asperiores repellat.</p>-->
+            <!--            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et-->
+            <!--                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip-->
+            <!--                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu-->
+            <!--                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia-->
+            <!--                deserunt mollit anim id est laborum.</p>-->
+            <!---->
+            <!--            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti-->
+            <!--                atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,-->
+            <!--                similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum-->
+            <!--                quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio-->
+            <!--                cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est,-->
+            <!--                omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus-->
+            <!--                saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic-->
+            <!--                tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis-->
+            <!--                doloribus asperiores repellat.</p>-->
         </div>
         <!--#footer-top-->
         <div id="footer-bottom">

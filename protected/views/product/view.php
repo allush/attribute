@@ -33,7 +33,7 @@ $this->menu = array(
 <div class="main-content">
     <div class="product-item">
         <div class="product-images">
-            <?php echo CHtml::image($model->thumbnail(), '', array('class' => 'big-img'));?>
+            <?php echo CHtml::image($model->thumbnail(), '', array('class' => 'big-img')); ?>
 
             <div class="gallery">
                 <ul>
@@ -49,29 +49,13 @@ $this->menu = array(
         </div>
         <!--.product-images-->
         <div class="product-description">
-            <h1><?php echo CHtml::encode($model->name);?></h1>
+            <h1><?php echo CHtml::encode($model->name); ?></h1>
 
-            <p><?php echo CHtml::encode($model->description);?></p>
+            <p><?php echo CHtml::encode($model->description); ?></p>
 
             <div class="product-description-buttons">
-                <div class="product-price"><?php echo CHtml::encode($model->price);?> руб</div>
-<!--                <a href="#" class="add-basket-button"></a>-->
-                <?php
-                echo CHtml::ajaxLink(
-                    '',
-                    array('/order/addToCart', 'productID' => $model->productID),
-                    array(
-                        'success' => 'js:function(data){
-                                    if(data==301){
-                                        document.location="' . $this->createUrl('/product/view', array('id' => $model->productID)) . '";
-                                    } else{
-                                        $(".basket .count").html(data);
-                                    }
-                              }',
-                    ),
-                    array('class' => 'add-basket-button')
-                );
-                ?>
+                <div class="product-price"><?php echo CHtml::encode($model->price); ?> руб</div>
+                <?php echo CHtml::link('', '', array('class' => 'add-basket-button', 'productID' => $model->productID)); ?>
                 <div class="clear"></div>
             </div>
             <!--.product-description-buttons-->
@@ -96,21 +80,8 @@ $this->menu = array(
             echo '<div class="product-image">' . CHtml::link(CHtml::image($oneRelatedProduct->thumbnail()), array('view', 'id' => $oneRelatedProduct->productID)) . '</div>';
             echo '<div class="name-product">' . CHtml::link($oneRelatedProduct->name, array('view', 'id' => $oneRelatedProduct->productID), array('class' => '')) . '</div>';
             echo '<div class="product-price">';
-            echo CHtml::ajaxLink(
-                '',
-                array('/order/addToCart', 'productID' => $oneRelatedProduct->productID),
-                array(
-                    'success' => 'js:function(data){
-                                    if(data==301){
-                                        document.location="' . $this->createUrl('/product/view', array('id' => $oneRelatedProduct->productID)) . '";
-                                    } else{
-                                        $(".basket .count").html(data);
-                                    }
-                              }',
-                ),
-                array('class' => 'to-basket-button')
-            );
-            echo  '<span>' . $oneRelatedProduct->price . ' руб.</span>';
+            echo CHtml::link('','',array('class' => 'to-basket-button'));
+            echo '<span>' . $oneRelatedProduct->price . ' руб.</span>';
             echo '</div>';
 
             echo '</div>';

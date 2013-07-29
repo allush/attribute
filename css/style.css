@@ -48,7 +48,7 @@ body {
 	height:auto !important; 
 	min-height:100%; 
 	font-family: 'dincyr-regularregular';
-	font-size: 12px;
+	font-size: 14px;
 	color: #000;
 }
 
@@ -883,6 +883,7 @@ span.required,.errorMessage, .errorSummary{
 	position: absolute;
 	top: 3px;
 	left: -2px;
+    cursor: pointer;
 }
 
 
@@ -952,6 +953,7 @@ span.required,.errorMessage, .errorSummary{
 .main-content .product-item .product-images{
 	float: left;
 	padding-right: 21px;
+    min-width: 360px;
 }
 
 .product-item .product-images .big-img {
@@ -1092,6 +1094,7 @@ a.icon-color.black {
 	height: 54px;
 	display: block;
 	float: left;
+    cursor: pointer;
 }
 
 .product-description-buttons .add-basket-button:hover {

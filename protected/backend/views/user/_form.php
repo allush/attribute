@@ -38,30 +38,6 @@ $form = $this->beginWidget('CActiveForm', array(
         </div>
     </div>
 
-    <div class="control-group">
-        <?php echo $form->labelEx($model, 'email', array('class' => 'control-label')); ?>
-        <div class="controls">
-            <?php echo $form->textField($model, 'email', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($model, 'email'); ?>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <?php echo $form->labelEx($model, 'password', array('class' => 'control-label')); ?>
-        <div class="controls">
-            <?php echo $form->passwordField($model, 'password', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($model, 'password'); ?>
-        </div>
-    </div>
-
-
-    <div class="control-group">
-        <?php echo $form->labelEx($model, 'address', array('class' => 'control-label')); ?>
-        <div class="controls">
-            <?php echo $form->textField($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($model, 'address'); ?>
-        </div>
-    </div>
 
     <div class="control-group">
         <?php echo $form->labelEx($model, 'index', array('class' => 'control-label')); ?>
@@ -80,14 +56,6 @@ $form = $this->beginWidget('CActiveForm', array(
     </div>
 
     <div class="control-group">
-        <?php echo $form->labelEx($model, 'phone', array('class' => 'control-label')); ?>
-        <div class="controls">
-            <?php echo $form->textField($model, 'phone', array('class' => 'span5', 'maxlength' => 255)); ?>
-            <?php echo $form->error($model, 'phone'); ?>
-        </div>
-    </div>
-
-    <div class="control-group">
         <?php echo $form->labelEx($model, 'region', array('class' => 'control-label')); ?>
         <div class="controls">
             <?php echo $form->textField($model, 'region', array('class' => 'span5', 'maxlength' => 255)); ?>
@@ -102,6 +70,47 @@ $form = $this->beginWidget('CActiveForm', array(
             <?php echo $form->error($model, 'sity'); ?>
         </div>
     </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'address', array('class' => 'control-label')); ?>
+        <div class="controls">
+            <?php echo $form->textField($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
+            <?php echo $form->error($model, 'address'); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'email', array('class' => 'control-label')); ?>
+        <div class="controls">
+            <?php echo $form->textField($model, 'email', array('class' => 'span5', 'maxlength' => 255)); ?>
+            <?php echo $form->error($model, 'email'); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'phone', array('class' => 'control-label')); ?>
+        <div class="controls">
+            <?php echo $form->textField($model, 'phone', array('class' => 'span5', 'maxlength' => 255)); ?>
+            <?php echo $form->error($model, 'phone'); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'activated', array('class' => 'control-label')); ?>
+        <div class="controls">
+            <?php echo $form->checkBox($model, 'activated', array()); ?>
+            <?php echo $form->error($model, 'activated'); ?>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <?php echo $form->labelEx($model, 'isAdmin', array('class' => 'control-label')); ?>
+        <div class="controls">
+            <?php echo $form->checkBox($model, 'isAdmin', array()); ?>
+            <?php echo $form->error($model, 'isAdmin'); ?>
+        </div>
+    </div>
+
 
     <div class="control-group">
         <div class="controls">

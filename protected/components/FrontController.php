@@ -10,6 +10,16 @@ class FrontController extends CController
 {
     public $order = null;
 
+    public $pageTitleBase = 'Attribute.pro';
+
+    public $pageTitle = 'Интернет магазин модных аксессуаров, интересных подарков, полезных и красивых вещиц';
+    public $description = 'Интернет магазин модных аксессуаров, интересных подарков, полезных и красивых вещиц';
+
+    public function pageTitle()
+    {
+        return $this->pageTitleBase . ' - ' . $this->pageTitle;
+    }
+
     /**
      * @param bool $create
      * @return Order
@@ -20,7 +30,6 @@ class FrontController extends CController
         /** @var $order Order */
 
         $session = Yii::app()->getSession();
-//        echo $session->sessionID;
 
         // найти анонимный заказ
         $order = Order::model()->findByAttributes(
@@ -31,7 +40,7 @@ class FrontController extends CController
             )
         );
 
-
+        // если гость и нужно создать заказ(в случае добавления нового товара), то создать пустой заказ.
         if (Yii::app()->user->isGuest) {
             if ($order === null && $create) {
                 $order = new Order();

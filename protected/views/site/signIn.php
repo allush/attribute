@@ -3,7 +3,6 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm */
 
-$this->pageTitle = Yii::app()->name . ' - Вход';
 $this->breadcrumbs = array(
     'Вход',
 );
@@ -38,7 +37,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
     <tr>
         <td><?php echo CHtml::submitButton('Войти', array('class' => 'span3 btn')); ?> </td>
-        <td></td>
+        <td><?php echo CHtml::link('Регистрация', array('signUp')); ?> </td>
         <td></td>
     </tr>
 </table>

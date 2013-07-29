@@ -79,6 +79,12 @@ class SiteController extends FrontController
 
     public function actionSignUp()
     {
+        if(!Yii::app()->user->isGuest){
+            $this->redirect('/');
+        }
+
+        $this->pageTitle = 'Регистрация';
+
         /** @var $model User */
         $model = new User();
 
@@ -101,6 +107,12 @@ class SiteController extends FrontController
      */
     public function actionSignIn()
     {
+        if(!Yii::app()->user->isGuest){
+            $this->redirect('/');
+        }
+
+        $this->pageTitle = 'Вход';
+
         $model = new LoginForm;
 
         // collect user input data

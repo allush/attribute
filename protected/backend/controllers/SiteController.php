@@ -68,7 +68,7 @@ class SiteController extends BackendController
     public function actionLogin()
     {
         $this->layout = "clear";
-        $model = new LoginForm;
+        $model = new BackendLoginForm();
 
         // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -77,8 +77,8 @@ class SiteController extends BackendController
         }
 
         // collect user input data
-        if (isset($_POST['LoginForm'])) {
-            $model->attributes = $_POST['LoginForm'];
+        if (isset($_POST['BackendLoginForm'])) {
+            $model->attributes = $_POST['BackendLoginForm'];
             // validate user input and redirect to the previous page if valid
             if ($model->validate() && $model->login())
                 $this->redirect(Yii::app()->user->returnUrl);

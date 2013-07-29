@@ -34,7 +34,15 @@ $this->widget('zii.widgets.grid.CGridView', array(
             'value' => 'CHtml::link($data->surname." ".$data->name." ".$data->patronymic, array("update","id"=>$data->userID))',
         ),
         'email',
-        'phone'
+        'phone',
+        array(
+            'name' =>'activated',
+            'value' => '($data->activated == 1)?"Да":"Нет"'
+        ),
+        array(
+            'name' =>'isAdmin',
+            'value' => '($data->isAdmin == 1)?"Да":"Нет"'
+        ),
     ),
 
     'showTableOnEmpty' => false,

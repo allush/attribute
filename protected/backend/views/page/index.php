@@ -7,7 +7,6 @@ $this->breadcrumbs = array(
 );
 
 $this->menu = array(
-    array('label' => 'Создать страницу', 'url' => array('create')),
 );
 
 

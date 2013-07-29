@@ -19,6 +19,7 @@
  * @property string $phone
  * @property string $region
  * @property string $sity
+ * @property boolean $isAdmin
  *
  * The followings are the available model relations:
  * @property Order[] $orders
@@ -54,6 +55,7 @@ class User extends CActiveRecord
             array('name, email, password', 'required'),
             array('activated, index', 'numerical', 'integerOnly' => true),
             array('email', 'unique'),
+            array('isAdmin', 'boolean'),
             array('surname, name, patronymic, email, password, address, country, phone, region, sity', 'length', 'max' => 255),
             array('lastVisit, createdOn', 'safe'),
             // The following rule is used by search().
@@ -95,6 +97,7 @@ class User extends CActiveRecord
             'phone' => 'Телефон',
             'region' => 'Регион/область',
             'sity' => 'Город',
+            'isAdmin' => 'Администратор',
         );
     }
 

@@ -6,6 +6,8 @@
  * The followings are the available columns in table 'orderdelivery':
  * @property integer $orderDeliveryID
  * @property string $name
+ * @property integer $price
+ * @property boolean $hidden
  *
  * The followings are the available model relations:
  * @property Order[] $orders
@@ -40,6 +42,8 @@ class OrderDelivery extends CActiveRecord
         return array(
             array('name', 'required'),
             array('name', 'length', 'max' => 255),
+            array('price', 'numerical'),
+            array('hidden', 'boolean'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('orderDeliveryID, name', 'safe', 'on' => 'search'),
@@ -66,6 +70,8 @@ class OrderDelivery extends CActiveRecord
         return array(
             'orderDeliveryID' => 'Order Delivery',
             'name' => 'Название',
+            'price' =>'Стоимость доставки, руб.',
+            'hidden' => 'Скрыто',
         );
     }
 
@@ -86,5 +92,22 @@ class OrderDelivery extends CActiveRecord
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+
+    protected function beforeDelete()
+    {
+        // всем заказам, имеющим удаляемый способ доставки поставить как не определено.
+        Order::model()->updateAll(array(
+                'orderDeliveryID' => null
+            ),
+            array(
+                'condition' => 'orderDeliveryID=:orderDeliveryID',
+                'params' => array(
+                    ':orderDeliveryID' => $this->orderDeliveryID
+                )
+            )
+        );
+
+        return parent::beforeDelete();
     }
 }

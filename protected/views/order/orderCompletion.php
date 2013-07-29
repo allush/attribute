@@ -96,6 +96,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
 
 
 <div class="order-complete-info">
+    <div class="heading">Содержание заказа</div>
     <table class="order-complete-table">
         <?php
         if (count($order->orderItems) > 0) {

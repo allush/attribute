@@ -10,7 +10,7 @@ return array(
     'viewPath' => $backend . '/views',
     'runtimePath' => $backend . '/runtime',
 
-    'defaultController' => 'site',
+    'defaultController' => 'news',
 
     'preload' => array('log'),
 
