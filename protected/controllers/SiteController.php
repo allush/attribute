@@ -51,6 +51,7 @@ class SiteController extends FrontController
             'data' => $page->content,
         ));
     }
+
 //
 //    /**
 //     * This is the default 'index' action that is invoked
@@ -79,23 +80,25 @@ class SiteController extends FrontController
 
     public function actionSignUp()
     {
-        if(!Yii::app()->user->isGuest){
+        if (!Yii::app()->user->isGuest) {
             $this->redirect('/');
         }
 
         $this->pageTitle = 'Регистрация';
 
-        /** @var $model User */
         $model = new User();
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             $model->password = User::hashPassword($model->password);
             if ($model->save()) {
-                $userIdentity = new UserIdentity($model->email, $_POST['User']['password']);
-                if ($userIdentity->authenticate()) {
-                    Yii::app()->user->login($userIdentity);
-                }
+
+                $message = 'Для активации Вашего профиля перейдите по ссылке: http://attribute.pro/user/activate?c=' . md5($model->email);
+
+                $mailer = new Mailer();
+                $mailer->sendMail($model, $message);
+
+                Yii::app()->user->setFlash('signUp', true);
                 $this->redirect('/');
             }
         }
@@ -107,7 +110,7 @@ class SiteController extends FrontController
      */
     public function actionSignIn()
     {
-        if(!Yii::app()->user->isGuest){
+        if (!Yii::app()->user->isGuest) {
             $this->redirect('/');
         }
 

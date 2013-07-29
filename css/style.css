@@ -1333,3 +1333,9 @@ a.icon-color.black {
 }
 
 
+.success-alert{
+    background-color: #bdf1b3;
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: 1px solid #9dd791;
+}

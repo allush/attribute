@@ -22,6 +22,15 @@
     </style>
 
 <?php
+
+if(Yii::app()->user->hasFlash('activated') && Yii::app()->user->getFlash('activated') == true){
+    echo '<div class="success-alert">Ваша  учетная запись активирована</div>';
+}
+
+if(Yii::app()->user->hasFlash('signUp') && Yii::app()->user->getFlash('signUp') == true){
+    echo '<div class="success-alert">Вы успешно зарегистрированы. На вашу почту было выслано письмо с ссылкой для активации учетной записи</div>';
+}
+
 $this->widget('zii.widgets.CListView', array(
     'dataProvider' => $dataProvider,
     'itemView' => '_view',

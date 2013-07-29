@@ -76,7 +76,7 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
     ?>
     <div class="heading">2. Способ доставки</div>
     <div>
-        <?php echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll(), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
+        <?php echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll('hidden=0'), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
         <?php echo $form->error($order, 'orderDeliveryID'); ?>
     </div>
 

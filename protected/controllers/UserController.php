@@ -1,32 +1,27 @@
 <?php
 
-class UserController extends BackendController
-{/**
- * @return array action filters
- */
-    public function filters()
+class UserController extends FrontController
+{
+    public function actionActivate($c)
     {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
+        /** @var $user User */
+        $user = User::model()->find(array(
+            'condition' => 'MD5(`email`)=:src and activated=0',
+            'params' => array(
+                ':src' => $c,
+            ),
+        ));
+
+        if ($user !== null) {
+            $user->activated = true;
+            $user->save();
+            Yii::app()->user->setFlash('activated', true);
+        }
+
+
+        $this->redirect('/');
     }
 
-    /**
-     * Specifies the access control rules.
-     * This method is used by the 'accessControl' filter.
-     * @return array access control rules
-     */
-    public function accessRules()
-    {
-        return array(
-            array('allow',
-                'users' => array('@'),
-            ),
-            array('deny', // deny all users
-                'users' => array('*'),
-            ),
-        );
-    }
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -38,8 +33,8 @@ class UserController extends BackendController
 
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
-            if ($model->save()){
-                if(Yii::app()->request->isAjaxRequest){
+            if ($model->save()) {
+                if (Yii::app()->request->isAjaxRequest) {
                     Yii::app()->end();
                 }
             }

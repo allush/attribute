@@ -1,4 +1,4 @@
 <?php
 /* @var $this OrderController */
 
-echo 'Поздравляем! Заказ успешно оплачен';
+echo '<div class="success-alert">Поздравляем! Заказ успешно оплачен</div>';
