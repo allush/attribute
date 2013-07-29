@@ -33,6 +33,62 @@ class ProductController extends BackendController
     /**
      * @return bool
      */
+
+    public function actionGroupAction()
+    {
+        if (!isset($_POST['action']) || !isset($_POST['productID'])) {
+            $this->redirect(Yii::app()->request->urlReferrer);
+        }
+
+        switch ($_POST['action']) {
+            case 'group':
+                $this->group($_POST['productID']);
+                break;
+
+            case 'ungroup':
+                $this->ungroup($_POST['productID']);
+                break;
+        }
+
+        $this->redirect(Yii::app()->request->urlReferrer);
+    }
+
+    private function group($productIDs)
+    {
+        if (!is_array($productIDs) or count($productIDs) < 2) {
+            return;
+        }
+
+        $command = Yii::app()->db->createCommand();
+        $groupNumber = $command->select('MAX(`group`)')
+            ->from('product')
+            ->queryScalar();
+
+        if($groupNumber === null){
+            $groupNumber = 0;
+        }
+        $groupNumber++;
+
+        foreach ($productIDs as $productID) {
+            $product = Product::model()->findByPk($productID);
+            $product->group = $groupNumber;
+            $product->save();
+        }
+    }
+
+    private function ungroup($productIDs)
+    {
+        if (!is_array($productIDs) or count($productIDs) == 0) {
+            return;
+        }
+
+        foreach ($productIDs as $productID) {
+            $product = Product::model()->findByPk($productID);
+            $product->group = null;
+            $product->save();
+        }
+    }
+
     public function actionUpload()
     {
         /** @var $files CUploadedFile[] */
@@ -168,7 +224,7 @@ class ProductController extends BackendController
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
             if ($model->save()) {
-                if(Yii::app()->request->isAjaxRequest){
+                if (Yii::app()->request->isAjaxRequest) {
                     Yii::app()->end();
                 }
                 $this->redirect(array('view', 'id' => $model->productID));
@@ -226,7 +282,7 @@ class ProductController extends BackendController
                 'pageSize' => 10,
             ),
             'sort' => array(
-                'defaultOrder' => 'modifiedOn DESC'
+                'defaultOrder' => '`group` DESC, modifiedOn DESC'
             ),
         ));
 

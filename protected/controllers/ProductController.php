@@ -27,9 +27,19 @@ class ProductController extends FrontController
             'limit' => 4
         ));
 
+        $similarProducts = Product::model()->findAll(array(
+            'condition' => '`group`=:group AND productID<>:productID',
+            'params' => array(
+                ':group' => $model->group,
+                ':productID' => $model->productID,
+            ),
+            'order' => 'productID',
+        ));
+
         $this->render('view', array(
             'model' => $model,
             'relatedProducts' => $relatedProducts,
+            'similarProducts' => $similarProducts,
         ));
     }
 

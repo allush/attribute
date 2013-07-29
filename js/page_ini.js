@@ -63,6 +63,9 @@ $(document).ready(function() {
     $('.to-basket-button').click(function(){
         addToCart($(this).attr('productID'));
     });
+    $('.to-basket-button-immediate').click(function(){
+        addToCart($(this).attr('productID'));
+    });
 });
 
 function addToCart(productID){
