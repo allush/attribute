@@ -33,13 +33,13 @@ class Mailer
         $to = $user->email;
         $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
 
-        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro> \n";
-        $header .= 'mime-version: 1.0 \n';
-        $header .= 'content-type: multipart/mixed; boundary=' . $bound . '\n';
+        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro>\n";
+        $header .= 'MIME-Version: 1.0\n';
+        $header .= 'Content-type: multipart/mixed; boundary=' . $bound . '\n';
 
         $body = "--$bound\n";
-        $body .= "content-type: text/html; charset=utf-8 \n";
-        $body .= "content-transfer-encoding: quoted-printable \n\n";
+        $body .= "Content-type: text/html; charset=utf-8\n";
+        $body .= "Content-transfer-encoding: quoted-printable\n\n";
 
         $body .= "$message\n\n";
 
