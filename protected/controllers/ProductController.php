@@ -19,7 +19,7 @@ class ProductController extends FrontController
         $this->pageTitle = 'Каталог - ' . $model->catalog->name . ' - ' . $model->name;
 
         $relatedProducts = Product::model()->findAll(array(
-            'condition' => 'productID<>:productID',
+            'condition' => 'productID<>:productID AND existence>0 AND deleted=0',
             'params' => array(
                 ':productID' => $id,
             ),
@@ -28,7 +28,7 @@ class ProductController extends FrontController
         ));
 
         $similarProducts = Product::model()->findAll(array(
-            'condition' => '`group`=:group AND productID<>:productID',
+            'condition' => '`group`=:group AND productID<>:productID AND existence>0 AND deleted=0',
             'params' => array(
                 ':group' => $model->group,
                 ':productID' => $model->productID,
@@ -64,9 +64,9 @@ class ProductController extends FrontController
             $catalogIDs = array();
             Catalog::childrenRecursively($catalogIDs, $c);
             $criteria->addInCondition('catalogID', $catalogIDs);
-            $criteria->addCondition('deleted=0');
+            $criteria->addCondition('deleted=0 AND existence>0');
         } else {
-            $criteria->condition = 'catalogID IS NOT NULL AND deleted=0';
+            $criteria->condition = 'catalogID IS NOT NULL AND deleted=0 AND existence>0';
         }
 
         $dataProvider = new CActiveDataProvider('Product', array(
