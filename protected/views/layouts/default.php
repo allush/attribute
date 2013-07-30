@@ -26,6 +26,8 @@
 
 
 <body>
+<div id="popup-singleton"></div>
+
 <div id="container">
     <div id="header-container">
         <div id="header-wrapper">

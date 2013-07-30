@@ -31,7 +31,7 @@ class Mailer
 
         //---------------создание письма--------------------
         $to = $user->email;
-        $subject = '=?utf-8?b?'. base64_encode($subject) . '?=';
+        $subject = '=?utf-8?b?' . base64_encode($subject) . '?=';
 
         $header = 'From: =?utf-8?b?' . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . '?= <info@attribute.pro> \r\n';
         $header .= 'MIME-Version:1.0 \r\n';
@@ -41,7 +41,7 @@ class Mailer
         $body .= 'Content-type: text/html; charset=utf-8 \r\n';
         $body .= 'Content-Transfer-Encoding: quoted-printable \r\n\r\n';
 
-        $body .= $message.' \r\n\r\n';
+        $body .= $message . ' \r\n\r\n';
 
         if ($order !== null) {
             $file_path = Yii::app()->basePath . '/backend/invoice/' . $order->orderID . '.pdf';
@@ -70,7 +70,7 @@ class Mailer
 
         $message .= '----------------------------------------<br>';
         $message .= 'С уважением, Ольга Махова .<br > ';
-        $message .= 'Attribute . pro < br>';
+        $message .= 'Attribute.pro<br>';
         $message .= 'http://attribute.pro ';
 
         $to = $user->email;

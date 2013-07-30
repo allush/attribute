@@ -1,15 +1,15 @@
-$(document).ready(function() {
-	if($('#slideshow-items').length) {
-		$('#slideshow-items').cycle({
-			fx:     'scrollHorz',
-			speed:   800, 
-			pager: '#nav',
-			timeout: 4000,
-			pagerAnchorBuilder: function(idx, slide) { 
-			return '<a href="#"></a>'; 
-			}
-		});
-	}
+$(document).ready(function () {
+    if ($('#slideshow-items').length) {
+        $('#slideshow-items').cycle({
+            fx: 'scrollHorz',
+            speed: 800,
+            pager: '#nav',
+            timeout: 4000,
+            pagerAnchorBuilder: function (idx, slide) {
+                return '<a href="#"></a>';
+            }
+        });
+    }
 //	if($('.products-item').length) {
 //		$('.products-item').mouseover(function(e){
 //			if($(e.target).parents().filter('.products-item').length == 1 || $(e.target).attr('class')=='products-item'){
@@ -26,55 +26,69 @@ $(document).ready(function() {
 //			}
 //		});
 //	}
-	if($('.product-images .gallery').length) {
-		$('.product-images .gallery a').click(function() {
-			var src = $(this).find('img').attr('src');
-			$('.product-images .big-img').attr('src', src);
-		});
-	}
-	if($('#question').length){
-		$("#question").fancybox({
-			'opacity'			: true,
-			'overlayShow'		: true,
-			'transitionIn'		: 'fade',
-			'transitionOut'		: 'fade',
-			'centerOnScroll'	: true,
-			'hideOnContentClick': false,
-			'showCloseButton'	: false,
-			'titleShow'			: false,
-			'overlayOpacity'	: 0.9,
-			'overlayColor'		: '#00151d',
-			'padding'			:0
-		});
-	}
-	if($('input').length) {
-		$('input').focus(function () {
-			$(this).addClass('focus');
-		});
-		$('input').blur(function () {
-			$(this).removeClass('focus');
-		});
-	}
+    if ($('.product-images .gallery').length) {
+        $('.product-images .gallery a').click(function () {
+            var src = $(this).find('img').attr('src');
+            $('.product-images .big-img').attr('src', src);
+        });
+    }
+    if ($('#question').length) {
+        $("#question").fancybox({
+            'opacity': true,
+            'overlayShow': true,
+            'transitionIn': 'fade',
+            'transitionOut': 'fade',
+            'centerOnScroll': true,
+            'hideOnContentClick': false,
+            'showCloseButton': false,
+            'titleShow': false,
+            'overlayOpacity': 0.9,
+            'overlayColor': '#00151d',
+            'padding': 0
+        });
+    }
+    if ($('input').length) {
+        $('input').focus(function () {
+            $(this).addClass('focus');
+        });
+        $('input').blur(function () {
+            $(this).removeClass('focus');
+        });
+    }
 
-    $('.add-basket-button').click(function(){
+    $('.add-basket-button').click(function () {
         addToCart($(this).attr('productID'));
     });
 
-    $('.to-basket-button').click(function(){
+    $('.to-basket-button').click(function () {
         addToCart($(this).attr('productID'));
     });
-    $('.to-basket-button-immediate').click(function(){
+    $('.to-basket-button-immediate').click(function () {
         addToCart($(this).attr('productID'));
     });
 });
 
-function addToCart(productID){
+var popupSingletonTimeout = null;
+function addToCart(productID) {
+
+    if(popupSingletonTimeout !== null){
+        clearTimeout(popupSingletonTimeout);
+    }
+
     $.ajax({
-        url: '/order/addToCart?productID='+productID,
+        url: '/order/addToCart?productID=' + productID,
         type: 'get',
-        beforeSend: function () {},
+        beforeSend: function () {
+            $('#popup-singleton').html('<img src="/img/ajax-loader.gif">');
+            $('#popup-singleton').fadeIn(100);
+        },
         success: function (data) {
             $(".basket .count").html(data);
+
+            $('#popup-singleton').html('Товар добавлен в корзину');
+            popupSingletonTimeout = setTimeout(function () {
+                $('#popup-singleton').fadeOut(200);
+            }, 800);
         }
     });
 }
