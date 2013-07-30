@@ -52,7 +52,7 @@ class Mailer
 
                 $body .= "--$bound\n";
 
-                $body .= "content-type: application/pdf ; name = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n";
+                $body .= "content-type: application/pdf; name = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n";
                 $body .= "content-transfer-encoding: base64\n";
                 $body .= "content-disposition: attachment; filename = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n\n";
 
