@@ -13,10 +13,10 @@ class Mailer
      * @param $user
      * @param $subject
      * @param $msg
-     * @param null $order
+     * @param $order
      * @return bool
      */
-    public function sendMailWithAttachment($user, $subject, $msg, $order = null)
+    public function sendMailWithAttachment($user, $subject, $msg, $order)
     {
 //----------------текст письма---------------
         $message = $user->name . ', здравствуйте!<br>';
@@ -27,21 +27,21 @@ class Mailer
         $message .= 'Attribute.pro <br>';
         $message .= 'http://attribute.pro ';
 
-        $bound = session_id(); //разделитель
+        $bound = md5(time()); //разделитель
 
         //---------------создание письма--------------------
         $to = $user->email;
-        $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
+        $subject = '=?utf-8?b?'. base64_encode($subject) . '?=';
 
-        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro>\r\n";
-        $header .= 'MIME-Version: 1.0\r\n';
-        $header .= 'Content-type: multipart/mixed; boundary=' . $bound . '\r\n';
+        $header = 'From: =?utf-8?b?' . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . '?= <info@attribute.pro> \r\n';
+        $header .= 'MIME-Version:1.0 \r\n';
+        $header .= 'Content-type:multipart/mixed; boundary=' . $bound . ' \r\n';
 
-        $body = "--$bound\n";
-        $body .= "Content-type: text/html; charset=utf-8\n";
-        $body .= "Content-transfer-encoding: quoted-printable\n\n";
+        $body = '--' . $bound . ' \r\n';
+        $body .= 'Content-type: text/html; charset=utf-8 \r\n';
+        $body .= 'Content-Transfer-Encoding: quoted-printable \r\n\r\n';
 
-        $body .= "$message\n\n";
+        $body .= $message.' \r\n\r\n';
 
         if ($order !== null) {
             $file_path = Yii::app()->basePath . '/backend/invoice/' . $order->orderID . '.pdf';
@@ -50,34 +50,27 @@ class Mailer
                 $data = fread($file, filesize($file_path));
                 fclose($file);
 
-                $body .= "--$bound\n";
+                $body .= '--' . $bound . ' \r\n';
 
-                $body .= "content-type: application/pdf; name = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n";
-                $body .= "content-transfer-encoding: base64\n";
-                $body .= "content-disposition: attachment; filename = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n\n";
+                $body .= 'Content-Type: application/octet-stream \r\n';
+                $body .= 'Content-Transfer-Encoding: base64 \r\n';
+                $body .= 'Content-Disposition: attachment; filename="invoice.pdf" \r\n\r\n';
 
-
-
-                $body .= "Content-Type: application/octet-stream\n";
-                $body .= "Content-Transfer-Encoding: base64\n";
-                $body .= "Content-Disposition: attachment; filename = \"invoice.pdf\"\n\n";
-
-                $body .= chunk_split(base64_encode($data)) . "\n";
-                $body .= "--" . $bound . "--\n";
+                $body .= chunk_split(base64_encode($data)) . ' \r\n';
+                $body .= '--' . $bound . '-- \r\n';
             }
         }
-
         return mail($to, $subject, $body, $header);
     }
 
     public function sendMailSimple($user, $subject, $msg)
     {
-        $message = $user->name . ', здравствуйте!<br><br>';
-        $message .= $msg . '<br><br>';
+        $message = $user->name . ', здравствуйте!<br><br > ';
+        $message .= $msg . '<br ><br > ';
 
         $message .= '----------------------------------------<br>';
         $message .= 'С уважением, Ольга Махова .<br > ';
-        $message .= 'Attribute.pro <br>';
+        $message .= 'Attribute . pro < br>';
         $message .= 'http://attribute.pro ';
 
         $to = $user->email;

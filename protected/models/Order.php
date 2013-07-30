@@ -193,6 +193,6 @@ class Order extends CActiveRecord
         $invoice->generate();
 
         $mailer = new Mailer();
-        $mailer->sendMailWithAttachment($this->user, 'Оформление заказа на сайте Attribute.pro', 'Заказ успешно оформлен. Оплаченный вами счет находится во вложении.', $this);
+        $mailer->sendMailSimple($this->user, 'Оформление заказа на сайте Attribute.pro', 'Заказ успешно оформлен. <br><br>В ближайшее время с Вами свяжется менеждер для уточнения деталей заказа.');
     }
 }
