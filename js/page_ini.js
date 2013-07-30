@@ -71,7 +71,7 @@ $(document).ready(function () {
 var popupSingletonTimeout = null;
 function addToCart(productID) {
 
-    if(popupSingletonTimeout !== null){
+    if (popupSingletonTimeout !== null) {
         clearTimeout(popupSingletonTimeout);
     }
 
@@ -83,13 +83,16 @@ function addToCart(productID) {
             $('#popup-singleton').fadeIn(100);
         },
         success: function (data) {
-            $(".basket .count").html(data);
-
-            $('#popup-singleton').html('Товар добавлен в корзину');
             popupSingletonTimeout = setTimeout(function () {
                 $('#popup-singleton').fadeOut(200);
-            }, 800);
+            }, 1000);
+
+            if (data == 'null') {
+                $('#popup-singleton').html('<span style="color: red; font-weight: bold;">Больше нет в наличии!</span>');
+            } else {
+                $('#popup-singleton').html('Товар добавлен в корзину');
+                $(".basket .count").html(data);
+            }
         }
     });
 }
-
