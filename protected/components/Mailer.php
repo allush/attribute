@@ -10,12 +10,13 @@
 class Mailer
 {
     /**
-     * @param User $user
-     * @param string $msg
-     * @param Order|null $order
+     * @param $user
+     * @param $subject
+     * @param $msg
+     * @param null $order
      * @return bool
      */
-    public function sendMail($user, $msg, $order = null)
+    public function sendMailWithAttachment($user, $subject, $msg, $order = null)
     {
 //----------------текст письма---------------
         $message = $user->name . ', здравствуйте!<br>';
@@ -30,7 +31,7 @@ class Mailer
 
         //---------------создание письма--------------------
         $to = $user->email;
-        $subject = "=?utf-8?b?" . base64_encode("Заказ в интернет-магазине модных аксессуаров Attribute.pro") . "?=";
+        $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
 
         $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.ru> \n";
         $header .= 'mime-version: 1.0 \n';
@@ -61,5 +62,25 @@ class Mailer
         }
 
         return mail($to, $subject, $body, $header);
+    }
+
+    public function sendMailSimple($user, $subject, $msg)
+    {
+        $message = $user->name . ', здравствуйте!<br><br>';
+        $message .= $msg . '<br><br>';
+
+        $message .= '----------------------------------------<br>';
+        $message .= 'С уважением, Ольга Махова .<br > ';
+        $message .= 'Attribute.pro <br>';
+        $message .= 'http://attribute.pro ';
+
+        $to = $user->email;
+        $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
+
+        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.ru> \n";
+        $header .= 'mime-version: 1.0 \n';
+        $header .= 'content-type: text/html; charset=utf-8 \n';
+
+        return mail($to, $subject, $message, $header);
     }
 }

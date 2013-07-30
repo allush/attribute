@@ -96,7 +96,7 @@ class SiteController extends FrontController
                 $message = 'Для активации Вашего профиля перейдите по ссылке: http://attribute.pro/user/activate?c=' . md5($model->email);
 
                 $mailer = new Mailer();
-                $mailer->sendMail($model, $message);
+                $mailer->sendMailSimple($model, 'Регистрация на сайте Attribute.pro', $message);
 
                 Yii::app()->user->setFlash('signUp', true);
                 $this->redirect('/');

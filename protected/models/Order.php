@@ -189,10 +189,10 @@ class Order extends CActiveRecord
             $item->product->save();
         }
 
-//        $invoice = new Invoice($this);
-//        $invoice->generate();
+        $invoice = new Invoice($this);
+        $invoice->generate();
 
         $mailer = new Mailer();
-        $mailer->sendMail($this->user, 'Заказ успешно оформлен. Оплаченный вами счет находится во вложении.', $this);
+        $mailer->sendMailWithAttachment($this->user, 'Оформление заказа на сайте Attribute.pro', 'Заказ успешно оформлен. Оплаченный вами счет находится во вложении.', $this);
     }
 }

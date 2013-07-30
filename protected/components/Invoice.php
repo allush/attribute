@@ -22,6 +22,9 @@ class Invoice
 
     public function generate()
     {
+        $mPDF = Yii::app()->basePath.'/components/mpdf/mpdf.php';
+        include_once($mPDF);
+
         $pdf = new mPDF();
         $pdf->SetProtection(array('print'));
 
@@ -31,13 +34,7 @@ class Invoice
 
         //------Записываем шапку PDF документа------
         $head = "<table id='head'>";
-        $head .= "<tr><td>Продавец:       </td><td>ИП Лушникова Елена Игоревна</td></tr>
-                  <tr><td>Адрес:          </td><td>440018 г.Пенза, ул. Карпинского 44а, кв.73, тел. 89273715444</td></tr>
-                  <tr><td>ИНН:            </td><td>583605856260</td></tr>
-                  <tr><td>Расчетный счет: </td><td>40802810148000012395</td></tr>
-                  <tr><td>Корсчет:        </td><td>30101810000000000635</td></tr>
-                  <tr><td>БИК:            </td><td>045655635</td></tr>
-                  <tr><td>Банк:           </td><td>Пензенское отделение №8624 ОАО «Сбербанк России»</td></tr>";
+        $head .= "<tr><td>Продавец:       </td><td>Махова О.</td></tr>";
 
         $head .= '<tr id="buyer"><td>Покупатель:</td><td>' . $this->_user->surname . ' ' . $this->_user->name . ' ' . $this->_user->patronymic . '</td></tr>';
         $head .= '<tr><td>Адрес:      </td><td>' . $this->_user->index . ', ' . $this->_user->country . ', ' . $this->_user->sity . ', ' . $this->_user->address . ',  тел. ' . $this->_user->phone . '</td></tr>';
@@ -71,24 +68,6 @@ class Invoice
             $body .= '</tr>';
             $sum = 0;
         }
-
-//        if ($order->transport_type() == 'Почта России') {
-//            $sendCost = 250;
-//            if ($total > 2500)
-//                $sendCost = $total * 0.1;
-//
-//            settype($sendCost, "int");
-//            $total += $sendCost;
-//
-//            $body .= " < tr><td > " . ($i + 1) . "</td ><td > Доставка Почтой Росии </td ><td ></td ><td class='center' ></td ><td class='center' > $sendCost р .</td ><td class='center' > $sendCost р .</td ></tr > ";
-//        } elseif ($order->transport_type() == 'EMS почта') {
-//            $body .= "<tr ><td > " . ($i + 1) . "</td ><td > Доставка Ems почтой </td >  <td ></td ><td class='center' ></td ><td class='center' > При получении </td ><td class='center' > При получении </td ></tr > ";
-//        } elseif ($order->transport_type() == 'Транспортная компания ПЭК') {
-//            $courier = 200;
-//            $total += $courier;
-//
-//            $body .= "<tr ><td > " . ($i + 1) . "</td ><td > Забор груза из офиса </td ><td ></td ><td class='center' ></td ><td class='center' > $courier р .</td ><td class='center' > $courier р .</td ></tr > ";
-//        }
 
         $body .= '<tr>';
         $body .= '<td></td>';
