@@ -102,7 +102,7 @@ $this->menu = array(
             echo '<div class="product-image">' . CHtml::link(CHtml::image($oneRelatedProduct->thumbnail()), array('view', 'id' => $oneRelatedProduct->productID)) . '</div>';
             echo '<div class="name-product">' . CHtml::link($oneRelatedProduct->name, array('view', 'id' => $oneRelatedProduct->productID), array('class' => '')) . '</div>';
             echo '<div class="product-price">';
-            echo CHtml::link('', '', array('class' => 'to-basket-button'));
+            echo CHtml::link('', '', array('class' => 'to-basket-button', 'productID' => $oneRelatedProduct->productID));
             echo '<span>' . $oneRelatedProduct->price . ' руб.</span>';
             echo '</div>';
 
