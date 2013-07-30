@@ -33,9 +33,9 @@ class Mailer
         $to = $user->email;
         $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
 
-        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro>\n";
-        $header .= 'MIME-Version: 1.0\n';
-        $header .= 'Content-type: multipart/mixed; boundary=' . $bound . '\n';
+        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro>\r\n";
+        $header .= 'MIME-Version: 1.0\r\n';
+        $header .= 'Content-type: multipart/mixed; boundary=' . $bound . '\r\n';
 
         $body = "--$bound\n";
         $body .= "Content-type: text/html; charset=utf-8\n";
@@ -55,6 +55,12 @@ class Mailer
                 $body .= "content-type: application/pdf; name = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n";
                 $body .= "content-transfer-encoding: base64\n";
                 $body .= "content-disposition: attachment; filename = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n\n";
+
+
+
+                $body .= "Content-Type: application/octet-stream\n";
+                $body .= "Content-Transfer-Encoding: base64\n";
+                $body .= "Content-Disposition: attachment; filename = \"invoice.pdf\"\n\n";
 
                 $body .= chunk_split(base64_encode($data)) . "\n";
                 $body .= "--" . $bound . "--\n";
