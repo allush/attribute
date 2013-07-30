@@ -50,7 +50,7 @@ class Mailer
                 $data = fread($file, filesize($file_path));
                 fclose($file);
 
-                $body = "--$bound\n";
+                $body .= "--$bound\n";
 
                 $body .= "content-type: application/pdf ; name = \"" . '=?utf-8?b?' . base64_encode("Счет_" . $user->surname) . '?=.pdf' . "\"\n";
                 $body .= "content-transfer-encoding: base64\n";
