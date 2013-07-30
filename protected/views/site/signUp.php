@@ -25,12 +25,6 @@ $form = $this->beginWidget('CActiveForm', array(
     </tr>
 
     <tr>
-        <td><?php echo $form->labelEx($user, 'surname'); ?></td>
-        <td><?php echo $form->textField($user, 'surname', array()); ?></td>
-        <td><?php echo $form->error($user, 'surname'); ?></td>
-    </tr>
-
-    <tr>
         <td> <?php echo $form->labelEx($user, 'email'); ?></td>
         <td><?php echo $form->emailField($user, 'email', array('required'=>'required')); ?></td>
         <td><?php echo $form->error($user, 'email'); ?></td>
@@ -43,8 +37,8 @@ $form = $this->beginWidget('CActiveForm', array(
     </tr>
 
     <tr>
-        <td></td>
-        <td><?php echo CHtml::submitButton('Зарегистироваться', array()); ?></td>
+        <td><?php echo CHtml::submitButton('Зарегистироваться', array('style' => 'padding: 4px 16px;cursor: pointer;')); ?></td>
+        <td><?php echo CHtml::link('Вход', array('signIn')); ?></td>
         <td></td>
     </tr>
 </table>

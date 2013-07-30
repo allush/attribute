@@ -21,8 +21,14 @@ return array(
 
     // application components
     'components' => array(
+        'mailer' => array(
+            'class' => 'application.extensions.mailer.EMailer',
+            'pathViews' => 'application.views.email',
+            'pathLayouts' => 'application.views.email.layouts'
+        ),
 
         'db' => require(dirname(__FILE__) . '/db.php'),
+
         'request' => array(
             'enableCsrfValidation' => true,
             'enableCookieValidation' => true,

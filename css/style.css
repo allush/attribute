@@ -1313,8 +1313,9 @@ a.icon-color.black {
     display: inline-block;
     float: right;
     margin-top: -8px;
+    margin-right: 10px;
     padding: 4px 8px;
-    background-image: url('../img/white50.png');
+    background-image: url('../img/white_transparent.png');
     border-radius: 4px;
 }
 

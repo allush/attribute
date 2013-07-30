@@ -56,17 +56,24 @@ $(document).ready(function () {
         });
     }
 
+    initAddingToCart();
+});
+
+function initAddingToCart(id, data){
+    $('.add-basket-button').unbind('click');
+    $('.to-basket-button').unbind('click');
+    $('.to-basket-button-immediate').unbind('click');
+
     $('.add-basket-button').click(function () {
         addToCart($(this).attr('productID'));
     });
-
     $('.to-basket-button').click(function () {
         addToCart($(this).attr('productID'));
     });
     $('.to-basket-button-immediate').click(function () {
         addToCart($(this).attr('productID'));
     });
-});
+}
 
 var popupSingletonTimeout = null;
 function addToCart(productID) {

@@ -36,7 +36,7 @@ $form = $this->beginWidget('CActiveForm', array(
     </tr>
 
     <tr>
-        <td><?php echo CHtml::submitButton('Войти', array('class' => 'span3 btn')); ?> </td>
+        <td><?php echo CHtml::submitButton('Войти', array('class' => 'span3 btn', 'style' => 'padding: 4px 24px;cursor: pointer;')); ?> </td>
         <td><?php echo CHtml::link('Регистрация', array('signUp')); ?> </td>
         <td></td>
     </tr>
