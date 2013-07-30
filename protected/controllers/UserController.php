@@ -6,7 +6,7 @@ class UserController extends FrontController
     {
         /** @var $user User */
         $user = User::model()->find(array(
-            'condition' => 'MD5(`email`)=:src and activated=0',
+            'condition' => 'MD5(`email`)=:src and (activated=0 OR activated IS NULL)',
             'params' => array(
                 ':src' => $c,
             ),

@@ -66,13 +66,15 @@ class Mailer
 
     public function sendMailSimple($user, $subject, $msg)
     {
-        $message = $user->name . ', здравствуйте!<br><br>';
+        $message = '<html><body>';
+        $message .= $user->name . ', здравствуйте!<br><br>';
         $message .= $msg . '<br><br>';
 
         $message .= '----------------------------------------<br>';
         $message .= 'С уважением, Ольга Махова .<br > ';
         $message .= 'Attribute.pro <br>';
         $message .= 'http://attribute.pro ';
+        $message .= '</body></html>';
 
         $to = $user->email;
         $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";

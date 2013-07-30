@@ -24,7 +24,7 @@
 <?php
 
 if(Yii::app()->user->hasFlash('activated') && Yii::app()->user->getFlash('activated') == true){
-    echo '<div class="success-alert">Ваша  учетная запись активирована</div>';
+    echo '<div class="success-alert">Ваша  учетная запись активирована. Теперь Вы можете '.CHtml::link('войти', array('/site/signIn')).' в систему</div>';
 }
 
 if(Yii::app()->user->hasFlash('signUp') && Yii::app()->user->getFlash('signUp') == true){
