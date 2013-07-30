@@ -33,7 +33,7 @@ class Mailer
         $to = $user->email;
         $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
 
-        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.ru> \n";
+        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro> \n";
         $header .= 'mime-version: 1.0 \n';
         $header .= 'content-type: multipart/mixed; boundary=' . $bound . '\n';
 
@@ -66,22 +66,19 @@ class Mailer
 
     public function sendMailSimple($user, $subject, $msg)
     {
-        $message = '<html><body>';
-        $message .= $user->name . ', здравствуйте!<br><br>';
+        $message = $user->name . ', здравствуйте!<br><br>';
         $message .= $msg . '<br><br>';
 
         $message .= '----------------------------------------<br>';
         $message .= 'С уважением, Ольга Махова .<br > ';
         $message .= 'Attribute.pro <br>';
         $message .= 'http://attribute.pro ';
-        $message .= '</body></html>';
 
         $to = $user->email;
         $subject = "=?utf-8?b?" . base64_encode($subject) . "?=";
 
-        $header = "from: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.ru> \n";
-        $header .= 'mime-version: 1.0 \n';
-        $header .= 'content-type: text/html; charset=utf-8 \n';
+        $header = "From: =?utf-8?b?" . base64_encode("Интернет-магазин модных аксессуаров Attribute.pro") . "?= <info@attribute.pro> \r\n";
+        $header .= 'Content-type: text/html; charset=utf-8\r\n';
 
         return mail($to, $subject, $message, $header);
     }
