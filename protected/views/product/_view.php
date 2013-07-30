@@ -18,7 +18,7 @@ if ($index % 3 == 0) {
 
     <div class="products-item">
         <div class="product-image">
-            <?php echo CHtml::link(CHtml::image($data->image()), array('view', 'id' => $data->productID)); ?>
+            <?php echo CHtml::link(CHtml::image($data->thumbnail()), array('view', 'id' => $data->productID)); ?>
         </div>
         <div class="name-product">
             <?php echo CHtml::link($data->name, array('view', 'id' => $data->productID)); ?>
