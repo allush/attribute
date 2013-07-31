@@ -25,10 +25,13 @@ if ($index % 3 == 0) {
         </div>
         <div class="product-price">
             <?php echo CHtml::link('', '', array('class' => 'to-basket-button', 'productID' => $data->productID)); ?>
-            <span><?php echo $data->priceCurrency(); ?></span>
+            <span <?php echo ($data->discount > 0) ? "style='color: #FF622B;'" : '' ?>><?php echo $data->priceCurrency(); ?></span>
         </div>
         <!--    <a href="javascript:void(0)" class="new-icon"></a>-->
         <!--    <a href="javascript:void(0)" class="top-icon"></a>-->
+        <?php if ($data->discount > 0) { ?>
+            <span class="sale-icon"></span>
+        <?php } ?>
     </div>
     <!--.products-item-->
 

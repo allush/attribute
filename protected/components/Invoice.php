@@ -55,7 +55,7 @@ class Invoice
         $total = 0;
         $i = 0;
         foreach ($this->_order->orderItems as $item) {
-            $sum = $item->product->price * $item->quantity;
+            $sum = $item->product->price() * $item->quantity;
             $total += $sum;
 
             $body .= "<tr>";
@@ -63,7 +63,7 @@ class Invoice
             $body .= '<td>' . $item->product->name . '</td>';
             $body .= '<td class="center">' . $item->product->unit . '</td>';
             $body .= '<td class="center">' . $item->quantity . '</td>';
-            $body .= '<td class="center">' . $item->product->price . ' руб</td>';
+            $body .= '<td class="center">' . $item->product->priceCurrency() . '</td>';
             $body .= '<td class="center" >' . $sum . ' руб</td>';
             $body .= '</tr>';
             $sum = 0;

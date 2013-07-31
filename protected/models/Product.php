@@ -171,7 +171,23 @@ class Product extends CActiveRecord
      */
     public function priceCurrency()
     {
-        return $this->price . ' руб.';
+        $price = $this->price;
 
+        if ($this->discount !== null && $this->discount > 0) {
+            $price = round($this->price * $this->discount / 100, 1);
+        }
+
+        return $price . ' руб.';
+
+    }
+
+    public function price()
+    {
+        $price = $this->price;
+
+        if ($this->discount !== null && $this->discount > 0) {
+            $price = round($this->price * $this->discount / 100, 1);
+        }
+        return $price;
     }
 }

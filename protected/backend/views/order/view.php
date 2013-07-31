@@ -79,12 +79,12 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'header' => 'Стоимость',
-            'value' => '$data->product->price'
+            'value' => '$data->product->priceCurrency()'
         ),
         'quantity',
         array(
             'header' => 'Сумма',
-            'value' => '$data->product->price * $data->quantity'
+            'value' => '$data->product->price() * $data->quantity'
         ),
 
     ),

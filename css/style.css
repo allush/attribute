@@ -831,6 +831,16 @@ span.required, .errorMessage, .errorSummary {
     right: -39px;
 }
 
+.sale-icon {
+    width: 60px;
+    height: 60px;
+    display: block;
+    background: url(../img/sale_icon.png) no-repeat 0 0;
+    position: absolute;
+    top: -13px;
+    right: -23px;
+}
+
 .products-item .product-image {
     overflow: hidden;
     width: 170px;

@@ -114,9 +114,9 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
             ?>
             <tr>
                 <td><?php echo CHtml::link($orderItem->product->name, array('/product/view', 'id' => $orderItem->productID)); ?></td>
-                <td><?php echo $orderItem->product->price . ' руб'; ?></td>
+                <td><?php echo $orderItem->product->priceCurrency(); ?></td>
                 <td><?php echo $orderItem->quantity . ' ' . $orderItem->product->unit; ?></td>
-                <td><?php echo round($orderItem->quantity * $orderItem->product->price, 2) . ' руб'; ?></td>
+                <td><?php echo round($orderItem->quantity * $orderItem->product->price(), 2) . ' руб'; ?></td>
             </tr>
         <?php
         }

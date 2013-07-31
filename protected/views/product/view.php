@@ -56,7 +56,7 @@ $this->menu = array(
             <p><?php echo CHtml::encode($model->description); ?></p>
 
             <div class="product-description-buttons">
-                <div class="product-price"><?php echo CHtml::encode($model->price); ?> руб</div>
+                <div class="product-price"><?php echo CHtml::encode($model->priceCurrency()); ?></div>
                 <?php echo CHtml::link('', '', array('class' => 'add-basket-button', 'productID' => $model->productID)); ?>
                 <div class="clear"></div>
             </div>
@@ -70,7 +70,7 @@ $this->menu = array(
                     echo '<tr>';
                     echo '<td>' . CHtml::image($oneSimilarProduct->thumbnail(), '', array('style' => 'width: 100px;')) . '</td>';
                     echo '<td>' . CHtml::link($oneSimilarProduct->name, array('view', 'id' => $oneSimilarProduct->productID),array('style' => 'color: #333333;')) . '</td>';
-                    echo '<td>' . $oneSimilarProduct->price . ' руб.</td>';
+                    echo '<td>' . $oneSimilarProduct->priceCurrency() . '</td>';
                     echo '<td>' . CHtml::link('', '', array('class' => 'to-basket-button-immediate', 'productID' => $oneSimilarProduct->productID)) . '</td>';
                     echo '</tr>';
                 }
@@ -103,7 +103,7 @@ $this->menu = array(
             echo '<div class="name-product">' . CHtml::link($oneRelatedProduct->name, array('view', 'id' => $oneRelatedProduct->productID), array('class' => '')) . '</div>';
             echo '<div class="product-price">';
             echo CHtml::link('', '', array('class' => 'to-basket-button', 'productID' => $oneRelatedProduct->productID));
-            echo '<span>' . $oneRelatedProduct->price . ' руб.</span>';
+            echo '<span>' . $oneRelatedProduct->priceCurrency() . '</span>';
             echo '</div>';
 
             echo '</div>';

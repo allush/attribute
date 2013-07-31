@@ -140,13 +140,26 @@ class Order extends CActiveRecord
      */
     public function sum()
     {
-        $command = Yii::app()->db->createCommand();
-        $sum = $command->select('SUM(product.price*quantity)')
-            ->from('orderitem')
-            ->join('product', 'product.productID=orderitem.productID')
-            ->where('orderID=:orderID', array(':orderID' => $this->orderID))
-            ->queryScalar();
-        return $sum !== null ? $sum : 0;
+//        $command = Yii::app()->db->createCommand();
+
+//        $sum = $command->select('SUM(product.price*quantity)')
+//            ->from('orderitem')
+//            ->join('product', 'product.productID=orderitem.productID')
+//            ->where('orderID=:orderID', array(':orderID' => $this->orderID))
+//            ->queryScalar();
+
+        $sum = 0;
+        foreach ($this->orderItems as $item) {
+            $price = $item->product->price;
+
+            if ($item->product->discount > 0) {
+                $price = $price * $item->product->discount / 100;
+            }
+
+            $sum += $price;
+        }
+
+        return $sum;
     }
 
     /**
