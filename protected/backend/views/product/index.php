@@ -40,7 +40,7 @@ $this->renderPartial('_menu');
             'enableAjaxValidation' => false,
             'htmlOptions' => array(),
         ));
-        echo '<button class="btn btn-small" name="action" value="group">Группировать</button>';
+        echo '<button class="btn btn-small" style="margin-right: 8px;" name="action" value="group">Группировать</button>';
         echo '<button class="btn btn-small" name="action" value="ungroup">Разгруппировать</button>';
 
         $this->widget('zii.widgets.CListView', array(
@@ -49,11 +49,20 @@ $this->renderPartial('_menu');
             'itemsTagName' => 'table',
             'itemsCssClass' => 'table table-bordered table-condensed table-hover',
 
-            'template' => '{summary}  {pager} {items} {pager}',
-            'summaryText' => '{start} - {end} из {count}',
-            'summaryCssClass' => 'pull-right',
+            'sortableAttributes'=>array(
+                'name',
+                'discount',
+                'group',
+                'productStatusID',
+                'createdOn',
+                'modifiedOn',
+            ),
 
-            'pagerCssClass' => 'pagination',
+            'template' => '  {pager}  {summary} {sorter} {items} {pager}',
+            'summaryText' => '{start} - {end} из {count}',
+//            'summaryCssClass' => 'pull-right',
+
+            'pagerCssClass' => 'pagination pull-left',
             'pager' => array(
                 'firstPageLabel' => '<<',
                 'prevPageLabel' => '<',
