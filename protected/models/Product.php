@@ -19,6 +19,7 @@
  * @property integer $productNumber
  * @property integer $deleted
  * @property integer $group
+ * @property integer $views
  *
  * The followings are the available model relations:
  * @property OrderItem[] $orderItems
@@ -101,6 +102,7 @@ class Product extends CActiveRecord
             'existence' => 'Наличие',
             'productNumber' => 'Артикул',
             'group' => 'Группа',
+            'views' => 'Количество просмотров'
         );
     }
 

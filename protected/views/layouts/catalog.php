@@ -13,9 +13,10 @@
                 <!--                </div>-->
                 <!--.sort-->
                 <ul>
-                    <li><?php echo CHtml::link('Все', array('/product/index')); ?></li>
+                    <li><?php echo CHtml::link('Все', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0)); ?></li>
                     <li><?php echo CHtml::link('Новинки', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0, 'target' => 'new')); ?></li>
                     <li><?php echo CHtml::link('Топ продаж', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0, 'target' => 'top')); ?></li>
+                    <li><?php echo CHtml::link('Со скидкой', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0, 'target' => 'sale')); ?></li>
                     <!--                    <li>-->
                     <?php //echo CHtml::link('Акции', array('/news/index'));?><!--</li>-->
                 </ul>

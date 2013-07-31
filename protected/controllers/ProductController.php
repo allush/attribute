@@ -16,6 +16,19 @@ class ProductController extends FrontController
     {
         $model = $this->loadModel($id);
 
+        // обновить кол-во просмотров
+        $command = Yii::app()->db->createCommand();
+        $command->update(
+            'product',
+            array(
+                'views' => ++$model->views,
+            ),
+            'productID=:productID',
+            array(
+                ':productID' => $model->productID,
+            )
+        );
+
         $this->pageTitle = 'Каталог - ' . $model->catalog->name . ' - ' . $model->name;
 
         $relatedProducts = Product::model()->findAll(array(
@@ -77,9 +90,11 @@ class ProductController extends FrontController
             if ($_GET['target'] == 'new') {
                 // добавленные в течение недели
                 $criteria->addCondition('(UNIX_TIMESTAMP()-createdOn)<604800');
-
             } elseif ($_GET['target'] == 'top') {
-//                $criteria->addCondition('');
+                // по убыванию кол-ва просмотров
+                $criteria->order = 'views DESC';
+            } elseif ($_GET['target'] == 'sale') {
+                $criteria->addCondition('discount IS NOT NULL AND discount > 0');
             }
         }
 
@@ -89,7 +104,7 @@ class ProductController extends FrontController
                 'pageSize' => 12,
             ),
             'sort' => array(
-                'defaultOrder' => 'modifiedOn DESC'
+                'defaultOrder' => 'createdOn DESC'
             ),
         ));
 
