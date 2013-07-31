@@ -18,7 +18,8 @@
     <?php Yii::app()->getClientScript()->registerCoreScript('jquery'); ?>
     <!--    <script type="text/javascript" src="-->
     <?php //echo Yii::app()->request->baseUrl; ?><!--/js/jquery-1.7.2.min.js"></script>-->
-    <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.scrollTo-1.4.3.1-min.js"></script>
+    <script type="text/javascript"
+            src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.scrollTo-1.4.3.1-min.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.cycle.all.js"></script>
     <script type="text/javascript"
             src="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.js"></script>
@@ -142,24 +143,26 @@
         <div id="your-question">
             <div class="your-question-bottom">
                 <div class="your-question-body">
-                    <div class="line-fields">
-                        <label for="textarea">Ваш вопрос</label>
-                        <textarea name="message" id="textarea"></textarea>
-                    </div>
-                    <div class="line-fields">
-                        <label for="email">Ваш Email</label>
-                        <input type="text" id="email" name="email" value="">
-                    </div>
-                    <div class="line-fields">
-                        <label for="name">Ваше имя</label>
-                        <input type="text" id="name" name="name" value="">
-                    </div>
-                    <div class="send-button-container">
-                        <div class="text">Спасибо!<br>В ближайшее время мы вышлем ответ вам на почту.</div>
-                        <a href="javascript:void(0)" class="send-button"></a>
-
-                        <div class="clear"></div>
-                    </div>
+                    <form action="<?php echo $this->createUrl('/site/feedback')?>" method="post">
+                        <input type="hidden" style="display: none;" name="YII_CSRF_TOKEN" value="<?php echo Yii::app()->request->csrfToken?>">
+                        <div class="line-fields">
+                            <label for="textarea">Ваш вопрос</label>
+                            <textarea required="required" name="message" id="textarea"></textarea>
+                        </div>
+                        <div class="line-fields">
+                            <label for="email">Ваш Email</label>
+                            <input required="required" type="email" id="email" name="email" value="">
+                        </div>
+                        <div class="line-fields">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" value="">
+                        </div>
+                        <div class="send-button-container">
+                            <div class="text">Спасибо!<br>В ближайшее время мы ответим Вам на почту</div>
+                            <button class="send-button"></button>
+                            <div class="clear"></div>
+                        </div>
+                    </form>
                 </div>
                 <!--.your-question-body-->
             </div>

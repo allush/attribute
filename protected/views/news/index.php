@@ -31,6 +31,21 @@ if(Yii::app()->user->hasFlash('signUp') && Yii::app()->user->getFlash('signUp') 
     echo '<div class="success-alert">Вы успешно зарегистрированы. На вашу почту было выслано письмо с ссылкой для активации учетной записи</div>';
 }
 
+if(Yii::app()->user->hasFlash('questionSent') && Yii::app()->user->getFlash('questionSent') == true){
+    echo '<div class="success-alert">Вопрос успешно отправлен.</div>';
+}
+
+?>
+
+<script type="text/javascript">
+    setTimeout(function(){
+        $('.success-alert').fadeOut(200);
+    },5000);
+</script>
+
+<?php
+
+
 $this->widget('zii.widgets.CListView', array(
     'dataProvider' => $dataProvider,
     'itemView' => '_view',

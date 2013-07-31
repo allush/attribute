@@ -269,10 +269,16 @@ class OrderController extends FrontController
      */
     public function actionDeleteOrderItem($id)
     {
+        /** @var  $model OrderItem*/
         $model = OrderItem::model()->findByPk($id);
         if ($model !== null) {
             $model->delete();
         }
+
+        if(count($model->order->orderItems) == 0){
+            $model->order->delete();
+        }
+
         $this->redirect(Yii::app()->request->urlReferrer);
     }
 
@@ -281,6 +287,8 @@ class OrderController extends FrontController
         OrderItem::model()->deleteAllByAttributes(array(
             'orderID' => $orderID
         ));
+
+        Order::model()->findByPk($orderID)->delete();
 
         $this->redirect(Yii::app()->request->urlReferrer);
     }

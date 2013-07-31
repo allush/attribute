@@ -52,6 +52,28 @@ class SiteController extends FrontController
         ));
     }
 
+    public function actionFeedback()
+    {
+        $email = (isset($_POST['email'])) ? $_POST['email'] : 'Не указана';
+        $name = (isset($_POST['name'])) ? $_POST['name'] : 'Не указано';
+
+        $message = 'Имя: '.$name.'<br>';
+        $message .= 'Email: '.$email.'<br><br>';
+        $message .= (isset($_POST['message'])) ? $_POST['message'] : '';
+
+        $to = 'info@attribute.pro';
+        $subject = 'Вопрос';
+
+        $headers = "from: <" . $to . "> \n";
+        $headers .= "content-type: text/html; charset=utf-8 \n";
+        $headers .= "mime-version: 1.0 \n";
+
+        mail($to, $subject, $message, $headers);
+
+        Yii::app()->user->setFlash('questionSent',true);
+        $this->redirect('/');
+    }
+
 //
 //    /**
 //     * This is the default 'index' action that is invoked
