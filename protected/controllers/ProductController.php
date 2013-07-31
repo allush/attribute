@@ -19,11 +19,12 @@ class ProductController extends FrontController
         $this->pageTitle = 'Каталог - ' . $model->catalog->name . ' - ' . $model->name;
 
         $relatedProducts = Product::model()->findAll(array(
-            'condition' => 'productID<>:productID AND existence>0 AND deleted=0',
+            'condition' => 'productID<>:productID AND catalogID<>:catalogID AND existence>0 AND deleted=0',
             'params' => array(
                 ':productID' => $id,
+                ':catalogID' => $model->catalogID
             ),
-            'order' => 'productID',
+            'order' => 'RAND()',
             'limit' => 4
         ));
 
@@ -55,18 +56,31 @@ class ProductController extends FrontController
 
         $criteria = new CDbCriteria();
 
-        if ($c !== null and $c !== 0) {
+        if ($c !== null and $c != 0) {
             $catalog = Catalog::model()->findByPk($c);
             if ($catalog !== null) {
                 $this->pageTitle .= ' - ' . $catalog->name;
+
+                $catalogIDs = array();
+                Catalog::childrenRecursively($catalogIDs, $c);
+                $criteria->addInCondition('catalogID', $catalogIDs);
+                $criteria->addCondition('deleted=0 AND existence>0');
+            } else {
+                $criteria->condition = 'catalogID IS NOT NULL AND deleted=0 AND existence>0';
             }
 
-            $catalogIDs = array();
-            Catalog::childrenRecursively($catalogIDs, $c);
-            $criteria->addInCondition('catalogID', $catalogIDs);
-            $criteria->addCondition('deleted=0 AND existence>0');
         } else {
             $criteria->condition = 'catalogID IS NOT NULL AND deleted=0 AND existence>0';
+        }
+
+        if (isset($_GET['target'])) {
+            if ($_GET['target'] == 'new') {
+                // добавленные в течение недели
+                $criteria->addCondition('(UNIX_TIMESTAMP()-createdOn)<604800');
+
+            } elseif ($_GET['target'] == 'top') {
+//                $criteria->addCondition('');
+            }
         }
 
         $dataProvider = new CActiveDataProvider('Product', array(

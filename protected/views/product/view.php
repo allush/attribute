@@ -69,7 +69,7 @@ $this->menu = array(
                 foreach ($similarProducts as $oneSimilarProduct) {
                     echo '<tr>';
                     echo '<td>' . CHtml::image($oneSimilarProduct->thumbnail(), '', array('style' => 'width: 100px;')) . '</td>';
-                    echo '<td>' . $oneSimilarProduct->name . '</td>';
+                    echo '<td>' . CHtml::link($oneSimilarProduct->name, array('view', 'id' => $oneSimilarProduct->productID),array('style' => 'color: #333333;')) . '</td>';
                     echo '<td>' . $oneSimilarProduct->price . ' руб.</td>';
                     echo '<td>' . CHtml::link('', '', array('class' => 'to-basket-button-immediate', 'productID' => $oneSimilarProduct->productID)) . '</td>';
                     echo '</tr>';

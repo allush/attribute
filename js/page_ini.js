@@ -83,7 +83,7 @@ function pageProductLoaded(){
 }
 
 function pageProductLoading(){
-    $('#popup-singleton').html('Загрузка...');
+    $('#popup-singleton').html('Загрузка <img src="/img/ajax-loader.gif" >');
     $('#popup-singleton').fadeIn(100);
 }
 

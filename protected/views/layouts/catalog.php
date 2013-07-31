@@ -7,16 +7,17 @@
     <div id="line-blue">
         <div id="line-blue-wrap">
             <div id="menu-top">
-                <div class="sort">
-                    <span>Сортировать:</span>
-                    <a href="javascript:void(0)" class="sort-button"></a>
-                </div>
+                <!--                <div class="sort">-->
+                <!--                    <span>Сортировать:</span>-->
+                <!--                    <a href="javascript:void(0)" class="sort-button"></a>-->
+                <!--                </div>-->
                 <!--.sort-->
                 <ul>
-                    <li><?php echo CHtml::link('Все', array('/product/index'));?></li>
-                    <li><?php echo CHtml::link('Новинки', array('/product/index', 'target' => 'new'));?></li>
-                    <li><?php echo CHtml::link('Топ продаж', array('/product/index', 'target' => 'top'));?></li>
-<!--                    <li>--><?php //echo CHtml::link('Акции', array('/news/index'));?><!--</li>-->
+                    <li><?php echo CHtml::link('Все', array('/product/index')); ?></li>
+                    <li><?php echo CHtml::link('Новинки', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0, 'target' => 'new')); ?></li>
+                    <li><?php echo CHtml::link('Топ продаж', array('/product/index', 'c' => isset($_GET['c']) ? $_GET['c'] : 0, 'target' => 'top')); ?></li>
+                    <!--                    <li>-->
+                    <?php //echo CHtml::link('Акции', array('/news/index'));?><!--</li>-->
                 </ul>
                 <!--                    <div class="filter-colors">-->
                 <!--                        <div class="filter-header">Фильтр по цветам</div>-->
@@ -63,9 +64,9 @@
         <!--.left-menu-top-->
         <div class="socials">
             <p>Мы в социальных сетях:</p>
-<!--            <a href="#" target="_blank" class="facebook-icon"></a>-->
-<!--            <a href="#" target="_blank" class="twitter-icon"></a>-->
-<!--            <a href="#" target="_blank" class="google-icon"></a>-->
+            <!--            <a href="#" target="_blank" class="facebook-icon"></a>-->
+            <!--            <a href="#" target="_blank" class="twitter-icon"></a>-->
+            <!--            <a href="#" target="_blank" class="google-icon"></a>-->
             <a href="http://vk.com/club54960227" target="_blank" class="vk-icon"></a>
 
             <div class="clear"></div>
@@ -73,7 +74,7 @@
     </div>
     <!--.left-sidebar-->
     <div class="right-content">
-        <?php echo $content;?>
+        <?php echo $content; ?>
     </div>
     <!--.right-content-->
 
