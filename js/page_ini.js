@@ -75,6 +75,18 @@ function initAddingToCart(id, data){
     });
 }
 
+function pageProductLoaded(){
+    initAddingToCart();
+
+    $('#popup-singleton').fadeOut(200);
+    $(document).scrollTo('#product-container', 500 );
+}
+
+function pageProductLoading(){
+    $('#popup-singleton').html('Загрузка...');
+    $('#popup-singleton').fadeIn(100);
+}
+
 var popupSingletonTimeout = null;
 function addToCart(productID) {
 

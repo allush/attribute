@@ -900,7 +900,7 @@ span.required,.errorMessage, .errorSummary{
 	width: 600px;
 	height: 44px;
 	margin: 0 auto;
-    text-align: left;
+    text-align: center;
 }
 
 .right-content .pager a:first-child {
@@ -920,11 +920,7 @@ span.required,.errorMessage, .errorSummary{
 	line-height: 44px;
 	text-align: center;
 	text-decoration: none;
-	color: #1e9cb3;
-}
-
-.right-content .pager li:hover a {
-    color: #71c1cf;
+    color: #1e9cb3;
 }
 
 .right-content .pager li.first a,
@@ -938,7 +934,7 @@ span.required,.errorMessage, .errorSummary{
 	background-position: 0px -44px;
 }
 .right-content .pager li.hidden{
-    display: none;
+    visibility: hidden;
 }
 .right-content .pager li{
     margin: 0 2px;

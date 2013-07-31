@@ -26,5 +26,7 @@ $this->widget('zii.widgets.CListView', array(
         'cssFile' => '',
         'selectedPageCssClass' => 'active',
     ),
-    'afterAjaxUpdate'=>'initAddingToCart'
+    'id' => 'product-container',
+    'afterAjaxUpdate'=>'pageProductLoaded',
+    'beforeAjaxUpdate' => 'pageProductLoading'
 ));
