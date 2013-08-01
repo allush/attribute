@@ -75,8 +75,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
         ),
         array(
             'header' => 'Название',
-            'value' => '$data->product->name'
+            'type' => 'raw',
+            'value' => 'CHtml::link($data->product->name,array("/product/view","id"=>$data->product->productID))'
         ),
+        array(
+            'header' => 'Закупка',
+            'value' => '$data->product->purchase." руб."'
+        ),
+
         array(
             'header' => 'Стоимость',
             'value' => '$data->product->priceCurrency()'
@@ -84,7 +90,11 @@ $this->widget('zii.widgets.grid.CGridView', array(
         'quantity',
         array(
             'header' => 'Сумма',
-            'value' => '$data->product->price() * $data->quantity'
+            'value' => '($data->product->price() * $data->quantity)." руб."'
+        ),
+        array(
+            'header' => 'Выручка',
+            'value' => '(($data->product->price() - $data->product->purchase)* $data->quantity)." руб."'
         ),
 
     ),
