@@ -832,13 +832,17 @@ span.required, .errorMessage, .errorSummary {
 }
 
 .sale-icon {
-    width: 60px;
+    width: 30px;
     height: 60px;
     display: block;
     background: url(../img/sale_icon.png) no-repeat 0 0;
     position: absolute;
     top: -13px;
     right: -23px;
+    color: #ffffff;
+    padding: 20px 15px;
+    font-size: 18px;
+    text-align: center;
 }
 
 .products-item .product-image {

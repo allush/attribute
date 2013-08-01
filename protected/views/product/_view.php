@@ -30,7 +30,7 @@ if ($index % 3 == 0) {
         <!--    <a href="javascript:void(0)" class="new-icon"></a>-->
         <!--    <a href="javascript:void(0)" class="top-icon"></a>-->
         <?php if ($data->discount > 0) { ?>
-            <span class="sale-icon"></span>
+            <span class="sale-icon"><?php echo $data->discount.'%'?></span>
         <?php } ?>
     </div>
     <!--.products-item-->
