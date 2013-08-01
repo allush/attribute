@@ -162,6 +162,22 @@ class Order extends CActiveRecord
         return $sum;
     }
 
+    public function profit()
+    {
+        $profit = 0;
+        foreach ($this->orderItems as $item) {
+            $price = $item->product->price;
+
+            if ($item->product->discount > 0) {
+                $price = $price * $item->product->discount / 100;
+            }
+
+            $profit += ($price - $item->product->purchase) * $item->quantity;
+        }
+
+        return $profit;
+    }
+
     /**
      * @param $otherOrder Order
      */

@@ -56,6 +56,13 @@ $this->menu = array(
             <p><?php echo CHtml::encode($model->description); ?></p>
 
             <div class="product-description-buttons">
+                <?php if ($model->discount > 0) { ?>
+                    <div style="margin-bottom: 20px;">
+                        <span style="color: #FF622B;font-size: 18px;font-weight: bold; margin-right: 24px;" >Скидка <?php echo $model->discount;?>%</span>
+                        <span style="color: #aaaaaa;font-size: 14px;font-weight: bold;">Старая цена: <?php echo $model->price.' руб.'?></span>
+                    </div>
+
+                <?php } ?>
                 <div class="product-price"><?php echo CHtml::encode($model->priceCurrency()); ?></div>
                 <?php echo CHtml::link('', '', array('class' => 'add-basket-button', 'productID' => $model->productID)); ?>
                 <div class="clear"></div>
@@ -68,7 +75,7 @@ $this->menu = array(
                 echo '<table style="width: 100%;">';
                 foreach ($similarProducts as $oneSimilarProduct) {
                     echo '<tr>';
-                    echo '<td>' . CHtml::image($oneSimilarProduct->thumbnail(), '', array('style' => 'width: 100px;')) . '</td>';
+                    echo '<td>' . CHtml::link(CHtml::image($oneSimilarProduct->thumbnail(), '', array('style' => 'width: 100px;')), array('view', 'id' => $oneSimilarProduct->productID)) . '</td>';
                     echo '<td>' . CHtml::link($oneSimilarProduct->name, array('view', 'id' => $oneSimilarProduct->productID),array('style' => 'color: #333333;')) . '</td>';
                     echo '<td>' . $oneSimilarProduct->priceCurrency() . '</td>';
                     echo '<td>' . CHtml::link('', '', array('class' => 'to-basket-button-immediate', 'productID' => $oneSimilarProduct->productID)) . '</td>';
@@ -78,10 +85,6 @@ $this->menu = array(
                 echo '</table>';
             }
             ?>
-
-
-            <!--.product-description-buttons-->
-            <div class="share"></div>
         </div>
         <!--.product-description-->
         <div class="clear"></div>

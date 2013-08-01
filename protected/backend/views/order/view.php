@@ -61,8 +61,8 @@ $this->menu = array(
         'class' => 'table table-bordered table-condensed table-hover',
     )
 )); ?>
-
-    <h4>Сумма заказа: <?php echo $model->sum(); ?> руб.</h4>
+<h4>Сумма заказа: <?php echo $model->sum(); ?> руб.</h4>
+<h4 style="color: #ec211e;">Выручка: <?php echo $model->profit(); ?> руб.</h4>
 
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(

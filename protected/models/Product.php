@@ -176,7 +176,7 @@ class Product extends CActiveRecord
         $price = $this->price;
 
         if ($this->discount !== null && $this->discount > 0) {
-            $price = round($this->price * $this->discount / 100, 1);
+            $price = round($this->price- ($this->price * $this->discount / 100));
         }
 
         return $price . ' руб.';
@@ -188,7 +188,7 @@ class Product extends CActiveRecord
         $price = $this->price;
 
         if ($this->discount !== null && $this->discount > 0) {
-            $price = round($this->price * $this->discount / 100, 1);
+            $price = round($this->price - ($this->price * $this->discount / 100));
         }
         return $price;
     }
