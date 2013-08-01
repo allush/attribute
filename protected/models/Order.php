@@ -169,7 +169,7 @@ class Order extends CActiveRecord
             $price = $item->product->price;
 
             if ($item->product->discount > 0) {
-                $price = $price * $item->product->discount / 100;
+                $price = $item->product->price();
             }
 
             $profit += ($price - $item->product->purchase) * $item->quantity;
