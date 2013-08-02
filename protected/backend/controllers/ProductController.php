@@ -64,7 +64,7 @@ class ProductController extends BackendController
             ->from('product')
             ->queryScalar();
 
-        if($groupNumber === null){
+        if ($groupNumber === null) {
             $groupNumber = 0;
         }
         $groupNumber++;
@@ -258,7 +258,7 @@ class ProductController extends BackendController
     /**
      * Lists all models.
      */
-    public function actionIndex($c = null)
+    public function actionIndex($c = null, $key = null)
     {
         $hierarchy = array();
         Catalog::_loadHierarchy($hierarchy, null, 'view');
@@ -276,10 +276,14 @@ class ProductController extends BackendController
             }
         }
 
+        if ($key !== null and strlen($key) > 0) {
+            $criteria->addCondition("name LIKE '" . $key . "%' OR productNumber LIKE '" . $key . "%'");
+        }
+
         $dataProvider = new CActiveDataProvider('Product', array(
             'criteria' => $criteria,
             'pagination' => array(
-                'pageSize' => 10,
+                'pageSize' => 50,
             ),
             'sort' => array(
                 'defaultOrder' => '`group` DESC, modifiedOn DESC'

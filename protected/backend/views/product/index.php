@@ -34,6 +34,18 @@ $this->renderPartial('_menu');
     <div class="span10">
         <?php
         /** @var $form CActiveForm */
+        echo CHtml::form('index', 'get');
+        echo CHtml::textField('key', (isset($_GET['key'])) ? $_GET['key'] : '', array('style' => 'margin-bottom: 0;margin-right: 8px;','required' => 'required', 'class' => 'span4', 'placeholder' => 'Введите артикул или название товара'));
+
+        if (isset($_GET['c'])) {
+            echo CHtml::hiddenField('c', $_GET['c']);
+        }
+        echo CHtml::submitButton('Найти', array('class' => 'btn'));
+        echo CHtml::endForm();
+        ?>
+
+        <?php
+        /** @var $form CActiveForm */
         $form = $this->beginWidget('CActiveForm', array(
             'action' => array('groupAction'),
             'id' => 'product-form',
@@ -49,7 +61,7 @@ $this->renderPartial('_menu');
             'itemsTagName' => 'table',
             'itemsCssClass' => 'table table-bordered table-condensed table-hover',
 
-            'sortableAttributes'=>array(
+            'sortableAttributes' => array(
                 'name',
                 'discount',
                 'group',
