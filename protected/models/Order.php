@@ -144,6 +144,12 @@ class Order extends CActiveRecord
         foreach ($this->orderItems as $item) {
             $sum += $item->product->price() * $item->quantity;
         }
+
+        // если сумма заказа менее 1500 рублей, то добавить стоимость доставки
+        if($sum < 1500 && $this->orderDelivery !== null){
+            $sum += $this->orderDelivery->price;
+        }
+
         return $sum;
     }
 

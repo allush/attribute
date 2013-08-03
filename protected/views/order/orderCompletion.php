@@ -76,8 +76,25 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
     ?>
     <div class="heading">2. Способ доставки</div>
     <div>
-        <?php echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll('hidden=0'), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
-        <?php echo $form->error($order, 'orderDeliveryID'); ?>
+        <?php
+        /** @var  $orderDelivery OrderDelivery[] */
+        $orderDelivery = OrderDelivery::model()->findAll('hidden=0');
+        $sum = $order->sum();
+        foreach ($orderDelivery as $orderDeliveryItem) {
+            $cost = ' <span style="color: #ec5056;">(Бесплатно)</span>';
+            if ($sum < 1500 && $orderDeliveryItem->price > 0) {
+                $cost = ' <span style="color: #0792ac;">(Стоимость доставки: ' . $orderDeliveryItem->price . ' руб.)</span>';
+            }
+            echo '<p>';
+            echo CHtml::radioButton('Order[orderDeliveryID]', ($orderDeliveryItem->orderDeliveryID == $order->orderDeliveryID ? true : false), array('required' => 'required', 'value' => $orderDeliveryItem->orderDeliveryID, 'id' => 'orderDelivery' . $orderDeliveryItem->orderDeliveryID, 'class' => 'orderDeliveryItem'));
+            echo CHtml::label($orderDeliveryItem->name . $cost, 'orderDelivery' . $orderDeliveryItem->orderDeliveryID, array('style' => 'margin-left: 8px;'));
+            echo '</p>';
+        }
+
+        ?>
+
+        <!--        --><?php //echo $form->radioButtonList($order, 'orderDeliveryID', CHtml::listData(OrderDelivery::model()->findAll('hidden=0'), 'orderDeliveryID', 'name'), array('required' => 'required')); ?>
+        <!--        --><?php //echo $form->error($order, 'orderDeliveryID'); ?>
     </div>
 
     <div class="heading">4. Способ оплаты</div>
@@ -127,8 +144,29 @@ Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl . '/css/orderCompl
                 <td></td>
                 <td></td>
                 <td colspan="2" style="text-align: right; font-weight: bold;">
-                    Всего: <?php echo CHtml::encode($order->sum() . ' руб.'); ?></td>
+                    Всего: <span id="totalSum"><?php echo CHtml::encode($order->sum()); ?></span> руб.
+                </td>
             </tr>
         <?php } ?>
     </table>
 </div>
+
+<script type="text/javascript">
+    $('.orderDeliveryItem').click(function () {
+        var orderDeliveryID = $(this).attr('value');
+
+        $.ajax({
+            url: '<?php echo $this->createUrl('/order/setOrderDelivery'); ?>',
+            type: 'get',
+            data: {
+                orderID:<?php echo $order->orderID?>,
+                orderDeliveryID: orderDeliveryID
+            },
+            beforeSend: function () {
+            },
+            success: function (data) {
+                $('#totalSum').html(data)
+            }
+        });
+    });
+</script>

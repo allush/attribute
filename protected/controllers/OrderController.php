@@ -19,6 +19,14 @@ class OrderController extends FrontController
         );
     }
 
+    public function actionSetOrderDelivery($orderID, $orderDeliveryID){
+        $model = $this->loadModel($orderID);
+        $model->orderDeliveryID = $orderDeliveryID;
+        $model->save();
+
+        echo $model->sum();
+    }
+
     public function actionFailURL()
     {
     }
@@ -199,20 +207,25 @@ class OrderController extends FrontController
             $user->save();
         }
 
-        if (isset($_POST['Robokassa'])) {
-            $get['MrchLogin'] = $_POST['Robokassa']['MrchLogin'];
-            $get['OutSum'] = $_POST['Robokassa']['OutSum'];
-            $get['InvId'] = $_POST['Robokassa']['InvId'];
-            $get['Desc'] = $_POST['Robokassa']['Desc'];
-            $get['SignatureValue'] = $_POST['Robokassa']['SignatureValue'];
-            $get['IncCurrLabel'] = $_POST['Robokassa']['IncCurrLabel'];
+        if (isset($_POST['Robokassa']['IncCurrLabel'])) {
+            // способ оплаты
+            $incCurrLabel = $_POST['Robokassa']['IncCurrLabel'];
 
-            $redirectUrl = 'http://test.robokassa.ru/Index.aspx?';
+            $mrh_login = "attribute";
+            // сумма заказа
+            $out_summ = $model->sum();
+            // номер заказа
+            $inv_id = $model->orderID;
+            $mrh_pass1 = "attribute2013_1r4";
 
-            foreach ($get as $key => $value) {
-                $redirectUrl .= $key . '=' . $value . '&';
-            }
-            $redirectUrl = substr($redirectUrl, 0, strlen($redirectUrl) - 1);
+            // формирование подписи
+            $crc = md5("$mrh_login:$out_summ:$inv_id:$mrh_pass1");
+
+            // описание заказа
+            $inv_desc = 'Оплата заказа № ' . $inv_id . ' на сайте attribute.pro';
+
+            $redirectUrl = "http://test.robokassa.ru/Index.aspx?MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&Desc=$inv_desc&SignatureValue=$crc&IncCurrLabel=$incCurrLabel";
+
             $this->redirect($redirectUrl);
         }
     }
