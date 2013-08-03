@@ -58,7 +58,7 @@
                                         array('label' => 'Оплата и доставка', 'url' => array('/delivery'), 'linkOptions' => array('class' => 'delivery')),
                                         array('label' => 'Акции', 'url' => array('/actions'), 'linkOptions' => array('class' => 'stock')),
                                         array('label' => 'Контакты', 'url' => array('/contacts'), 'linkOptions' => array('class' => 'contacts')),
-                                        array('label' => '<input placeholder="поиск" class="search-field" type="text" name="field"><input type="button" class="search-button" name="btn">', 'itemOptions' => array('class' => 'menu-search'))
+                                        array('label' => '<form action="' . $this->createUrl('/product/index') . '" method="get"><input placeholder="поиск" class="search-field" type="text" name="key" required="required" value="' . (isset($_GET['key']) ? $_GET['key'] : '') . '"><button class="search-button"></button></form>', 'itemOptions' => array('class' => 'menu-search'))
                                     ),
                                     'encodeLabel' => false,
                                 )); ?>
@@ -143,8 +143,10 @@
         <div id="your-question">
             <div class="your-question-bottom">
                 <div class="your-question-body">
-                    <form action="<?php echo $this->createUrl('/site/feedback')?>" method="post">
-                        <input type="hidden" style="display: none;" name="YII_CSRF_TOKEN" value="<?php echo Yii::app()->request->csrfToken?>">
+                    <form action="<?php echo $this->createUrl('/site/feedback') ?>" method="post">
+                        <input type="hidden" style="display: none;" name="YII_CSRF_TOKEN"
+                               value="<?php echo Yii::app()->request->csrfToken ?>">
+
                         <div class="line-fields">
                             <label for="textarea">Ваш вопрос</label>
                             <textarea required="required" name="message" id="textarea"></textarea>

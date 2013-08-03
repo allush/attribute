@@ -352,6 +352,7 @@ span.required, .errorMessage, .errorSummary {
     padding: 0px 5px;
     line-height: 25px;
     height: 27px;
+    border-radius: 0;
 }
 
 #header .header-menu ul li.menu-search .search-button {
@@ -361,6 +362,7 @@ span.required, .errorMessage, .errorSummary {
     height: 27px;
     cursor: pointer;
     float: left;
+    border-radius: 0 4px 4px 0;
 }
 
 .primary-btn {

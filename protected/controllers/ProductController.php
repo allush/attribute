@@ -60,7 +60,7 @@ class ProductController extends FrontController
     /**
      * Lists all models.
      */
-    public function actionIndex($c = null)
+    public function actionIndex($c = null, $key=null)
     {
         $this->layout = 'catalog';
         $this->pageTitle = 'Каталог';
@@ -84,6 +84,10 @@ class ProductController extends FrontController
 
         } else {
             $criteria->condition = 'catalogID IS NOT NULL AND deleted=0 AND existence>0';
+        }
+
+        if($key !== null && strlen($key) > 0){
+            $criteria->addCondition("name LIKE '%" . $key . "%'");
         }
 
         if (isset($_GET['target'])) {
