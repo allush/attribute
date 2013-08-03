@@ -136,10 +136,24 @@ class Product extends CActiveRecord
      * @param int $index
      * @return null|string
      */
-    public function image($index = 0)
+    public function large($index = 0)
     {
-        if (count($this->pictures) > 0)
+        if (count($this->pictures) > 0) {
             return $this->pictures[$index]->large();
+        }
+
+        return null;
+    }
+
+    /**
+     * @param int $index
+     * @return null|string
+     */
+    public function watermark($index = 0)
+    {
+        if (count($this->pictures) > 0) {
+            return $this->pictures[$index]->watermark();
+        }
 
         return null;
     }
@@ -150,8 +164,9 @@ class Product extends CActiveRecord
      */
     public function thumbnail($index = 0)
     {
-        if (count($this->pictures) > 0)
+        if (count($this->pictures) > 0){
             return $this->pictures[$index]->thumbnail();
+        }
 
         return null;
     }

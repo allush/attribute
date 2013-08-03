@@ -92,6 +92,42 @@ class Picture extends CActiveRecord
         ));
     }
 
+    /**
+     * На исходном изображении поставить водяной знак, сохранив новое изображение как копию
+     */
+    public function setWatermark()
+    {
+        $logo = Yii::app()->basePath . '/../img/watermark.png';
+
+        $largePath = Yii::app()->basePath . '/..' . $this->large();
+        $watermarkPath = Yii::app()->basePath . '/..' .$this->watermark();
+
+        $ih = new CImageHandler();
+        $ih->load($largePath)
+            ->watermark($logo, 15, 20, CImageHandler::CORNER_RIGHT_BOTTOM)
+            ->save($watermarkPath);
+    }
+
+    /**
+     * Из большого изображения с водяным знаком создать миниатюру
+     */
+    public function createThumbnail()
+    {
+        $watermarkPath = Yii::app()->basePath . '/..' . $this->watermark();
+        $thumbnailPath = Yii::app()->basePath . '/..' . $this->thumbnail();
+
+        // создать и сохранить миниатюру
+        $ih = new CImageHandler();
+        $ih->load($watermarkPath)
+            ->thumb(400, 300)
+            ->save($thumbnailPath);
+    }
+
+    public function watermark()
+    {
+        return Yii::app()->baseUrl . '/img/product/watermark/' . $this->filename;
+    }
+
     public function thumbnail()
     {
         return Yii::app()->baseUrl . '/img/product/thumbnail/' . $this->filename;
@@ -106,6 +142,7 @@ class Picture extends CActiveRecord
     {
         $largePath = Yii::app()->basePath . '/../img/product/large/' . $this->filename;
         $thumbnailPath = Yii::app()->basePath . '/../img/product/thumbnail/' . $this->filename;
+        $watermarkPath = Yii::app()->basePath . '/../img/product/watermark/' . $this->filename;
 
         if (file_exists($largePath)) {
             unlink($largePath);
@@ -113,6 +150,10 @@ class Picture extends CActiveRecord
 
         if (file_exists($thumbnailPath)) {
             unlink($thumbnailPath);
+        }
+
+        if (file_exists($watermarkPath)) {
+            unlink($watermarkPath);
         }
 
         return parent::beforeDelete();

@@ -30,6 +30,20 @@ class ProductController extends BackendController
         );
     }
 
+    public function actionSetWatermarkAndThumbnail()
+    {
+        set_time_limit(0);
+
+        /** @var Product[] $products */
+        $products = Product::model()->findAll();
+        foreach ($products as $product) {
+            foreach ($product->pictures as $picture) {
+                $picture->setWatermark();
+                $picture->createThumbnail();
+            }
+        }
+    }
+
     /**
      * @return bool
      */
@@ -108,20 +122,18 @@ class ProductController extends BackendController
 
                 // определение пути сохранения файлов
                 $pathLarge = 'img/product/large/' . $filename;
-                $pathThumbnail = 'img/product/thumbnail/' . $filename;
 
                 // если большое изображение успешно сохранено
                 if ($file->saveAs($pathLarge)) {
-                    // создать и сохранить миниатюру
-                    $ih = new CImageHandler();
-                    $ih->load($pathLarge);
-                    $ih->thumb(400, 300)->save($pathThumbnail);
-
                     // создать модель фото продукта
                     $picture = new Picture();
                     $picture->productID = $product->productID;
                     $picture->filename = $filename;
                     $picture->save();
+
+                    $picture->setWatermark();
+
+                    $picture->createThumbnail();
                 }
             } else {
                 return false;
@@ -135,9 +147,10 @@ class ProductController extends BackendController
         /** @var $picture Picture */
         $picture = Picture::model()->findByPk($productPictureID);
 
-        $base = Yii::app()->basePath . '/../';
+        $base = Yii::app()->basePath . '/..';
         @unlink($base . $picture->large());
         @unlink($base . $picture->thumbnail());
+        @unlink($base . $picture->watermark());
 
         $picture->delete();
 
@@ -165,16 +178,17 @@ class ProductController extends BackendController
 
             // если большое изображение успешно сохранено
             if ($file->saveAs($pathLarge)) {
-                // создать и сохранить миниатюру
-                $ih = new CImageHandler();
-                $ih->load($pathLarge);
-                $ih->thumb(400, 300)->save($pathThumbnail);
 
                 // создать модель фото продукта
                 $picture = new Picture();
                 $picture->productID = $productID;
                 $picture->filename = $filename;
                 $picture->save();
+
+                $picture->setWatermark();
+
+                $picture->createThumbnail();
+
             }
         }
     }
