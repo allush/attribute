@@ -42,7 +42,7 @@ $this->renderPartial('_menu');
                 {title: "Zip files", extensions: "zip"}
             ],
             multipart_params: {
-                YII_CSRF_TOKEN: "<?php echo Yii::app()->request->csrfToken;?>"
+                YII_CSRF_TOKEN: '<?php echo Yii::app()->request->csrfToken;?>'
             },
             // Flash settings
             flash_swf_url: '/plupload/js/plupload.flash.swf',
