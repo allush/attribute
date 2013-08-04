@@ -185,7 +185,7 @@ class Catalog extends CActiveRecord
             $productCount = Yii::app()->db->createCommand()
                 ->select()
                 ->from('product')
-                ->where('product.catalogID IN (' . $ids . ')')
+                ->where('product.catalogID IN (' . $ids . ') AND deleted=0')
                 ->query()
                 ->rowCount;
 

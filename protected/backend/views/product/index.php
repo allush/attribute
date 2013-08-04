@@ -24,7 +24,7 @@ $this->renderPartial('_menu');
         $productCount = Yii::app()->db->createCommand()
             ->select('COUNT(productID)')
             ->from('product')
-            ->where('product.catalogID IS NULL')
+            ->where('product.catalogID IS NULL AND deleted=0')
             ->queryScalar();
 
 
