@@ -43,7 +43,7 @@
                     <div id="header-right">
                         <!--                        --><?php //echo CHtml::link('Оптовые продажи', array('/wholesale'), array('class' => 'opt'));?>
 
-                        <div class="header-phone">8 937 411 10 20</div>
+                        <div class="header-phone">8 937 411 10 20<br>8 937 411 10 18</div>
                     </div>
                     <!--.header-right-->
                     <div class="clear"></div>

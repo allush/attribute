@@ -273,7 +273,7 @@ span.required, .errorMessage, .errorSummary {
 #header #header-right .header-phone {
     padding: 10px 0px 0px 0px;
     color: #5db8c8;
-    font-size: 37px;
+    font-size: 30px;
     font-family: 'dincyr-boldregular';
 }
 
@@ -392,7 +392,7 @@ span.required, .errorMessage, .errorSummary {
 
 #header .header-menu .basket {
     position: absolute;
-    top: -27px;
+    top: -24px;
     color: #fff;
     font-size: 14px;
     font-family: 'dincyr-boldregular';
@@ -765,7 +765,12 @@ span.required, .errorMessage, .errorSummary {
 }
 
 .socials a.vk-icon {
-    background: url(../img/vk_icon_big.png) no-repeat 0 0;
+    background: url(../img/vk_icon.png) no-repeat 0 0;
+    background-size: contain;
+}
+.socials a.odnoklassniki-icon {
+    background: url(../img/odnoklassniki.png) no-repeat 0 0;
+    background-size: contain;
 }
 
 .socials p {
