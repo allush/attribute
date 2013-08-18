@@ -65,7 +65,10 @@ class ProductController extends FrontController
         $this->layout = 'catalog';
         $this->pageTitle = 'Каталог';
 
-        $this->catalogs = Catalog::model()->findAll('parent IS NULL');
+        $this->catalogs = Catalog::model()->findAll(array(
+            'condition' => 'parent IS NULL',
+            'order' => 'name ASC'
+        ));
 
         $criteria = new CDbCriteria();
 

@@ -690,16 +690,16 @@ span.required, .errorMessage, .errorSummary {
 }
 
 .left-sidebar .left-menu ul li {
-    height: 48px;
+    /*height: 48px;*/
     position: relative;
     line-height: 48px;
     background: url(../img/1x2_line.gif) repeat-x 0 bottom;
 }
 
 .left-sidebar .left-menu ul li .li-wrap {
-    position: absolute;
-    top: -2px;
-    left: -22px;
+    /*position: absolute;*/
+    margin-top: -2px;
+    margin-left: -22px;
     width: 210px;
     height: 52px;
     padding: 0px 22px;
@@ -715,21 +715,21 @@ span.required, .errorMessage, .errorSummary {
 
 .left-sidebar .left-menu ul li:hover,
 .left-sidebar .left-menu ul li:hover a {
-    background: none !important;
+    /*background: none !important;*/
 }
 
 .left-sidebar .left-menu ul li.active,
 .left-sidebar .left-menu ul li.active a {
-    background: none !important;
+    /*background: none !important;*/
 }
 
 .left-sidebar .left-menu ul li:first-child {
-    height: 50px;
+    /*height: 50px;*/
     line-height: 50px;
 }
 
 .left-sidebar .left-menu ul li:first-child a {
-    background: url(../img/1x2_line.gif) repeat-x 0 0;
+    /*background: url(../img/1x2_line.gif) repeat-x 0 0;*/
 }
 
 .left-sidebar .left-menu ul li a {
@@ -739,6 +739,26 @@ span.required, .errorMessage, .errorSummary {
     text-decoration: none;
     padding: 0px 0px 0px 7px;
 }
+
+
+.left-sidebar .left-menu ul li ul{
+    display: none;
+}
+.left-sidebar .left-menu ul li.active ul{
+    display: block;
+}
+
+.left-sidebar .left-menu ul li ul li a.active:before {
+    content: '- ';
+}
+
+.left-sidebar .left-menu ul li ul li a:hover,
+.left-sidebar .left-menu ul li ul li a.active
+{
+    color: #f6cad5;
+}
+
+
 
 .socials {
     padding: 0px 0px 0px 1px;
