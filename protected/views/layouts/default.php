@@ -10,6 +10,8 @@
     <meta name="language" content="ru"/>
     <meta name="description" content="<?php echo $this->description; ?>"/>
 
+    <meta name='yandex-verification' content='6e34a82971033151' />
+
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cart.css">
     <link rel="stylesheet" type="text/css"
