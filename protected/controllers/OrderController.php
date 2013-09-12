@@ -224,7 +224,8 @@ class OrderController extends FrontController
             // описание заказа
             $inv_desc = 'Оплата заказа № ' . $inv_id . ' на сайте attribute.pro';
 
-            $redirectUrl = "http://test.robokassa.ru/Index.aspx?MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&Desc=$inv_desc&SignatureValue=$crc&IncCurrLabel=$incCurrLabel";
+//            $redirectUrl = "http://test.robokassa.ru/Index.aspx?MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&Desc=$inv_desc&SignatureValue=$crc&IncCurrLabel=$incCurrLabel";
+            $redirectUrl = "https://merchant.roboxchange.com/Index.aspx?MrchLogin=$mrh_login&OutSum=$out_summ&InvId=$inv_id&Desc=$inv_desc&SignatureValue=$crc&IncCurrLabel=$incCurrLabel";
 
             $this->redirect($redirectUrl);
         }
