@@ -62,7 +62,7 @@
                             }
 
                             $active = '';
-                            if (is_numeric($_GET['c']) && isset($_GET['c']) && ($_GET['c'] == $catalog->catalogID || in_array($_GET['c'], $childrenID))) {
+                            if (isset($_GET['c']) && is_numeric($_GET['c']) && ($_GET['c'] == $catalog->catalogID || in_array($_GET['c'], $childrenID))) {
                                 $active = 'active';
                             }
                             echo '<li class="' . $active . '">';
@@ -76,7 +76,7 @@
                                     echo '<li>';
 
                                     $active = '';
-                                    if (is_numeric($_GET['c']) && isset($_GET['c']) && $_GET['c'] == $child->catalogID) {
+                                    if (isset($_GET['c']) && is_numeric($_GET['c']) && $_GET['c'] == $child->catalogID) {
                                         $active = 'active';
                                     }
                                     echo CHtml::link($child->name, array('/product/index', 'c' => $child->catalogID), array('class' => "$active"));
@@ -98,7 +98,8 @@
         <!--.left-menu-top-->
         <div class="socials">
             <p>Мы в социальных сетях:</p>
-            <a href="http://vk.com/club54960227" target="_blank" class="vk-icon"></a>
+            <a href="http://vk.com/attributepro" target="_blank" class="vk-icon"></a>
+            <a href="http://instagram.com/p/eWqFlVOW73/" target="_blank" class="instagram-icon"></a>
             <a href="http://odnoklassniki.ru/group/51883095359682" target="_blank" class="odnoklassniki-icon"></a>
 
             <div class="clear"></div>

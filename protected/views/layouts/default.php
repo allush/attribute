@@ -39,6 +39,9 @@
                 <div class="header-top">
                     <div id="header-logo">
                         <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/img/header_logo.png'), '/'); ?>
+                        <p id="slogan">
+                            Магазин модных аксессуаров, интересных подарков и полезных вещей
+                        <p>
                     </div>
                     <!--.header-logo-->
 

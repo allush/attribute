@@ -365,6 +365,13 @@ span.required, .errorMessage, .errorSummary {
     border-radius: 0 4px 4px 0;
 }
 
+#slogan{
+    color: #EB8DC3;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 0px;
+}
+
 .primary-btn {
     text-decoration: none;
     background-color: #eb99c7;
@@ -786,6 +793,10 @@ span.required, .errorMessage, .errorSummary {
 
 .socials a.vk-icon {
     background: url(../img/vk_icon.png) no-repeat 0 0;
+    background-size: contain;
+}
+.socials a.instagram-icon {
+    background: url(../img/insta.png) no-repeat 0 0;
     background-size: contain;
 }
 .socials a.odnoklassniki-icon {
