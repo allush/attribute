@@ -214,7 +214,7 @@ span.required, .errorMessage, .errorSummary {
 }
 
 #header-container {
-    height: 237px;
+    height: 260px;
     width: 1024px;
     margin: 0px auto;
 }
@@ -224,14 +224,14 @@ span.required, .errorMessage, .errorSummary {
 }
 
 #header-container #header {
-    height: 237px;
+    height: 260px;
     width: 1024px;
     margin: 0px auto;
 }
 
 #header-container #header-wrapper {
     width: 100%;
-    height: 237px;
+    height: 260px;
     position: absolute;
     left: 0;
     top: 0;
