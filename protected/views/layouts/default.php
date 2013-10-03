@@ -10,7 +10,7 @@
     <meta name="language" content="ru"/>
     <meta name="description" content="<?php echo $this->description; ?>"/>
 
-    <meta name='yandex-verification' content='6e34a82971033151' />
+    <meta name='yandex-verification' content='6e34a82971033151'/>
 
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css">
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/cart.css">
@@ -26,6 +26,13 @@
     <script type="text/javascript"
             src="<?php echo Yii::app()->request->baseUrl; ?>/js/fancybox/jquery.fancybox-1.3.4.js"></script>
     <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/page_ini.js"></script>
+
+    <!--     Put this script tag to the <head> of your page —>-->
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?101"></script>
+
+    <script type="text/javascript">
+        VK.init({apiId: 3908479, onlyWidgets: true});
+    </script>
 </head>
 
 
@@ -41,6 +48,7 @@
                         <?php echo CHtml::link(CHtml::image(Yii::app()->baseUrl . '/img/header_logo.png'), '/'); ?>
                         <p id="slogan">
                             Магазин модных аксессуаров, интересных подарков и полезных вещей
+
                         <p>
                     </div>
                     <!--.header-logo-->

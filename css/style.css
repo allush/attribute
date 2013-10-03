@@ -365,7 +365,7 @@ span.required, .errorMessage, .errorSummary {
     border-radius: 0 4px 4px 0;
 }
 
-#slogan{
+#slogan {
     color: #EB8DC3;
     font-weight: bold;
     font-size: 18px;
@@ -747,11 +747,11 @@ span.required, .errorMessage, .errorSummary {
     padding: 0px 0px 0px 7px;
 }
 
-
-.left-sidebar .left-menu ul li ul{
+.left-sidebar .left-menu ul li ul {
     display: none;
 }
-.left-sidebar .left-menu ul li.active ul{
+
+.left-sidebar .left-menu ul li.active ul {
     display: block;
 }
 
@@ -760,12 +760,9 @@ span.required, .errorMessage, .errorSummary {
 }
 
 .left-sidebar .left-menu ul li ul li a:hover,
-.left-sidebar .left-menu ul li ul li a.active
-{
+.left-sidebar .left-menu ul li ul li a.active {
     color: #f6cad5;
 }
-
-
 
 .socials {
     padding: 0px 0px 0px 1px;
@@ -795,10 +792,12 @@ span.required, .errorMessage, .errorSummary {
     background: url(../img/vk_icon.png) no-repeat 0 0;
     background-size: contain;
 }
+
 .socials a.instagram-icon {
     background: url(../img/insta.png) no-repeat 0 0;
     background-size: contain;
 }
+
 .socials a.odnoklassniki-icon {
     background: url(../img/odnoklassniki.png) no-repeat 0 0;
     background-size: contain;
@@ -947,19 +946,18 @@ span.required, .errorMessage, .errorSummary {
     display: inline-block;
 }
 
-.right-content .pager {
+ .pager {
     padding: 49px 0px 0px 0px;
     width: 600px;
     height: 44px;
     margin: 0 auto;
     text-align: center;
 }
-
-.right-content .pager a:first-child {
+ .pager a:first-child {
     margin: 0;
 }
 
-.right-content .pager li a {
+ .pager li a {
     width: 44px;
     height: 44px;
     display: block;
@@ -975,32 +973,32 @@ span.required, .errorMessage, .errorSummary {
     color: #1e9cb3;
 }
 
-.right-content .pager li.first a,
-.right-content .pager li.last a,
-.right-content .pager li.next a,
-.right-content .pager li.previous a {
+ .pager li.first a,
+ .pager li.last a,
+ .pager li.next a,
+ .pager li.previous a {
     background: none;
 }
 
-.right-content .pager a:hover {
+ .pager a:hover {
     background-position: 0px -44px;
 }
 
-.right-content .pager li.hidden {
+.pager li.hidden {
     visibility: hidden;
 }
 
-.right-content .pager li {
+.pager li {
     margin: 0 2px;
     display: inline-block;
 }
 
-.right-content .pager li.active a {
+ .pager li.active a {
     color: #fff;
     background-position: 0px -88px;
 }
 
-.right-content .pager img {
+ .pager img {
     float: left;
     margin: 18px 0px 0px 10px;
 }
@@ -1404,4 +1402,48 @@ a.icon-color.green {
     z-index: 1002;
     box-shadow: 0 0 4px 2px #333;
     color: white;
+}
+
+.popular-news-item {
+    text-transform: lowercase;
+    margin-bottom: 8px;
+}
+
+.popular-news-item:first-letter {
+    text-transform: uppercase;
+}
+
+.popular-news-item a {
+    color: #656565;
+}
+
+.popular-news-item a:hover {
+    color: #333333;
+}
+
+.popular-news-item .numViews {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 3px;
+    background-color: #ffecec;
+    color: red;
+    margin-left: 4px;
+}
+
+.read-more-button {
+    margin: 8px 0;
+    padding: 4px 12px;
+    background-color: #fafafa;
+    border-radius: 4px;
+    border: 1px solid #f1f1f1;
+    display: inline-block;
+    text-decoration: none;
+    color: #414141;
+}
+
+.read-more-button:hover {
+    background-color: #f5f5f5;
+    border: 1px solid #e5e5e5;
+    color: #313131;
 }

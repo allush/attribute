@@ -91,7 +91,11 @@ class NewsController extends BackendController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('News');
+        $dataProvider = new CActiveDataProvider('News',array(
+            'criteria' => array(
+                'order' =>'newsID DESC'
+            ),
+        ));
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));

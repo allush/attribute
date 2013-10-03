@@ -7,6 +7,7 @@
  * @property integer $newsID
  * @property string $header
  * @property string $content
+ * @property string $numViews
  */
 class News extends CActiveRecord
 {
@@ -38,6 +39,7 @@ class News extends CActiveRecord
         return array(
             array('header', 'required'),
             array('header', 'length', 'max' => 255),
+            array('numViews', 'numerical', 'integerOnly' => true),
             array('content', 'safe'),
         );
     }
@@ -61,6 +63,19 @@ class News extends CActiveRecord
             'newsID' => 'News',
             'header' => 'Заголовок',
             'content' => 'Содержание',
+            'numViews' => 'Кол-во просмотров'
         );
+    }
+
+    public function trimmedContent()
+    {
+        $trimmingPos = stripos($this->content, '<div style="page-break-after: always;">');
+
+        if ($trimmingPos === false) {
+            return $this->content;
+        }
+
+        return substr($this->content, 0, $trimmingPos);
+
     }
 }

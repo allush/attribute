@@ -7,6 +7,9 @@ class NewsController extends FrontController
     {
         $model = $this->loadModel($id);
 
+        $model->numViews++;
+        $model->save();
+
         $this->pageTitle = 'Новости - ' . $model->header;
 
         $this->render('view', array(
@@ -19,9 +22,23 @@ class NewsController extends FrontController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('News');
+        $popularNews = new CActiveDataProvider('News',array(
+            'criteria'=>array(
+                'order'=>'numViews DESC, newsID DESC',
+                'limit' => 5
+            ),
+            'pagination'=>false
+        ));
+
+        $dataProvider = new CActiveDataProvider('News',array(
+            'criteria'=>array(
+                'order'=>'newsID DESC',
+            ),
+        ));
+
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+            'popularNews' => $popularNews
         ));
     }
 
