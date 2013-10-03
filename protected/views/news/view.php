@@ -29,6 +29,9 @@ echo CHtml::link('<= Все новости', array('index'), array('class' => 'r
     </div>
 </div>
 
+<script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+<div class="yashare-auto-init" data-yashareL10n="ru" data-yashareType="none"
+     data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div>
 
 <!--Put this div tag to the place, where the Comments block will be —>-->
 <div id="vk_comments"></div>
