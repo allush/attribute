@@ -60,12 +60,25 @@
         <div>
             <?php
             echo $form->textArea($model, 'description', array(
-                'rows' => 11,
+                'rows' => 9,
                 'class' => 'span5',
                 'placeholder' => $model->getAttributeLabel('description'),
                 'title' => $model->getAttributeLabel('description'),
             ));
             echo $form->error($model, 'description');
+            ?>
+        </div>
+        <br>
+
+        <div>
+            <?php
+            echo $form->textArea($model, 'supplier', array(
+                'rows' => 5,
+                'class' => 'span5',
+                'placeholder' => $model->getAttributeLabel('supplier'),
+                'title' => $model->getAttributeLabel('supplier'),
+            ));
+            echo $form->error($model, 'supplier');
             ?>
         </div>
     </div>

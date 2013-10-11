@@ -9,6 +9,7 @@
  * @property string $createdOn
  * @property string $modifiedOn
  * @property string $description
+ * @property string $supplier
  * @property string $unit
  * @property integer $productStatusID
  * @property integer $catalogID
@@ -60,7 +61,7 @@ class Product extends CActiveRecord
             array('deleted', 'boolean'),
             array('price, existence, purchase', 'numerical'),
             array('name, unit, productNumber', 'length', 'max' => 255),
-            array('description', 'safe'),
+            array('description, supplier', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('productID, name, createdOn, modifiedOn, description, unit, productStatusID, discount', 'safe', 'on' => 'search'),
@@ -93,6 +94,7 @@ class Product extends CActiveRecord
             'createdOn' => 'Создан',
             'modifiedOn' => 'Изменен',
             'description' => 'Описание',
+            'supplier' => 'Поставщик',
             'unit' => 'Ед.изм.',
             'productStatusID' => 'Статус',
             'catalogID' => 'Каталог',

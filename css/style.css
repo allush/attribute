@@ -445,6 +445,8 @@ span.required, .errorMessage, .errorSummary {
 
 #slider-container #slideshow-items {
     height: 279px;
+    background-image: url('../img/white_transparent.png');
+    border-radius: 4px;
 }
 
 #slider-container #slideshow-items .slide {
@@ -456,12 +458,13 @@ span.required, .errorMessage, .errorSummary {
 #slider-container #slideshow-items .slide img {
     width: 753px;
     height: 279px;
+    border-radius: 4px 0 0 4px;
 }
 
 #slider-container #slideshow-items .slide .slide-content {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 8px;
+    right: 8px;
     text-align: right;
     width: 440px;
     padding: 8px 0px 0px 0px;
@@ -504,7 +507,7 @@ span.required, .errorMessage, .errorSummary {
 #slider-container #nav {
     position: absolute;
     bottom: 37px;
-    right: 0;
+    right: 8px;
     z-index: 100;
 }
 
@@ -1361,7 +1364,7 @@ a.icon-color.green {
     display: inline-block;
     float: right;
     margin-top: -8px;
-    margin-right: 10px;
+    margin-right: 5px;
     padding: 4px 8px;
     background-image: url('../img/white_transparent.png');
     border-radius: 4px;

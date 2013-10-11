@@ -38,7 +38,9 @@ class Action extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('picture, title', 'required'),
+            array('title', 'required'),
+            array('picture', 'required', 'except' => 'update'),
+
             array('expires', 'numerical', 'integerOnly' => true),
             array('picture, title, description', 'length', 'max' => 255),
             // The following rule is used by search().
@@ -76,6 +78,21 @@ class Action extends CActiveRecord
         return Yii::app()->baseUrl . '/img/actions/' . $this->picture;
     }
 
+    private function deletePicture()
+    {
+        $path = Yii::app()->basePath . '/../img/actions/' . $this->picture;
+
+        if (is_file($path) && file_exists($path)) {
+            unlink($path);
+        }
+    }
+
+    protected function beforeDelete()
+    {
+        $this->deletePicture();
+        return parent::beforeDelete();
+    }
+
     protected function beforeValidate()
     {
         if (strlen($this->expires) == 0) {
@@ -84,14 +101,56 @@ class Action extends CActiveRecord
             $this->expires = $this->expiresToInt();
         }
 
+        /** @var $file CUploadedFile */
+        $file = CUploadedFile::getInstanceByName('Action[picture]');
+
+        if ($file === null) {
+            return parent::beforeValidate();
+        }
+
+        $this->deletePicture();
+
+        // преобразовать имя файла в уникальное, сохраняя расширение файла
+        $originalFilename = $file->getName();
+        $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
+        $filename = md5(crypt($originalFilename)) . $fileExtension;
+
+        $this->picture = $filename;
+
         return parent::beforeValidate();
+    }
+
+    protected function afterSave()
+    {
+        /** @var $file CUploadedFile */
+        $file = CUploadedFile::getInstanceByName('Action[picture]');
+
+        if ($file === null) {
+            return parent::beforeValidate();
+        }
+
+        // определение пути сохранения файлов
+        $path = Yii::app()->basePath . '/../img/actions/' . $this->picture;
+
+        // если большое изображение успешно сохранено
+        if (!$file->saveAs($path)) {
+            return false;
+        }
+
+        // масштабировать до нужного размера
+        $ih = new CImageHandler();
+        $ih->load($path)
+            ->thumb(810, 300)
+            ->save($path);
+
+        return parent::afterSave();
     }
 
     public function expiresToStr()
     {
         if (is_numeric($this->expires)) {
             return date('Y-m-d', $this->expires);
-        }elseif(is_null($this->expires)){
+        } elseif (is_null($this->expires)) {
             return 'Постоянная акция';
         }
 

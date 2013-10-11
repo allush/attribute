@@ -53,60 +53,16 @@ class ActionController extends BackendController
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Action'])) {
-
             $model->attributes = $_POST['Action'];
 
-            /** @var $file CUploadedFile */
-            $file = CUploadedFile::getInstanceByName('Action[picture]');
-
-            // преобразовать имя файла в уникальное, сохраняя расширение файла
-            $originalFilename = $file->getName();
-            $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
-            $filename = md5(crypt($originalFilename)) . $fileExtension;
-
-            $model->picture = $filename;
-
-            // определение пути сохранения файлов
-            $path = Yii::app()->basePath.'/../img/actions/' . $filename;
-
-            // если большое изображение успешно сохранено
-            if ($file->saveAs($path)) {
-                // масштабировать до нужного размера
-                $ih = new CImageHandler();
-                $ih->load($path)
-                    ->thumb(400, 300)
-                    ->save($path);
-
-                if ($model->save()) {
-                    $this->redirect(array('index'));
-                }
+            if ($model->save()) {
+                $this->redirect(array('index'));
             }
         }
 
         $this->render('create', array(
             'model' => $model,
         ));
-    }
-
-    public function actionUploadPicture()
-    {
-        /** @var $files CUploadedFile[] */
-        $files = CUploadedFile::getInstancesByName('file');
-        foreach ($files as $file) {
-
-            // преобразовать имя файла в уникальное, сохраняя расширение файла
-            $originalFilename = $file->getName();
-            $fileExtension = strtolower(substr($originalFilename, strripos($originalFilename, '.')));
-            $filename = md5(crypt($originalFilename)) . $fileExtension;
-
-            // определение пути сохранения файлов
-            $path = 'img/actions/' . $filename;
-
-            // если большое изображение успешно сохранено
-            if ($file->saveAs($path)) {
-
-            }
-        }
     }
 
 
@@ -123,7 +79,11 @@ class ActionController extends BackendController
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Action'])) {
+
+            unset($_POST['Action']['picture']);
+
             $model->attributes = $_POST['Action'];
+
             if ($model->save())
                 $this->redirect(array('index'));
         }
@@ -152,7 +112,7 @@ class ActionController extends BackendController
      */
     public function actionIndex()
     {
-        $dataProvider = new CActiveDataProvider('Action',array(
+        $dataProvider = new CActiveDataProvider('Action', array(
             'criteria' => array(
                 'order' => 'actionID DESC'
             )

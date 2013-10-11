@@ -13,6 +13,10 @@ echo CHtml::link('<= Все акции', array('index'), array('class' => 'read-
     </p>
 
     <p>
+        <?php echo CHtml::link(CHtml::image($model->picture()), array('view', 'id' => $model->actionID)); ?>
+    </p>
+
+    <p>
         <?php echo CHtml::encode($model->description); ?>
     </p>
 
@@ -20,7 +24,4 @@ echo CHtml::link('<= Все акции', array('index'), array('class' => 'read-
         <p>Продлится до:<?php echo CHtml::encode($model->expiresToStr()); ?></p>
     <?php } ?>
 
-    <p>
-        <?php echo CHtml::link(CHtml::image($model->picture()), array('view', 'id' => $model->actionID)); ?>
-    </p>
 </div>

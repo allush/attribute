@@ -102,50 +102,53 @@
                     </div>
 
                     <div class="clear-both"></div>
-                    <?php if (Yii::app()->controller->id == 'news') {
-                        ?>
-                        <style type="text/css">
-                            #header-container {
-                                height: 546px;
-                            }
-
-                            #header-container #header-wrapper {
-
-                                height: 550px;
-                            }
-                        </style>
-
-                        <div id="slider-container">
-                            <a href="#" id="top-slider-prev"></a>
-                            <a href="#" id="top-slider-next"></a>
-
-                            <div id="slideshow-items">
-                                <?php
-                                /** @var Action[] $actions */
-                                $actions = Action::model()->findAll(array(
-                                    'order' => 'actionID DESC'
-                                ));
-
-                                foreach ($actions as $action) {
-                                    ?>
-                                    <div class="slide">
-                                        <?php echo CHtml::image($action->picture()); ?>
-
-                                        <div class="slide-content">
-                                            <div class="slide-header"><?php echo CHtml::encode($action->title); ?></div>
-                                            <span
-                                                class="slide-slogan"><?php echo CHtml::encode($action->description); ?></span>
-                                            <?php echo CHtml::link('',array('/action/view','id' => $action->actionID),array('class' => 'want-button')) ?>
-                                        </div>
-                                    </div>
-                                <?php
+                    <?php if (Yii::app()->controller->id == 'news' && Yii::app()->controller->action->id == 'index') {
+                        /** @var Action[] $actions */
+                        $actions = Action::model()->findAll(array(
+                            'order' => 'actionID DESC'
+                        ));
+                        if (count($actions) > 0) {
+                            ?>
+                            <style type="text/css">
+                                #header-container {
+                                    height: 546px;
                                 }
-                                ?>
-                            </div>
-                            <div id="nav"></div>
-                        </div>
-                    <?php
 
+                                #header-container #header-wrapper {
+
+                                    height: 550px;
+                                }
+                            </style>
+
+                            <div id="slider-container">
+                                <a href="#" id="top-slider-prev"></a>
+                                <a href="#" id="top-slider-next"></a>
+
+                                <div id="slideshow-items">
+                                    <?php
+
+
+                                    foreach ($actions as $action) {
+                                        ?>
+                                        <div class="slide">
+                                            <?php echo CHtml::link(CHtml::image($action->picture()), array('/action/view', 'id' => $action->actionID)); ?>
+<!--                                            --><?php //echo '', array('/action/view', 'id' => $action->actionID), array('class' => 'want-button')) ?>
+
+                                            <div class="slide-content">
+                                                <div
+                                                    class="slide-header"><?php echo CHtml::encode($action->title); ?></div>
+                                                <span
+                                                    class="slide-slogan"><?php echo CHtml::encode($action->description); ?></span>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                                <div id="nav"></div>
+                            </div>
+                        <?php
+                        }
                     }?>
 
                 </div>
