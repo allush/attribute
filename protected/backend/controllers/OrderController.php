@@ -50,6 +50,27 @@ class OrderController extends BackendController
         ));
     }
 
+    public function actionUpdate($id)
+    {
+        $model = $this->loadModel($id);
+
+        if (isset($_POST['Order'])) {
+            $model->attributes = $_POST['Order'];
+            if ($model->save()) {
+                if (Yii::app()->request->isAjaxRequest) {
+                    Yii::app()->end();
+                }
+                $this->redirect(array('index'));
+            }
+        }
+
+        $this->render('update', array(
+            'model' => $model,
+        ));
+    }
+
+    /**
+
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -71,8 +92,7 @@ class OrderController extends BackendController
     public function actionIndex()
     {
         $dataProvider = new CActiveDataProvider('Order', array(
-            'criteria' => array(
-            ),
+            'criteria' => array(),
         ));
         $this->render('index', array(
             'dataProvider' => $dataProvider,

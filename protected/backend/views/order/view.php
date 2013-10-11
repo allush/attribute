@@ -37,23 +37,46 @@ $this->menu = array(
             'name' => 'modifiedOn',
             'value' => ($model->modifiedOn === null) ? "-" : date("d-m-Y", $model->modifiedOn)
         ),
-        'orderPaymentID',
-        'orderDeliveryID',
-
+        array(
+            'name' => 'orderDeliveryID',
+            'value' => ($model->orderDelivery !== null) ? $model->orderDelivery->name : 'Не задан'
+        ),
         array(
             'name' => 'userID',
-            'value' => ($model->user !== null) ? $model->user->surname . ' ' . $model->user->name : 'Не задан',
+            'value' => ($model->user !== null) ? $model->user->surname . ' ' . $model->user->name . ' ' . $model->user->patronymic : 'Не задан',
+        ),
+        array(
+            'name' => 'Адрес',
+            'value' => ($model->user !== null) ? $model->user->addressFull() : 'Не задан',
+        ),
+        array(
+            'name' => 'Контакты',
+            'value' => ($model->user !== null) ? $model->user->email . ' ' . $model->user->phone : 'Не задан',
+        ),
+        array(
+            'name' => 'orderPaymentID',
+            'value' => ($model->orderPayment !== null) ? $model->orderPayment->name : 'Не задан'
         ),
         'comment',
 
         array(
-            'name'=> 'orderStatusID',
-            'type'=>'raw',
+            'name' => 'orderStatusID',
+            'type' => 'raw',
             'value' => CHtml::dropDownList(
                 'orderStatusID',
-                '',
-                CHtml::listData(OrderStatus::model()->findAll(),'orderStatusID','name'),
-                array()
+                $model->orderStatusID,
+                CHtml::listData(OrderStatus::model()->findAll(), 'orderStatusID', 'name'),
+                array(
+                    'prompt' => '',
+                    'ajax' => array(
+                        'type' => 'post',
+                        'url' => array('update', 'id' => $model->orderID),
+                        'data' => array(
+                            'Order[orderStatusID]' => 'js:this.value',
+                            "YII_CSRF_TOKEN" => Yii::app()->request->csrfToken,
+                        ),
+                    ),
+                )
             ),
         ),
     ),
@@ -61,8 +84,8 @@ $this->menu = array(
         'class' => 'table table-bordered table-condensed table-hover',
     )
 )); ?>
-<h4>Сумма заказа: <?php echo $model->sum(); ?> руб.</h4>
-<h4 style="color: #ec211e;">Выручка: <?php echo $model->profit(); ?> руб.</h4>
+    <h4>Сумма заказа: <?php echo $model->sum(); ?> руб.</h4>
+    <h4 style="color: #ec211e;">Выручка: <?php echo $model->profit(); ?> руб.</h4>
 
 <?php
 $this->widget('zii.widgets.grid.CGridView', array(
