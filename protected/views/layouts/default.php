@@ -86,6 +86,8 @@
                         </div>
                         <!--.header-menu-right-->
                     </div>
+
+                    <!--.header-menu-left-->
                     <div id="login-status">
                         <?php
                         $this->widget('zii.widgets.CMenu', array(
@@ -98,39 +100,54 @@
                         ));
                         ?>
                     </div>
-                    <!--.header-menu-left-->
 
-                    <!--                    <div id="slider-container">-->
-                    <!--                        <a href="#" id="top-slider-prev"></a>-->
-                    <!--                        <a href="#" id="top-slider-next"></a>-->
-                    <!---->
-                    <!--                        <div id="slideshow-items">-->
-                    <!---->
-                    <!--                            <div class="slide">-->
-                    <!--                                <img src="/images/slide_img_1.png">-->
-                    <!---->
-                    <!--                                <div class="slide-content">-->
-                    <!--                                    <div class="slide-header">Фотоконкурс</div>-->
-                    <!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
-                    <!--                                    <a href="#" class="want-button"></a>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                            <!--slide-->
-                    <!--                            <div class="slide">-->
-                    <!--                                <img src="/images/slide_img_1.png">-->
-                    <!---->
-                    <!--                                <div class="slide-content">-->
-                    <!--                                    <div class="slide-header">конкурс</div>-->
-                    <!--                                    <span class="slide-slogan">Выигрывай ценные подарки за лучшую фотографию с нашими аксессуарами</span>-->
-                    <!--                                    <a href="#" class="want-button"></a>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                            <!--slide-->
-                    <!--                        </div>-->
-                    <!--                        <!--#slideshow-items-->
-                    <!--                        <div id="nav"></div>-->
-                    <!--                    </div>-->
-                    <!--                    <!--#slider-container-->
+                    <div class="clear-both"></div>
+                    <?php if (Yii::app()->controller->id == 'news') {
+                        ?>
+                        <style type="text/css">
+                            #header-container {
+                                height: 546px;
+                            }
+
+                            #header-container #header-wrapper {
+
+                                height: 550px;
+                            }
+                        </style>
+
+                        <div id="slider-container">
+                            <a href="#" id="top-slider-prev"></a>
+                            <a href="#" id="top-slider-next"></a>
+
+                            <div id="slideshow-items">
+                                <?php
+                                /** @var Action[] $actions */
+                                $actions = Action::model()->findAll(array(
+                                    'order' => 'actionID DESC'
+                                ));
+
+                                foreach ($actions as $action) {
+                                    ?>
+                                    <div class="slide">
+                                        <?php echo CHtml::image($action->picture()); ?>
+
+                                        <div class="slide-content">
+                                            <div class="slide-header"><?php echo CHtml::encode($action->title); ?></div>
+                                            <span
+                                                class="slide-slogan"><?php echo CHtml::encode($action->description); ?></span>
+                                            <?php echo CHtml::link('',array('/action/view','id' => $action->actionID),array('class' => 'want-button')) ?>
+                                        </div>
+                                    </div>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <div id="nav"></div>
+                        </div>
+                    <?php
+
+                    }?>
+
                 </div>
                 <!--.header-top-->
             </div>

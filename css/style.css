@@ -436,10 +436,11 @@ span.required, .errorMessage, .errorSummary {
 }
 
 #header #slider-container {
-    width: 948px;
-    padding: 7px 0px 0px 0px;
+    width: 910px;
     height: 279px;
     position: relative;
+    margin: 8px 0px 0px 30px;
+    padding: 0px 0px 0px 6px;
 }
 
 #slider-container #slideshow-items {
@@ -447,7 +448,7 @@ span.required, .errorMessage, .errorSummary {
 }
 
 #slider-container #slideshow-items .slide {
-    width: 948px;
+    width: 910px;
     position: relative;
     height: 279px;
 }
@@ -535,7 +536,7 @@ span.required, .errorMessage, .errorSummary {
 /*--------------Content-----------*/
 /**********************************/
 #content {
-    padding: 8px 55px 0px 56px;
+    padding: 8px 55px 0px 62px;
 }
 
 #content #line-blue {
@@ -1446,4 +1447,17 @@ a.icon-color.green {
     background-color: #f5f5f5;
     border: 1px solid #e5e5e5;
     color: #313131;
+}
+
+.action {
+    margin-bottom: 16px;
+}
+
+.action-header {
+    margin-bottom: 4px;
+    font-size: 18px;
+}
+
+.action-header a {
+    color: #71c1cf;
 }

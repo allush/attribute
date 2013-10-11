@@ -33,6 +33,7 @@
                     <?php
                     $this->widget('zii.widgets.CMenu', array(
                         'items' => array(
+                            array('label' => 'Акции', 'url' => array('/action/index')),
                             array('label' => 'Новости', 'url' => array('/news/index')),
                             array('label' => 'Заказы', 'url' => array('/order/index')),
                             array('label' => 'Доставка', 'url' => array('/orderDelivery/index')),

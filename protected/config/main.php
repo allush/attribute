@@ -51,7 +51,7 @@ return array(
                 '/contacts' => '/site/contacts',
                 '/delivery' => '/site/delivery',
                 '/wholesale' => '/site/wholesale',
-                '/actions' => '/site/actions',
+                '/actions' => '/action/index',
                 '/cart' => '/order/cart',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<news:\w+>/<id:\d+>' => '<controller>/<news>',

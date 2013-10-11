@@ -36,6 +36,7 @@ class NewsController extends FrontController
             ),
         ));
 
+
         $this->render('index', array(
             'dataProvider' => $dataProvider,
             'popularNews' => $popularNews
