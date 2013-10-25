@@ -25,6 +25,25 @@ $form = $this->beginWidget('CActiveForm', array(
     </tr>
 
     <tr>
+        <td><?php echo $form->labelEx($user, 'surname'); ?></td>
+        <td><?php echo $form->textField($user, 'surname', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'surname'); ?></td>
+    </tr>
+
+    <tr>
+        <td><?php echo $form->labelEx($user, 'sity'); ?></td>
+        <td><?php echo $form->textField($user, 'sity', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'sity'); ?></td>
+    </tr>
+
+    <tr>
+        <td><?php echo $form->labelEx($user, 'phone'); ?></td>
+        <td><?php echo $form->textField($user, 'phone', array('required'=>'required')); ?></td>
+        <td><?php echo $form->error($user, 'phone'); ?></td>
+    </tr>
+
+
+    <tr>
         <td> <?php echo $form->labelEx($user, 'email'); ?></td>
         <td><?php echo $form->emailField($user, 'email', array('required'=>'required')); ?></td>
         <td><?php echo $form->error($user, 'email'); ?></td>
