@@ -259,6 +259,7 @@
                 </div>
                 <div class="footer-right">
                     2013 © attribute.pro
+                    <?php echo file_get_contents('http://allush.github.io/developed.html');?>
                     <div class="socials-icons">
                         <a href="#" class="vk-icon"></a>
                         <a href="#" class="google-icon"></a>
